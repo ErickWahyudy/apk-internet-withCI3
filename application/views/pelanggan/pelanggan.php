@@ -5,7 +5,7 @@ if($aksi == "lihat"):
 ?>
 <?= $this->session->flashdata('pesan') ?>
 <div id="map" style="width: auto; height: 300px;"></div>  
-<a href="../edit_map/<?= $id_pelanggan ?>" class="btn btn-warning"><i class="fa fa-map-marker"></i> Edit Lokasi</a>
+<a href="<?= base_url('pelanggan/profile/edit_map/'.$id_pelanggan) ?>" class="btn btn-warning"><i class="fa fa-map-marker"></i> Edit Lokasi</a>
 
 <table class="table table-striped">
 <form action="" method="POST" enctype="multipart/form-data"> 
@@ -61,7 +61,7 @@ if($aksi == "lihat"):
 <tr>
 	<td></td>
 	<td>
-		<a href="../home" class="btn btn-primary">Kembali</a> &nbsp;&nbsp;
+		<a href="../pelanggan/home" class="btn btn-primary">Kembali</a> &nbsp;&nbsp;
 		<a href="<?= base_url('pelanggan/profile/edit/'.$id_pelanggan) ?>" class="btn btn-warning"><i class="fa fa-edit"> Perbarui Data</i></a> 
 	</td>
 </tr>
@@ -103,7 +103,7 @@ if($aksi == "lihat"):
         })(marker, i));
       }
     </script>
-	
+
 <?php 
 elseif($aksi == "edit"):
 ?>	
@@ -209,6 +209,78 @@ elseif($aksi == "ganti_pswd"):
 	</tr>
     </form>	 
 </table>
+
+<?php 
+elseif($aksi == "edit_lokasi"):
+?>
+<table class="table table-reposive">
+	<form action="" method="POST">
+	<tr>
+		<th class="col-md-3">Nama Pelanggan</th>
+		<td>
+			<input type="text" name="nama" class="form-control" value="<?= $nama ?>" readonly>
+		</td>
+	</tr>
+	<tr>
+	<div id="googleMap" style="width:100%;height:380px;"></div>
+	<input type="hidden" id="lat" name="latitude" value="">
+    <input type="hidden" id="lng" name="longitude" value="">
+	</tr>
+	<tr>
+		<td></td>
+		<th>
+			<a href="../" class="btn btn-warning">Batal</a>
+			<input type="submit" name="kirim" value="Simpan" class="btn btn-success">
+		</th>
+	</tr>
+	</form>
+</table>
+
+<script>
+// variabel global marker
+var marker;
+  
+function taruhMarker(peta, posisiTitik){
+    
+    if( marker ){
+      // pindahkan marker
+      marker.setPosition(posisiTitik);
+    } else {
+      // buat marker baru
+      marker = new google.maps.Marker({
+        position: posisiTitik,
+        map: peta
+      });
+    }
+  
+     // isi nilai koordinat ke form
+    document.getElementById("lat").value = posisiTitik.lat();
+    document.getElementById("lng").value = posisiTitik.lng();
+    
+}
+  
+function initialize() {
+  var propertiPeta = {
+    center:new google.maps.LatLng(-7.95273788368736, 111.42980425660366),
+    zoom:16,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  
+  var peta = new google.maps.Map(document.getElementById("googleMap"), propertiPeta);
+  
+  // even listner ketika peta diklik
+  google.maps.event.addListener(peta, 'click', function(event) {
+    taruhMarker(this, event.latLng);
+  });
+
+}
+
+
+// event jendela di-load  
+google.maps.event.addDomListener(window, 'load', initialize);
+  
+
+</script>
 <?php $this->load->view('template/footer'); ?>
 
 <?php endif; ?>

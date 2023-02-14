@@ -216,6 +216,66 @@ $SQLupdate=array(
       }
   }
 
+  public function edit_map($id='')
+  {
+  	$data=$this->m_pelanggan->view_id_maps($id)->row_array();
+    if (empty($data['id_pelanggan'])) {
+      $pesan='<script>
+                swal({
+                    title: "Gagal Edit Data",
+                    text: "ID Pelanggan Tidak Ditemukan",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: false
+                },
+                function(){
+                    window.location.href="'.base_url('pelanggan/profile').'";
+                });
+              </script>';
+      $this->session->set_flashdata('pesan',$pesan);
+      redirect(base_url('pelanggan/profile'));
+    }
+
+  	$x = array(
+    'aksi'            =>'edit_lokasi',
+    'judul'           =>'Edit Lokasi Pelanggan',
+    'id_pelanggan'    =>$data['id_pelanggan'],
+    'id_maps'         =>$data['id_maps'],
+    'nama'            =>$data['nama'],
+    'alamat'          =>$data['alamat'],
+    'latitude'        =>$data['latitude'],
+    'longitude'       =>$data['longitude']
+  	);
+
+    if (isset($_POST['kirim'])) {   
+    $SQLupdate=array(
+      'latitude'            =>$this->input->post('latitude'),
+      'longitude'           =>$this->input->post('longitude')
+      );
+      
+        $cek=$this->m_pelanggan->update_maps($id=$data['id_maps'],$SQLupdate);
+        if($cek){
+            $pesan='<script>
+                    swal({
+                        title: "Berhasil Edit Lokasi Pelanggan",
+                        text: "",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                        });
+                </script>';
+             $this->session->set_flashdata('pesan',$pesan);
+             redirect(base_url('pelanggan/profile/'));
+        }else{
+          echo "QUERY SQL ERROR";
+          }
+      }else{
+        $this->load->view('pelanggan/pelanggan',$x);
+      }
+  }
+
   public function ganti_password($id='') 
   {
   	$data=$this->m_pelanggan->view_id($id)->row_array();
