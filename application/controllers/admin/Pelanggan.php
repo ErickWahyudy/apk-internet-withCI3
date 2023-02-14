@@ -78,6 +78,7 @@ class Pelanggan extends CI_controller
     'password'        =>'',
     'level'           =>'PLG',
     'status_plg'      =>'Aktif',
+    'id_maps'         =>$this->acak_id(15),
   );
     
    if (isset($_POST['kirim'])) {
@@ -98,10 +99,16 @@ $SQLinsert=array(
 'terdaftar_mulai'   =>$this->input->post('terdaftar_mulai'),
 'email'             =>$this->input->post('email'),
 'password'          =>md5($this->input->post('password')),
-'id_paket'          =>$this->input->post('id_paket')
+'id_paket'          =>$this->input->post('id_paket'),
+'id_maps'           =>$x['id_maps']
+);
+
+$SQLinsert2=array(
+  'id_maps'         =>$x['id_maps'],
 );
 
 $cek=$this->m_pelanggan->add($SQLinsert);
+$cek=$this->m_pelanggan->addMaps($SQLinsert2);
 if($cek){
   	$pesan='<script>
               swal({
@@ -229,6 +236,10 @@ if($cek){
     'email'           =>$data['email'],
     'id_paket'        =>$data['id_paket'],
     'status_plg'      =>$data['status_plg'],
+    'id_maps'         =>$data['id_maps'],
+    'latitude'        =>$data['latitude'],
+    'longitude'       =>$data['longitude'],
+    
   );
     
  if (isset($_POST['kirim'])) {     
@@ -367,6 +378,66 @@ $SQLupdate=array(
       }
   }
 
+public function edit_map($id='')
+  {
+  	$data=$this->m_pelanggan->view_id_maps($id)->row_array();
+    if (empty($data['id_pelanggan'])) {
+      $pesan='<script>
+                swal({
+                    title: "Gagal Edit Data",
+                    text: "ID Pelanggan Tidak Ditemukan",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: false
+                },
+                function(){
+                    window.location.href="'.base_url('admin/pelanggan').'";
+                });
+              </script>';
+      $this->session->set_flashdata('pesan',$pesan);
+      redirect(base_url('admin/pelanggan'));
+    }
+
+  	$x = array(
+    'aksi'            =>'edit_lokasi',
+    'judul'           =>'Edit Lokasi Pelanggan',
+    'id_pelanggan'    =>$data['id_pelanggan'],
+    'id_maps'         =>$data['id_maps'],
+    'nama'            =>$data['nama'],
+    'alamat'          =>$data['alamat'],
+    'latitude'        =>$data['latitude'],
+    'longitude'       =>$data['longitude']
+  	);
+
+    if (isset($_POST['kirim'])) {   
+    $SQLupdate=array(
+      'latitude'            =>$this->input->post('latitude'),
+      'longitude'           =>$this->input->post('longitude')
+      );
+      
+        $cek=$this->m_pelanggan->update_maps($id=$data['id_maps'],$SQLupdate);
+        if($cek){
+            $pesan='<script>
+                    swal({
+                        title: "Berhasil Edit Lokasi Pelanggan",
+                        text: "",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                        });
+                </script>';
+             $this->session->set_flashdata('pesan',$pesan);
+             redirect(base_url('admin/pelanggan/edit/'.$data['id_pelanggan']));
+        }else{
+          echo "QUERY SQL ERROR";
+          }
+      }else{
+        $this->load->view('admin/pelanggan/pelanggan_form',$x);
+      }
+  }
+
 public function ganti_password($id='') 
   {
   	$data=$this->m_pelanggan->view_id($id)->row_array();
@@ -482,8 +553,6 @@ public function ganti_password($id='')
 
   public function hapus($id='')
   {
-  	$foto=$this->db->get_where('tb_pelanggan',array('id_pelanggan'=>$id))->row_array();
-  	if($foto['foto'] != ""){ @unlink('template/data/'.$foto['foto']); }else{ }
 
     $cek=$this->m_pelanggan->delete($id);
 	 if ($cek) {

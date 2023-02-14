@@ -39,6 +39,9 @@ class Profile extends CI_controller
     'email'           =>$data['email'],
     'id_paket'        =>$data['id_paket'],
     'status_plg'      =>$data['status_plg'],
+    'id_maps'         =>$data['id_maps'],
+    'latitude'        =>$data['latitude'],
+    'longitude'       =>$data['longitude'],
   );
     $this->load->view('pelanggan/pelanggan',$x);
   }

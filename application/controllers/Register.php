@@ -71,7 +71,8 @@ class Register extends CI_controller
             'email'           =>'',
             'password'        =>'',
             'level'           =>'PLG',
-            'status_plg'        =>'Aktif',
+            'status_plg'      =>'Aktif',
+            'id_maps'         =>$this->acak_id(15),
         );
             
         if (isset($_POST['kirim'])) {
@@ -115,9 +116,16 @@ class Register extends CI_controller
                 'terdaftar_mulai'   =>$this->tanggal(),
                 'email'             =>$this->input->post('email'),
                 'password'          =>md5($this->input->post('password')),
-                'id_paket'          =>$this->input->post('id_paket')
+                'id_paket'          =>$this->input->post('id_paket'),
+                'id_maps'           =>$x['id_maps']
                 );
+
         $cek=$this->M_pelanggan->add($SQLinsert);
+
+        $SQLinsert3=array(
+            'id_maps'         =>$x['id_maps'],
+          );
+        $cek2=$this->M_pelanggan->addMaps($SQLinsert3);
         if ($cek) {
 
             //Membuat Notifikasi Menggunakan Sweetalert
@@ -339,6 +347,7 @@ class Register extends CI_controller
             'status'          =>$this->db->get('tb_promo',1)->result_array(),
             'level'           =>'PLG',
             'status_plg'        =>'Aktif',
+            'id_maps'         =>$this->acak_id(15),
         );
             
         if (isset($_POST['kirim'])) {
@@ -381,7 +390,8 @@ class Register extends CI_controller
                 'terdaftar_mulai'   =>$this->tanggal(),
                 'email'             =>$this->input->post('email'),
                 'password'          =>md5($this->input->post('password')),
-                'id_paket'          =>$this->input->post('id_paket')
+                'id_paket'          =>$this->input->post('id_paket'),
+                'id_maps'           =>$x['id_maps'],
                 );
         $cek=$this->M_pelanggan->add($SQLinsert);
 
@@ -393,6 +403,11 @@ class Register extends CI_controller
                 'signature'         =>$this->upload_signature(),
                 );
         $cek=$this->M_promo->promo_add($SQLinsert2);
+
+        $SQLinsert3=array(
+            'id_maps'         =>$x['id_maps'],
+          );
+        $cek=$this->M_pelanggan->addMaps($SQLinsert3);
         
         if ($cek) {
 

@@ -36,6 +36,9 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif] -->
+  <!-- maps -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
    <!-- sweetalert -->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
@@ -129,7 +132,7 @@ if($this->session->userdata('level') =="Administrator"){
                   <a href="<?= base_url('admin/user_admin') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= base_url('admin/keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
               <?php }elseif($this->session->userdata('level') == "PLG"){ ?>
@@ -138,7 +141,7 @@ if($this->session->userdata('level') =="Administrator"){
                   <a href="<?= base_url('pelanggan/profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= base_url('pelanggan/keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
               <?php } ?>
@@ -204,6 +207,7 @@ if($this->session->userdata('level') =="Administrator"){
           <ul class="treeview-menu active">
       <li><a href="<?= base_url('admin/pelanggan') ?>" class="active"><i class="fa fa-cubes"></i>Pelanggan</a></li>
       <li><a href="<?= base_url('admin/promo') ?>"><i class="fa fa-creative-commons"></i>Pendaftar Promo</a></li>
+      <li><a href="<?= base_url('admin/maps') ?>"><i class="fa fa-map-marker"></i>Peta Pelanggan</a></li>
           </ul>
         </li>
  
@@ -258,6 +262,8 @@ if($this->session->userdata('level') =="Administrator"){
    </li> 
   
 <?php } ?>
+  <!-- logout -->
+  <li> <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-sign-out"></i>Sign out</a>
   <li class="header">END MAIN NAVIGATION</li>
       </ul>
     </section>

@@ -4,6 +4,9 @@
 if($aksi == "lihat"):
 ?>
 <?= $this->session->flashdata('pesan') ?>
+<div id="map" style="width: auto; height: 300px;"></div>  
+<a href="../edit_map/<?= $id_pelanggan ?>" class="btn btn-warning"><i class="fa fa-map-marker"></i> Edit Lokasi</a>
+
 <table class="table table-striped">
 <form action="" method="POST" enctype="multipart/form-data"> 
  <tr>
@@ -66,10 +69,46 @@ if($aksi == "lihat"):
 </form>
 </table>
 
+
+<script type="text/javascript">
+
+
+    //menampilkan data maps berdasarkan id_pelanggan dengan select
+	var locations = [
+	  ['<h4><?= $nama ?></h4><p><?= $alamat ?></p>', <?= $latitude ?>, <?= $longitude ?>],
+	];
+			
+ 
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 18,
+        center: new google.maps.LatLng(<?= $latitude ?>, <?= $longitude ?>),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+ 
+      var infowindow = new google.maps.InfoWindow();
+ 
+      var marker, i;
+ 
+      for (i = 0; i < locations.length; i++) {  
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+          map: map
+        });
+ 
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            infowindow.setContent(locations[i][0]);
+            infowindow.open(map, marker);
+          }
+        })(marker, i));
+      }
+    </script>
+	
 <?php 
 elseif($aksi == "edit"):
 ?>	
 <?= $this->session->flashdata('pesan') ?>
+
 <table class="table table-striped">
 <form action="" method="POST" enctype="multipart/form-data"> 
  <tr>
