@@ -75,7 +75,7 @@
             </label>
           </div>
         		<center>
-							<strong>Copyright &copy; 2019 - <?php echo date('Y'); ?>
+							<strong>Copyright &copy; <?php echo date('Y'); ?>
 							<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved.
 						</center>
 					</div>
