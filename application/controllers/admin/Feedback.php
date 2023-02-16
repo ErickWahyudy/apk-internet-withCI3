@@ -24,9 +24,9 @@ class Feedback extends CI_controller
     //feedback
     public function index($value='')
     {
-     $view = array('judul'     =>'Data Tagihan Lain',
+     $view = array('judul'     =>'Data Feedback',
                    'data'      =>$this->m_feedback->view(),);
-      $this->load->view('admin/feedback/feedback',$view);
+      $this->load->view('admin/feedback/form',$view);
     }
     
      //mengambil id feedback urut terakhir
@@ -107,37 +107,7 @@ class Feedback extends CI_controller
     
      }
         
-    public function edit($id='')
-      {
-      $data=$this->m_feedback->view_id($id)->row_array();
-      if (empty($data['id_feedback'])) {
-        $pesan='<script>
-                  swal({
-                      title: "Gagal Edit Data",
-                      text: "ID Feedback Tidak Ditemukan",
-                      type: "error",
-                      showConfirmButton: true,
-                      confirmButtonColor: "#DD6B55",
-                      confirmButtonText: "OK",
-                      closeOnConfirm: false
-                  },
-                  function(){
-                      window.location.href="'.base_url('admin/feedback').'";
-                  });
-                </script>';
-        $this->session->set_flashdata('pesan',$pesan);
-        redirect(base_url('admin/feedback'));
-      }
-
-      $x = array('judul'                =>'Edit Data Tagihan Lain' ,
-                  'aksi'                =>'edit',
-                  'id_feedback'         =>$data['id_feedback'],
-                  'nama'                =>$data['nama'],
-                  'no_hp'               =>$data['no_hp'],
-                  'nilai'               =>$data['nilai'],
-                  'feedback'            =>$data['feedback'],
-                  'tanggal'             =>$data['tanggal'],
-                );	
+    public function edit($id='') {
         if(isset($_POST['kirim'])){
           $SQLupdate=array(
             'nilai'                    =>$this->input->post('nilai'),
@@ -157,11 +127,7 @@ class Feedback extends CI_controller
           </script>';
   	 	    $this->session->set_flashdata('pesan',$pesan);
          redirect(base_url('admin/feedback'));
-          }else{
-           echo "ERROR input Data";
           }
-        }else{
-         $this->load->view('admin/feedback/feedback_edit',$x);
         }
       }
     

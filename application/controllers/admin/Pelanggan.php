@@ -69,7 +69,7 @@ class Pelanggan extends CI_controller
     'judul'           =>'Tambah Data Pelanggan' , 
     'aksi'            =>'tambah',
     'id_pelanggan'    =>$this->id_pelanggan_urut(),
-    'paket'           =>$this->db->get('tb_paket')->result_array(),
+    'paket'           =>'',
     'nama'            =>'',
     'alamat'          =>'',
     'no_hp'           =>'',
@@ -82,6 +82,35 @@ class Pelanggan extends CI_controller
   );
     
    if (isset($_POST['kirim'])) {
+
+    //cek nomor hp sudah pernah terdaftar
+    $proses_cek=$this->db->get_where('tb_pelanggan',array('no_hp'=>$this->input->post('no_hp')))->num_rows();
+    if ($proses_cek > 0) {
+        $this->session->set_flashdata('pesan', '<script>
+            swal({
+                text: "Nomor HP sudah pernah digunakan mendaftar, silakan menggunakan nomor HP yang lain",
+                type: "error",
+                showConfirmButton: true,
+                confirmButtonText: "OKEE"
+            });
+        </script>');
+        redirect('admin/pelanggan');
+    }
+    else
+    //cek email sudah pernah terdaftar
+    $proses_cek=$this->db->get_where('tb_pelanggan',array('email'=>$this->input->post('email')))->num_rows();
+    if ($proses_cek > 0) {
+        $this->session->set_flashdata('pesan', '<script>
+            swal({
+                text: "Email sudah pernah digunakan mendaftar, silakan menggunakan email yang lain",
+                type: "error",
+                showConfirmButton: true,
+                confirmButtonText: "OKEE"
+            });
+        </script>');
+        redirect('admin/pelanggan');
+    }
+    else
       
       // $config['upload_path'] = './template/data/'; 
       // $config['allowed_types'] = 'bmp|jpg|png';  
@@ -112,7 +141,7 @@ $cek=$this->m_pelanggan->addMaps($SQLinsert2);
 if($cek){
   	$pesan='<script>
               swal({
-                  title: "Berhasil Menaambahkan Data Pelanggan",
+                  title: "Berhasil Menambahkan Data Pelanggan",
                   text: "",
                   type: "success",
                   showConfirmButton: true,
@@ -187,17 +216,8 @@ if($cek){
                 ;
   	 	$this->session->set_flashdata('pesan',$pesan);
 	 	redirect(base_url('admin/pelanggan'));
-}else{
- echo "QUERY SQL ERROR";
-}
-
-      // }else{
-      // 	echo $this->upload->display_errors();
-      // }
-
-    }else{
-    	$this->load->view('admin/pelanggan/pelanggan_form',$x);
-    } 
+    }
+   }
  
   }
 
@@ -234,6 +254,7 @@ if($cek){
     'no_hp'           =>$data['no_hp'],
     'terdaftar_mulai' =>$data['terdaftar_mulai'],
     'email'           =>$data['email'],
+    'password'        =>$data['password'],
     'id_paket'        =>$data['id_paket'],
     'status_plg'      =>$data['status_plg'],
     'id_maps'         =>$data['id_maps'],

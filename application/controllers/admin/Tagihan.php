@@ -123,7 +123,8 @@ class Tagihan extends CI_controller
           require_once(APPPATH.'libraries/phpmailer/PHPMailer.php');
           require_once(APPPATH.'libraries/phpmailer/SMTP.php');
 
-          $data=$this->db->get_where('tb_tagihan a join tb_pelanggan b on a.id_pelanggan=b.id_pelanggan',array('a.id_tagihan'=>$id))->row_array();
+          $data=$this->m_tagihan->lunas($id);
+          $data=$data->row_array();
 
           $mail = new PHPMailer();
           // $mail->isSMTP();
@@ -193,39 +194,7 @@ class Tagihan extends CI_controller
     }
   }
 
-  public function editBL($id='')
-      {
-      $data=$this->m_tagihan->view_id($id)->row_array();
-      if (empty($data['id_tagihan'])) {
-        $pesan='<script>
-                  swal({
-                      title: "Gagal Edit Data",
-                      text: "ID Tagihan Tidak Ditemukan",
-                      type: "error",
-                      showConfirmButton: true,
-                      confirmButtonColor: "#DD6B55",
-                      confirmButtonText: "OK",
-                      closeOnConfirm: false
-                  },
-                  function(){
-                      window.location.href="'.base_url('admin/tagihan').'";
-                  });
-                </script>';
-        $this->session->set_flashdata('pesan',$pesan);
-        redirect(base_url('admin/tagihan'));
-      }
-
-      $x = array('judul'                =>'Edit Data Tagihan Lain' ,
-                  'aksi'                =>'editBL',
-                  'id_tagihan'          =>$data['id_tagihan'],
-                  'id_pelanggan'        =>$data['id_pelanggan'],
-                  'nama'                =>$data['nama'],
-                  'bulan'               =>$data['bulan'],
-                  'tahun'               =>$data['tahun'],
-                  'status'              =>$data['status'],
-                  'tgl_bayar'           =>$data['tgl_bayar'],
-                  'tagihan'             =>$data['tagihan'],
-                );	
+  public function editBL($id='') {
         if(isset($_POST['kirim'])){
           $SQLupdate=array(
             'status'                    =>$this->input->post('status'),
@@ -245,11 +214,7 @@ class Tagihan extends CI_controller
           </script>';
   	 	    $this->session->set_flashdata('pesan',$pesan);
          redirect(base_url('admin/tagihan'));
-          }else{
-           echo "ERROR input Data";
           }
-        }else{
-         $this->load->view('admin/tagihan_bulanan/tagihan_form',$x);
         }
       }
 
@@ -263,39 +228,7 @@ class Tagihan extends CI_controller
    $this->load->view('admin/tagihan_bulanan/tagihan_lunas',$x);
   }
 
-  public function editLS($id='')
-      {
-      $data=$this->m_tagihan->view_id($id)->row_array();
-      if (empty($data['id_tagihan'])) {
-        $pesan='<script>
-                  swal({
-                      title: "Gagal Edit Data",
-                      text: "ID Tagihan Tidak Ditemukan",
-                      type: "error",
-                      showConfirmButton: true,
-                      confirmButtonColor: "#DD6B55",
-                      confirmButtonText: "OK",
-                      closeOnConfirm: false
-                  },
-                  function(){
-                      window.location.href="'.base_url('admin/tagihan/lunas').'";
-                  });
-                </script>';
-        $this->session->set_flashdata('pesan',$pesan);
-        redirect(base_url('admin/tagihan/lunas'));
-      }
-
-      $x = array('judul'                =>'Edit Data Tagihan Lain' ,
-                  'aksi'                =>'editLS',
-                  'id_tagihan'          =>$data['id_tagihan'],
-                  'id_pelanggan'        =>$data['id_pelanggan'],
-                  'nama'                =>$data['nama'],
-                  'bulan'               =>$data['bulan'],
-                  'tahun'               =>$data['tahun'],
-                  'status'              =>$data['status'],
-                  'tgl_bayar'           =>$data['tgl_bayar'],
-                  'tagihan'             =>$data['tagihan'],
-                );	
+  public function editLS($id='') {
         if(isset($_POST['kirim'])){
           $SQLupdate=array(
             'status'                    =>$this->input->post('status'),
@@ -315,11 +248,7 @@ class Tagihan extends CI_controller
           </script>';
   	 	    $this->session->set_flashdata('pesan',$pesan);
          redirect(base_url('admin/tagihan/lunas'));
-          }else{
-           echo "ERROR input Data";
           }
-        }else{
-         $this->load->view('admin/tagihan_bulanan/tagihan_form',$x);
         }
       }
 	

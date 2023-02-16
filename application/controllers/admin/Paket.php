@@ -27,7 +27,7 @@ public function index($value='')
 {
  $view = array('judul'  =>'Data Paket Internet',
             'data'      =>$this->m_paket->paket_view(),);
-   $this->load->view('admin/paket/paket',$view);
+   $this->load->view('admin/paket/form',$view);
 }
 
  //mengambil id paket urut terakhir
@@ -50,16 +50,7 @@ public function index($value='')
    return $newID;
  }
 
- public function add($value='')
- {
-  $x = array(
-   'judul'      =>'Tambah Data Paket Internet' , 
-   'aksi'       =>'tambah',
-   'id_paket'   =>$this->id_paket_urut(),
-   'paket'      =>'',
-   'tarif'      =>'',
- );
-   
+ public function add($value='') {  
   if (isset($_POST['kirim'])) {
             
 $SQLinsert=array(
@@ -81,47 +72,12 @@ if($cek){
           </script>';
   	 	$this->session->set_flashdata('pesan',$pesan);
     redirect(base_url('admin/paket'));
-}else{
-echo "QUERY SQL ERROR";
-}
-
-     // }else{
-     // 	echo $this->upload->display_errors();
-     // }
-
-   }else{
-     $this->load->view('admin/paket/paket_form',$x);
-   } 
+  }
+  }
 
  }
     
-    public function edit($id='')
-	{
-  $data=$this->m_paket->paket_view_id($id)->row_array();
-  if (empty($data['id_paket'])) {
-    $pesan='<script>
-              swal({
-                  title: "Gagal Edit Data",
-                  text: "ID Paket Tidak Ditemukan",
-                  type: "error",
-                  showConfirmButton: true,
-                  confirmButtonColor: "#DD6B55",
-                  confirmButtonText: "OK",
-                  closeOnConfirm: false
-              },
-              function(){
-                  window.location.href="'.base_url('admin/paket').'";
-              });
-            </script>';
-    $this->session->set_flashdata('pesan',$pesan);
-    redirect(base_url('admin/paket'));
-  }
-
-	$x = array('judul'        =>'Edit Data Paket Internet' ,
-	            'aksi'        =>'edit',
-              'id_paket'    =>$data['id_paket'],
-              'paket'       =>$data['paket'],
-              'tarif'         =>$data['tarif']);	
+    public function edit($id='') {
     if(isset($_POST['kirim'])){
       $SQLupdate=array(
       	'paket'         =>$this->input->post('paket'),
@@ -139,11 +95,7 @@ echo "QUERY SQL ERROR";
           </script>';
   	 	$this->session->set_flashdata('pesan',$pesan);
 	 	redirect(base_url('admin/paket'));
-      }else{
-       echo "ERROR input Data";
       }
-    }else{
-     $this->load->view('admin/paket/paket_form',$x);
     }
 	}
 

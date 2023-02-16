@@ -28,7 +28,7 @@ class Tagihan_lain extends CI_controller
     {
      $view = array('judul'  =>'Data Tagihan Lain',
                 'data'      =>$this->m_tagihan_lain->view(),);
-      $this->load->view('admin/tagihan_lain/tagihan_lain',$view);
+      $this->load->view('admin/tagihan_lain/form',$view);
     }
 
     private function acak_id($panjang)
@@ -63,19 +63,7 @@ class Tagihan_lain extends CI_controller
        return $newID;
      }
     
-     public function add($value='')
-     {
-      $x = array(
-       'judul'              =>'Tambah Data Tagihan Lain' , 
-       'aksi'               =>'tambah',
-       'id_tagihan_lain'    =>$this->id_tagihan_lain_urut(),
-       'pelanggan'          =>$this->db->get('tb_pelanggan')->result_array(),
-       'tagihan'            =>'',
-       'status'             =>'',
-       'tgl_bayar'          =>'',
-       'keterangan'         =>'',
-     );
-       
+     public function add($value='') {      
       if (isset($_POST['kirim'])) {
                 
     $SQLinsert=array(
@@ -100,52 +88,11 @@ class Tagihan_lain extends CI_controller
           </script>';
   	 	$this->session->set_flashdata('pesan',$pesan);
         redirect(base_url('admin/tagihan_lain'));
-    }else{
-    echo "QUERY SQL ERROR";
-    }
-    
-         // }else{
-         // 	echo $this->upload->display_errors();
-         // }
-    
-       }else{
-         $this->load->view('admin/tagihan_lain/tagihan_lain_form',$x);
-       } 
-    
+        }
+      }    
      }
         
-    public function edit($id='')
-      {
-      $data=$this->m_tagihan_lain->view_id($id)->row_array();
-      if (empty($data['id_tagihan_lain'])) {
-        $pesan='<script>
-                  swal({
-                      title: "Gagal Edit Data",
-                      text: "ID Tagihan Lain Tidak Ditemukan",
-                      type: "error",
-                      showConfirmButton: true,
-                      confirmButtonColor: "#DD6B55",
-                      confirmButtonText: "OK",
-                      closeOnConfirm: false
-                  },
-                  function(){
-                      window.location.href="'.base_url('admin/tagihan_lain').'";
-                  });
-                </script>';
-        $this->session->set_flashdata('pesan',$pesan);
-        redirect(base_url('admin/tagihan_lain'));
-      }
-
-      $x = array('judul'                =>'Edit Data Tagihan Lain' ,
-                  'aksi'                =>'edit',
-                  'id_tagihan_lain'     =>$data['id_tagihan_lain'],
-                  'id_pelanggan'        =>$data['id_pelanggan'],
-                  'nama'                =>$data['nama'],
-                  'status'              =>$data['status'],
-                  'tgl_bayar'           =>$data['tgl_bayar'],
-                  'tagihan'             =>$data['tagihan'],
-                  'keterangan'          =>$data['keterangan'],
-                );	
+    public function edit($id='') {
         if(isset($_POST['kirim'])){
           $SQLupdate=array(
             'status'                    =>$this->input->post('status'),
@@ -166,11 +113,7 @@ class Tagihan_lain extends CI_controller
           </script>';
   	 	    $this->session->set_flashdata('pesan',$pesan);
          redirect(base_url('admin/tagihan_lain'));
-          }else{
-           echo "ERROR input Data";
           }
-        }else{
-         $this->load->view('admin/tagihan_lain/tagihan_lain_form',$x);
         }
       }
     

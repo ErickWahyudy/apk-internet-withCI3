@@ -27,7 +27,7 @@ class Informasi extends CI_controller
     $kode_tahun = date('Y');
     $view = array('judul'   =>'Data Informasi',
               'data'        =>$this->m_informasi->view(),);
-     $this->load->view('admin/informasi/informasi',$view);
+     $this->load->view('admin/informasi/form',$view);
   }
 
   private function acak_id($panjang)
@@ -63,15 +63,7 @@ class Informasi extends CI_controller
    }
 
     
-   public function add($value='')
-   {
-    $x = array(
-     'judul'              =>'Tambah Data Informasi Layanan' , 
-     'aksi'               =>'tambah',
-     'id_informasi'       =>$this->id_informasi_urut(),
-     'informasi'          =>'',
-   );
-     
+   public function add($value='') {    
     if (isset($_POST['kirim'])) {
               
   $SQLinsert=array(
@@ -92,47 +84,11 @@ class Informasi extends CI_controller
             </script>';
          $this->session->set_flashdata('pesan',$pesan);
       redirect(base_url('admin/informasi'));
-  }else{
-  echo "QUERY SQL ERROR";
-  }
-  
-       // }else{
-       // 	echo $this->upload->display_errors();
-       // }
-  
-     }else{
-       $this->load->view('admin/informasi/informasi_form',$x);
-     } 
-  
+     }
+    }
    }
       
-      public function edit($id='')
-    {
-    $data=$this->m_informasi->view_id($id)->row_array();
-    if (empty($data['id_informasi'])) {
-      $pesan='<script>
-                swal({
-                    title: "Gagal Edit Data",
-                    text: "ID Informasi Tidak Ditemukan",
-                    type: "error",
-                    showConfirmButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "OK",
-                    closeOnConfirm: false
-                },
-                function(){
-                    window.location.href="'.base_url('admin/informasi').'";
-                });
-              </script>';
-      $this->session->set_flashdata('pesan',$pesan);
-      redirect(base_url('admin/informasi'));
-    }
-
-    $x = array('judul'                =>'Edit Data informasi' ,
-                'aksi'                =>'edit',
-                'id_informasi'        =>$data['id_informasi'],
-                'informasi'           =>$data['informasi'],
-              );	
+      public function edit($id='') {
       if(isset($_POST['kirim'])){
         $SQLupdate=array(
           'informasi'               =>$this->input->post('informasi'),
@@ -150,11 +106,7 @@ class Informasi extends CI_controller
             </script>';
          $this->session->set_flashdata('pesan',$pesan);
        redirect(base_url('admin/informasi'));
-        }else{
-         echo "ERROR input Data";
         }
-      }else{
-       $this->load->view('admin/informasi/informasi_form',$x);
       }
     }
 
@@ -185,15 +137,7 @@ class Informasi extends CI_controller
       }
     }
 
-    public function file($id='')
-    {
-    $data=$this->m_informasi->view_id($id)->row_array();
-    $x = array('judul'                =>'Edit Data informasi' ,
-                'aksi'                =>'uploadfile',
-                'id_informasi'        =>$data['id_informasi'],
-                'informasi'           =>$data['informasi'],
-                'berkas'              =>$data['berkas'],
-              );	
+    public function file($id='') {	
       if(isset($_POST['kirim'])){
         $SQLupdate=array(
           'berkas'               =>$this->berkas(),
@@ -211,11 +155,7 @@ class Informasi extends CI_controller
             </script>';
          $this->session->set_flashdata('pesan',$pesan);
        redirect(base_url('admin/informasi'));
-        }else{
-         echo "ERROR input Data";
         }
-      }else{
-       $this->load->view('admin/informasi/informasi_form',$x);
       }
     }
   

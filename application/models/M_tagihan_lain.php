@@ -15,7 +15,7 @@ public function view($value='')
   $this->db->select('*');
   $this->db->from($this->table1);
   $this->db->join($this->table2 , 'tb_tagihan_lain.id_pelanggan = tb_pelanggan.id_pelanggan');
-  $this->db->order_by('id_tagihan_lain');
+  $this->db->order_by('id_tagihan_lain', 'DESC');
   return $this->db->get();
 }
 

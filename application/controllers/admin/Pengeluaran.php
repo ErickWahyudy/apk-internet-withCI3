@@ -28,7 +28,7 @@ class Pengeluaran extends CI_controller
   $view = array('judul'  =>'Data Pengeluaran',
             'data'        =>$this->m_pengeluaran->view(),
             'pengeluaran'    => $this->db->select_sum('biaya_pengeluaran')->get_where('tb_pengeluaran',array('keterangan'=>'LUNAS','YEAR(tanggal)'=>date('Y')))->num_rows() > 0 ? $this->db->select_sum('biaya_pengeluaran')->get_where('tb_pengeluaran',array('keterangan'=>'LUNAS','YEAR(tanggal)'=>date('Y')))->row()->biaya_pengeluaran : 0,);
-   $this->load->view('admin/pengeluaran/pengeluaran',$view);
+   $this->load->view('admin/pengeluaran/form',$view);
 }
 
 
@@ -64,18 +64,8 @@ private function acak_id($panjang)
    return $newID;
  }
 
- public function add($value='')
- {
-  $x = array(
-   'judul'              =>'Tambah Data Pengeluaran Internet' , 
-   'aksi'               =>'tambah',
-   'id_pengeluaran'     =>$this->id_pengeluaran_urut(),
-   'jenis_pengeluaran'  =>'',
-   'biaya_pengeluaran'  =>'',
-   'tanggal'            =>'',
-   'keterangan'         =>'',
- );
-   
+ public function add($value='') {
+
   if (isset($_POST['kirim'])) {
             
 $SQLinsert=array(
@@ -99,50 +89,11 @@ if($cek){
           </script>';
   	 	$this->session->set_flashdata('pesan',$pesan);
     redirect(base_url('admin/pengeluaran'));
-}else{
-echo "QUERY SQL ERROR";
-}
-
-     // }else{
-     // 	echo $this->upload->display_errors();
-     // }
-
-   }else{
-     $this->load->view('admin/pengeluaran/pengeluaran_form',$x);
-   } 
-
+    }
+   }
  }
     
-    public function edit($id='')
-	{
-  $data=$this->m_pengeluaran->view_id($id)->row_array();
-  if (empty($data['id_pengeluaran'])) {
-    $pesan='<script>
-              swal({
-                  title: "Gagal Edit Data",
-                  text: "ID Pengeluaran Tidak Ditemukan",
-                  type: "error",
-                  showConfirmButton: true,
-                  confirmButtonColor: "#DD6B55",
-                  confirmButtonText: "OK",
-                  closeOnConfirm: false
-              },
-              function(){
-                  window.location.href="'.base_url('admin/pengeluaran').'";
-              });
-            </script>';
-    $this->session->set_flashdata('pesan',$pesan);
-    redirect(base_url('admin/pengeluaran'));
-  }
-
-	$x = array('judul'                =>'Edit Data Pengeluaran' ,
-	            'aksi'                =>'edit',
-              'id_pengeluaran'      =>$data['id_pengeluaran'],
-              'jenis_pengeluaran'   =>$data['jenis_pengeluaran'],
-              'biaya_pengeluaran'   =>$data['biaya_pengeluaran'],
-              'tanggal'             =>$data['tanggal'],
-              'keterangan'          =>$data['keterangan'],
-            );	
+    public function edit($id='') {
     if(isset($_POST['kirim'])){
       $SQLupdate=array(
       	'jenis_pengeluaran'         =>$this->input->post('jenis_pengeluaran'),
@@ -163,11 +114,7 @@ echo "QUERY SQL ERROR";
           </script>';
   	 	$this->session->set_flashdata('pesan',$pesan);
 	 	redirect(base_url('admin/pengeluaran'));
-      }else{
-       echo "ERROR input Data";
       }
-    }else{
-     $this->load->view('admin/pengeluaran/pengeluaran_form',$x);
     }
 	}
 

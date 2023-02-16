@@ -39,15 +39,16 @@
 <?php elseif($depan == FALSE): ?>
 
 <?php if($cetak == TRUE ): ?>
-    <div class="alert alert-info alert-dismissible">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<h4>
-			<i class="icon fa fa-info"></i> Data Tagihan <br>
-             Bulan <?= bulan($bulan) ?> Tahun <?= $tahun ?>
-        </h4>
-	</div>
+<div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4>
+        <i class="icon fa fa-info"></i> Data Tagihan <br>
+        Bulan <?= bulan($bulan) ?> Tahun <?= $tahun ?>
+    </h4>
+</div>
 
-<a href="<?= base_url('email/sendmail_bulanan') ?>" class="btn btn-warning"><i class="fa fa-envelope"></i> Kirim Email</a>
+<a href="<?= base_url('email/sendmail_bulanan') ?>" class="btn btn-warning"><i class="fa fa-envelope"></i> Kirim
+    Email</a>
 <?php elseif($cetak == FALSE): ?>
 <script type="text/javascript">
 window.print()
@@ -98,11 +99,11 @@ $kode_tgl = date("d-m-Y");
                 <td>
                     <a href="<?= base_url('admin/tagihan/bayar/'.$tagihan['id_tagihan']) ?>" name="bayar"
                         class="btn btn-info"><i class="fa fa-check"></i> Bayar</a>
-                    <a href="<?= base_url('admin/tagihan/editBL/'.$tagihan['id_tagihan']) ?>" class="btn btn-warning"><i
-                            class="fa fa-edit"></i></a> &nbsp;
-                    <a href="<?= base_url('email/kirim_email_tagihan_bulanan/'.$tagihan['id_tagihan']) ?>" name="kirim" target="_blank"
-                        class="btn btn-primary"><i class="fa fa-envelope"></i></a> &nbsp; &nbsp;
-                        
+                    <a href="" class="btn btn-warning" data-toggle="modal"
+                        data-target="#editBL<?= $tagihan['id_tagihan'] ?>"><i class="fa fa-edit"></i></a>
+                    <a href="<?= base_url('email/kirim_email_tagihan_bulanan/'.$tagihan['id_tagihan']) ?>" name="kirim"
+                        target="_blank" class="btn btn-primary"><i class="fa fa-envelope"></i></a> &nbsp; &nbsp;
+
                     <?php $stt = $kode_tgl  ?>
                     <?php if($stt <= date('09-m-Y')){ ?>
                     <a href="https://api.whatsapp.com/send?phone=<?= $tagihan['no_hp']; ?>&text=Pelanggan Yth. Sdr/i%20<?= $tagihan['nama']; ?>, Tagihan hotspot KassandraWiFi untuk Bulan <?= $tagihan['bulan'] ?> Tahun <?= $tagihan['tahun'] ?> dgn rincian
@@ -130,20 +131,112 @@ $kode_tgl = date("d-m-Y");
                     %0A<?= base_url('struk/konfirmasi_bayar/'.$tagihan['id_tagihan']) ?>
 
                     %0A%0A_Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi._
-                    -wifi@kassandra.my.id-" target=" _blank" title="Pesan WhatsApp"
-                        class="btn btn-success">
+                    -wifi@kassandra.my.id-" target=" _blank" title="Pesan WhatsApp" class="btn btn-success">
                         <b>Whatsapp</b>
                     </a>
                     <?php } ?>
-                    
+
                 </td>
             </tr>
             <?php $no++; endforeach; ?>
         </tbody>
     </table>
 
-    <?php endif; ?>
 
+
+    <!-- Modal edit tagihan bulanan-->
+    <?php foreach($data->result_array() as $tagihan): ?>
+    <div class="modal fade" id="editBL<?= $tagihan['id_tagihan'] ?>" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-purple">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit <?= $judul ?></h4>
+                </div>
+                <div class="modal-body table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <form action="<?= base_url('admin/tagihan/editBL/'.$tagihan['id_tagihan']) ?>" method="post">
+                        <tr>
+                                <th class="col-md-2">ID Tagihan</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="form-control"><?= $tagihan['id_tagihan'] ?></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>ID Pelanggan</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="form-control"><?= $tagihan['id_pelanggan'] ?> | <?= $tagihan['nama'] ?></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Bulan / Tahun</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="form-control"><?= $tagihan['bulan'] ?> / <?= $tagihan['tahun'] ?></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="status" class="form-control">
+                                        <option value="BL" <?php if($tagihan['status'] == "BL"){echo "selected";} ?>>
+                                            Belum Di Bayar</option>
+                                        <option value="LS" <?php if($tagihan['status'] == "LS"){echo "selected";} ?>>
+                                            LUNAS</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Tgl bayar</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="date" name="tgl_bayar" value="<?= $tagihan['tgl_bayar'] ?>"
+                                        class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>tagihan</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" name="tagihan" value="<?= $tagihan['tagihan'] ?>"
+                                        class="form-control">
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    &nbsp;&nbsp;
+                                    <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
+                                    &nbsp;&nbsp;
+                                    <a href="<?= base_url('admin/tagihan/hapus/'.$tagihan['id_tagihan']) ?>"
+                                        class="btn btn-danger" onclick="return confirm('Yakin Hapus Data Ini ?')"><i
+                                            class="fa fa-trash"></i> Hapus</a>
+                                </td>
+                            </tr>
+
+                        </form>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endforeach; ?>
+    <!-- End Modal edit tagihan bulanan-->
+
+    <?php endif; ?>
     <?php $this->load->view('template/footer'); ?>
 
     <?php 
@@ -193,4 +286,3 @@ function bulan ($bln){
             break;
     }
 }
-

@@ -28,7 +28,7 @@ class Profile extends CI_controller
   $data=$this->m_pelanggan->view_id_plg($id)->row_array();
   $x = array(
     'aksi'            =>'lihat',
-    'judul'           =>'Data Pelanggan',
+    'judul'           =>'Data Akun Profile',
     'id_paket'        =>$data['id_paket'],
     'paket'           =>$data['paket'],
     'id_pelanggan'    =>$data['id_pelanggan'],
@@ -37,6 +37,7 @@ class Profile extends CI_controller
     'no_hp'           =>$data['no_hp'],
     'terdaftar_mulai' =>$data['terdaftar_mulai'],
     'email'           =>$data['email'],
+    'password'        =>$data['password'],
     'id_paket'        =>$data['id_paket'],
     'status_plg'      =>$data['status_plg'],
     'id_maps'         =>$data['id_maps'],
@@ -46,47 +47,10 @@ class Profile extends CI_controller
     $this->load->view('pelanggan/pelanggan',$x);
   }
 
-  public function edit($id='')
-  {
-
-  $data=$this->m_pelanggan->view_id($id)->row_array();
-  if (empty($data['id_pelanggan'])) {
-    $pesan='<script>
-              swal({
-                  title: "Gagal Edit Data",
-                  text: "ID Pelanggan Tidak Ditemukan",
-                  type: "error",
-                  showConfirmButton: true,
-                  confirmButtonColor: "#DD6B55",
-                  confirmButtonText: "OK",
-                  closeOnConfirm: false
-              },
-              function(){
-                  window.location.href="'.base_url('pelanggan/profile').'";
-              });
-            </script>';
-    $this->session->set_flashdata('pesan',$pesan);
-    redirect(base_url('pelanggan/profile'));
-  }
-
-  $x = array(
-    'aksi'            =>'edit',
-    'judul'           =>'Edit Data Pelanggan',
-    'paket'           =>$data['paket'],
-    'id_pelanggan'    =>$data['id_pelanggan'],
-    'nama'            =>$data['nama'],
-    'alamat'          =>$data['alamat'],
-    'no_hp'           =>$data['no_hp'],
-    'terdaftar_mulai' =>$data['terdaftar_mulai'],
-    'email'           =>$data['email'],
-    'id_paket'        =>$data['id_paket'],
-    'status_plg'      =>$data['status_plg'],
-  );
-    
+  public function edit($id='') {    
  if (isset($_POST['kirim'])) {     
  if(empty($_FILES['gambar']['name'])){
 $SQLupdate=array(
-'id_pelanggan'        =>$this->input->post('id_pelanggan'),
 'nama'                =>$this->input->post('nama'),
 'alamat'              =>$this->input->post('alamat'),
 'no_hp'               =>$this->input->post('no_hp'),
@@ -202,19 +166,12 @@ $SQLupdate=array(
                   });
           </script>';
   	 	$this->session->set_flashdata('pesan',$pesan);
-  	 	redirect(base_url('pelanggan/data'));
-  }else{
-   echo "QUERY SQL ERROR";
-  }
-
-        }else{
-        	echo $this->upload->display_errors();
-        }
-       }
-      }else{
-      	$this->load->view('pelanggan/pelanggan',$x);
+  	 	redirect(base_url('pelanggan/profile'));
       }
+    }
+   }
   }
+}
 
   public function edit_map($id='')
   {
@@ -276,36 +233,7 @@ $SQLupdate=array(
       }
   }
 
-  public function ganti_password($id='') 
-  {
-  	$data=$this->m_pelanggan->view_id($id)->row_array();
-    if (empty($data['id_pelanggan'])) {
-      $pesan='<script>
-                swal({
-                    title: "Gagal Edit Data",
-                    text: "ID Pelanggan Tidak Ditemukan",
-                    type: "error",
-                    showConfirmButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "OK",
-                    closeOnConfirm: false
-                },
-                function(){
-                    window.location.href="'.base_url('pelanggan/profile').'";
-                });
-              </script>';
-      $this->session->set_flashdata('pesan',$pesan);
-      redirect(base_url('pelanggan/profile'));
-    }
-    
-  	$x = array(
-    'aksi'            =>'ganti_pswd',
-    'judul'           =>'Ganti Password Pelanggan',
-    'id_pelanggan'    =>$data['id_pelanggan'],
-    'nama'            =>$data['nama'],
-    'email'           =>$data['email'],
-    'password'        =>$data['password'],
-  );
+  public function ganti_password($id='') {
   	if (isset($_POST['kirim'])) {
   		$SQLinsert=array(
   			'password'    =>md5($this->input->post('password'))
@@ -379,12 +307,8 @@ $SQLupdate=array(
           $mail->Body = $content;
           if ($mail->send());
   	 	$this->session->set_flashdata('pesan',$pesan);
-        redirect(base_url('pelanggan/pelanggan_edit/'.$id.''));
-      }else{
-        echo $this->upload->display_errors();
-     }
-    }else{
-      $this->load->view('pelanggan/pelanggan',$x);
+        redirect(base_url('pelanggan/profile'));
+      }
     }
 }
 
