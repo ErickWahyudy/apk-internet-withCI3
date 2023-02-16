@@ -123,7 +123,7 @@ class Tagihan extends CI_controller
           require_once(APPPATH.'libraries/phpmailer/PHPMailer.php');
           require_once(APPPATH.'libraries/phpmailer/SMTP.php');
 
-          $data=$this->m_tagihan->lunas($id);
+          $data=$this->db->query("SELECT * FROM tb_pelanggan JOIN tb_tagihan ON tb_pelanggan.id_pelanggan=tb_tagihan.id_pelanggan JOIN tb_bulan ON tb_tagihan.bulan=tb_bulan.id_bulan WHERE tb_tagihan.id_tagihan='$id'");
           $data=$data->row_array();
 
           $mail = new PHPMailer();
