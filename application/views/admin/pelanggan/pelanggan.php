@@ -143,7 +143,8 @@
                             <tr>
                                 <th>Tgl Daftar</th>
                                 <td>
-                                    <input type="date" name="terdaftar_mulai" class="form-control" required="">
+                                    <input type="date" name="terdaftar_mulai" class="form-control" value="<?= date('Y-m-d') ?>"
+                                        required="">
                                 </td>
                             </tr>
                             <tr>

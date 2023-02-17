@@ -218,15 +218,31 @@ class Tagihan extends CI_controller
         }
       }
 
-    public function lunas($value='')
+    public function lunas($dari='',$sampai='')
   { 
     $kode_bulan =date('m');
-    $kode_tahun =date('Y');
-    $x = array('judul' =>'Data Tagihan',
-              'data'  =>$this->m_tagihan->lunas(),
-              'sum_tagihanLS'   => $this->db->select_sum('tagihan')->get_where('tb_tagihan',array('status'=>'LS','tahun'=>$kode_tahun,'bulan'=>$kode_bulan))->num_rows() > 0 ? $this->db->select_sum('tagihan')->get_where('tb_tagihan',array('status'=>'LS','tahun'=>$kode_tahun,'bulan'=>$kode_bulan))->row()->tagihan : 0,);
+
+    if (isset($_POST['cari'])) {
+      //cek data apabila berhasi Di kirim maka postdata akan melakukan cek .... dan sebaliknya
+      $dari=$this->input->post('dari');
+      $sampai=$this->input->post('sampai');
+      
+    $x = array('judul' =>'Data Lunas Tagihan',
+              'data'  =>$this->m_tagihan->lunas($dari,$sampai),
+              'dari'  =>$dari,
+              'sampai'=>$sampai,
+              'depan'=>FALSE,
+              'cetak'=>TRUE,
+              'sum_tagihanLS'   => $this->db->select_sum('tagihan')->get_where('tb_tagihan',array('status'=>'LS','tahun >='=>$dari,'bulan'=>$kode_bulan))->num_rows() > 0 ? $this->db->select_sum('tagihan')->get_where('tb_tagihan',array('status'=>'LS','tahun >='=>$dari,'bulan'=>$kode_bulan))->row()->tagihan : 0,
+            );
    $this->load->view('admin/tagihan_bulanan/tagihan_lunas',$x);
+  }else{
+    $x = array('judul'    =>'Data Lunas Tagihan',
+               'depan'    =>TRUE,
+               'cetak'    =>FALSE);	
+    $this->load->view('admin/tagihan_bulanan/tagihan_lunas',$x);
   }
+}
 
   public function editLS($id='') {
         if(isset($_POST['kirim'])){

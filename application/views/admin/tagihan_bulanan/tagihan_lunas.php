@@ -1,15 +1,35 @@
 <?php $this->load->view('template/header'); ?>
 
+<?php if($depan == TRUE): 
+    $kode_tahun = date('Y');
+?>
+<table class="table table-striped">
+    <form action="" method="POST">
+        <tr>
+            <th>Dari</th>
+            <td><input type="number" name="dari" class="form-control" value="<?= $kode_tahun; ?>"></td>
+        </tr>
+        <tr>
+            <th>Sampai</th>
+            <td><input type="number" name="sampai" class="form-control" value="<?= $kode_tahun; ?>"></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><input type="submit" name="cari" class="btn btn-primary" value="Buka Tagihan"></td>
+        </tr>
+    </form>
+</table>
+
+<?php elseif($depan == FALSE): ?>
+
 <?= $this->session->flashdata('pesan') ?>
 
 <div class="alert alert-info alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <h4>
-        <i class="icon fa fa-info"></i> Total Pembayaran Pelanggan Bulan <?= date('F'); ?> Tahun <?= date('Y'); ?>
+        <i class="icon fa fa-info"></i> Total Pembayaran Pelanggan Bulan <?= date('F'); ?> Tahun <?= $dari ?> <?= rupiah($sum_tagihanLS);?>
     </h4>
-    <h4>
-        <?= rupiah($sum_tagihanLS);?>
-    </h4>
+    <h4>Laporan Pembayaran Tahun <?= $dari ?> Sampai <?= $sampai ?></h4>
 </div>
 <div class="table-responsive">
     <table id="example1" class="table table-bordered  table-striped">
@@ -89,7 +109,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <p class="form-control"><?= $tagihan['id_pelanggan'] ?> | <?= $tagihan['nama'] ?></p>
+                                    <p class="form-control"><?= $tagihan['id_pelanggan'] ?> | <?= $tagihan['nama'] ?>
+                                    </p>
                                 </td>
                             </tr>
                             <tr>
@@ -152,7 +173,8 @@
     </div>
     <?php endforeach; ?>
     <!-- End Modal edit tagihan bulanan-->
-
+    <?php endif; ?>
+    
     <?php $this->load->view('template/footer'); ?>
 
     <?php 

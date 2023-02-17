@@ -123,7 +123,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="date" name="tgl_bayar" class="form-control">
+                                    <input type="date" name="tgl_bayar" class="form-control" value="<?= date('Y-m-d') ?>"
+                                        required="">
                                 </td>
                             </tr>
                             <tr>

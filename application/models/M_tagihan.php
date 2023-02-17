@@ -55,12 +55,14 @@ public function sendmail_bl($bulan='',$tahun='')
   return $this->db->get();
 } 
 
-public function lunas($value='')
+public function lunas($dari='', $sampai='')
 {
     //join table tb_pelanggan dan tb_tagihan
     $this->db->select('*');
-    $this->db->from($this->table1);
-    $this->db->join($this->table3 , 'tb_tagihan.id_pelanggan = tb_pelanggan.id_pelanggan');
+    $this->db->from($this->table3);
+    $this->db->join($this->table1 , 'tb_tagihan.id_pelanggan = tb_pelanggan.id_pelanggan');
+    $this->db->where('tahun >=', $dari);
+    $this->db->where('tahun <=', $sampai);
     $this->db->where('status', 'LS');
     $this->db->order_by('tgl_bayar', 'DESC');
     return $this->db->get();
