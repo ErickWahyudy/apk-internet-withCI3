@@ -233,8 +233,7 @@ class Tagihan extends CI_controller
               'sampai'=>$sampai,
               'depan'=>FALSE,
               'cetak'=>TRUE,
-              'sum_tagihanLS'   => $this->db->select_sum('tagihan')->get_where('tb_tagihan',array('status'=>'LS','tahun >='=>$dari,'bulan'=>$kode_bulan))->num_rows() > 0 ? $this->db->select_sum('tagihan')->get_where('tb_tagihan',array('status'=>'LS','tahun >='=>$dari,'bulan'=>$kode_bulan))->row()->tagihan : 0,
-            );
+              'sum_tagihanLS'   => $this->db->select_sum('tagihan')->get_where('tb_tagihan',array('status'=>'LS','tahun'=>$dari,'bulan'=>$kode_bulan))->num_rows() > 0 ? $this->db->select_sum('tagihan')->get_where('tb_tagihan',array('status'=>'LS','tahun'=>$dari,'bulan'=>$kode_bulan))->row()->tagihan : 0,);
    $this->load->view('admin/tagihan_bulanan/tagihan_lunas',$x);
   }else{
     $x = array('judul'    =>'Data Lunas Tagihan',
