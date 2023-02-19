@@ -4,7 +4,7 @@
 if($aksi == "cetak_struk_bulanan"):
 ?>
 <head>
-    <title>Nota KassandraWiFi Bulan <?= $bulan;?> <?= $id_tagihan; ?> <?= $nama; ?>
+    <title>Nota KassandraWiFi Bulan <?= $bulan;?> <?= htmlentities($id_tagihan); ?> <?= $nama; ?>
     </title>
     <link rel="shortcut icon" href="<?= base_url('template/kassandra-wifi') ?>/img/favicon.ico" type="image/x-icon">  
     <meta name="keywords" content="wifi kassandra my id, kassandra my id, kassandra wifi, kassandra, kassandra hd production, KASSANDRA, KASSANDRA HD PRODUCTION">
@@ -41,7 +41,7 @@ if($aksi == "cetak_struk_bulanan"):
                         </td>
                         <td style='vertical-align:top' width='30%' align='left'>
                             <b><span style='font-size:12pt'>Nota Pembayaran Iuran Bulanan KassandraWiFi</span></b></br>
-                            No Tagihan : <?= $id_tagihan; ?></br>
+                            No Tagihan : <?= htmlentities($id_tagihan); ?></br>
                             Bulan Tagihan : <?= $bulan; ?> / <?= $tahun; ?></br></br>
                         </td>
                 </table><br><br>
@@ -123,7 +123,7 @@ if($aksi == "cetak_struk_bulanan"):
 elseif($aksi == "cetak_struk_tagihan_lain"):
 ?>	
 <head>
-    <title>Nota KassandraWiFi <?= $id_tagihan_lain; ?> <?= $nama; ?>
+    <title>Nota KassandraWiFi <?= htmlentities($id_tagihan_lain); ?> <?= $nama; ?>
     </title>
     <link rel="shortcut icon" href="../dist/img/favicon.ico" type="image/x-icon">
 </head>
@@ -158,7 +158,7 @@ elseif($aksi == "cetak_struk_tagihan_lain"):
                         </td>
                         <td style='vertical-align:top' width='30%' align='left'>
                             <b><span style='font-size:12pt'>Nota Pembayaran Iuran Bulanan KassandraWiFi</span></b></br>
-                            No Tagihan : <?= $id_tagihan_lain; ?></br>
+                            No Tagihan : <?= htmlentities($id_tagihan_lain); ?></br>
                         </td>
                 </table><br><br>
                 <table id="example1" class="table table-bordered table-striped" border="0" cellspacing="1"

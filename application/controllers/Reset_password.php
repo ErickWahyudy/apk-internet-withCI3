@@ -67,6 +67,27 @@ class Reset_password extends CI_controller
       'token'           =>$this->acak_token(25),
     );
       if (isset($_POST['kirim'])) {
+        $this->load->library('form_validation');
+        $rules = array(
+          array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'required|valid_email'
+          )
+        );
+        $this->form_validation->set_rules($rules);
+        if ($this->form_validation->run() == FALSE) {
+          $this->session->set_flashdata('pesan', '<script>
+            swal({
+                text: "Email yang anda masukkan tidak terdaftar, silakan ulangi lagi atau hubungi admin",
+                type: "error",
+                showConfirmButton: true,
+                confirmButtonText: "OKEE"
+            });
+          </script>');
+          redirect('reset_password');
+        } else 
+
         //cek apakah email tersebut sudah terdaftar atau belum
          $proses_cek=$this->m_resetpassword->view_id_byemail($this->input->post('email'))->num_rows();
             if ($proses_cek == 0) {
@@ -208,6 +229,16 @@ class Reset_password extends CI_controller
     'password'        =>$data['password'],
   );
   	if (isset($_POST['kirim'])) {
+      $this->load->library('form_validation');
+      $rules = array(
+        array(
+          'field' => 'password',
+          'label' => 'Password',
+          'rules' => 'required'
+        )
+      );
+      $this->form_validation->set_rules($rules);
+
   		$SQLinsert=array(
   			'password'    =>md5($this->input->post('password'))
       );

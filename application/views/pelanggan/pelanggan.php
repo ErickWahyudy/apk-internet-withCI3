@@ -19,13 +19,13 @@ if($aksi == "lihat"):
         <tr>
             <th>Nama</th>
             <td>
-                : <?= $nama ?>
+                : <?= htmlentities($nama) ?>
             </td>
         </tr>
         <tr>
             <th>Alamat</th>
             <td>
-                : <?= $alamat ?>
+                : <?= htmlentities($alamat) ?>
             </td>
         </tr>
         <tr>

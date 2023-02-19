@@ -70,6 +70,31 @@ class Feedback extends CI_controller
      );
        
       if (isset($_POST['kirim'])) {
+        $this->load->library('form_validation');
+      $rules = array(
+        array(
+          'field' => 'nama',
+          'label' => 'Nama',
+          'rules' => 'required'
+        ),
+        array(
+          'field' => 'no_hp',
+          'label' => 'No HP',
+          'rules' => 'required'
+        ),
+        array(
+          'field' => 'nilai',
+          'label' => 'Nilai',
+          'rules' => 'required'
+        ),
+        array(
+          'field' => 'feedback',
+          'label' => 'Feedback',
+          'rules' => 'required'
+        ),
+      );
+      $this->form_validation->set_rules($rules);
+      
                 
     $SQLinsert=array(
     'id_feedback'           =>$this->id_feedback_urut(),

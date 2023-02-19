@@ -209,7 +209,7 @@
                            <tr>
                              <th class="col-sm-2">ID Pelanggan</th>
                              <td>
-                               : <input type="text" name="nama" value="<?= $nama ?>" hidden><?= $nama ?>
+                               : <input type="text" name="nama" value="<?= htmlentities($nama) ?>" hidden><?= $nama ?>
                              </td>
                            </tr>
                

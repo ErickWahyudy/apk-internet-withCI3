@@ -110,7 +110,7 @@
                                     &nbsp;&nbsp;
                                     <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
                                     &nbsp;&nbsp;
-                                    <a href="<?= base_url('admin/feedback_hapus/'.$feedback['id_feedback']) ?>"
+                                    <a href="<?= base_url('admin/feedback/hapus/'.$feedback['id_feedback']) ?>"
                                         class="btn btn-danger" onclick="return confirm('Yakin Hapus Data Ini ?')"><i
                                             class="fa fa-trash"> Hapus</i></a>
                                 </td>

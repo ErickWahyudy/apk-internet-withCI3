@@ -422,10 +422,10 @@
                         <img class="flex-shrink-0 rounded-circle border p-1" style="width:22%" src="<?= base_url('template/kassandra-wifi') ?>/img/img/user.png" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">
-                                <?= shortname($feedback['nama']) ?>
+                                <?= htmlentities(shortname($feedback['nama'])) ?>
                             </h5>
                             <span>
-                                <?= tgl_indo($feedback['tanggal']) ?>
+                                <?= htmlentities(tgl_indo($feedback['tanggal'])) ?>
                             </span>
                         </div>
                     </div>
@@ -433,7 +433,7 @@
                         <?= rating($feedback['nilai']) ?>
                     </span> <br>
                     <p class="mb-0">"
-                         <?= $feedback['feedback'] ?>
+                         <?= htmlentities($feedback['feedback']) ?>
                         "</p>
                 </div>
                 <?php endforeach; ?>

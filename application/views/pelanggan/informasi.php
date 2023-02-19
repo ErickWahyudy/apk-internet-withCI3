@@ -15,7 +15,7 @@
                  <?php $no=1; foreach($data->result_array() as $informasi): ?>
                  <tr>
                  <td><?= $no ?></td>
-                  <td><?= $informasi['informasi'] ?></td>
+                  <td><?= htmlentities($informasi['informasi']) ?></td>
                   <td>
                     <a href="<?= base_url('template/file_informasi/'.$informasi['berkas']) ?>" target="_blank"><?= $informasi['berkas'] ?></a> <br>
                   </td>

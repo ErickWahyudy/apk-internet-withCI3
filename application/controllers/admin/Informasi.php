@@ -64,15 +64,19 @@ class Informasi extends CI_controller
 
     
    public function add($value='') {    
-    if (isset($_POST['kirim'])) {
-              
-  $SQLinsert=array(
-  'id_informasi'      =>$this->id_informasi_urut(),
-  'informasi'         =>$this->input->post('informasi'),
-  );
+      $this->load->library('form_validation');
   
-  $cek=$this->m_informasi->add($SQLinsert);
-  if($cek){
+      if (isset($_POST['kirim'])) {
+        $this->form_validation->set_rules('informasi', 'Informasi', 'required'); 
+  
+        if ($this->form_validation->run()) {
+          $SQLinsert = [
+            'id_informasi'  => $this->id_informasi_urut(),
+            'informasi'     => $this->input->post('informasi'),
+          ];
+  
+          if ($this->m_informasi->add($SQLinsert)) {
+  
      $pesan='<script>
                 swal({
                     title: "Berhasil Menambahkan Data",
@@ -86,7 +90,8 @@ class Informasi extends CI_controller
       redirect(base_url('admin/informasi'));
      }
     }
-   }
+  }
+}
       
       public function edit($id='') {
       if(isset($_POST['kirim'])){

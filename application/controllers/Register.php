@@ -76,6 +76,48 @@ class Register extends CI_controller
         );
             
         if (isset($_POST['kirim'])) {
+            $this->load->library('form_validation');
+            $rules = array(
+                array(
+                    'field' => 'nama',
+                    'label' => 'Nama',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'alamat',
+                    'label' => 'Alamat',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'no_hp',
+                    'label' => 'No HP',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'email',
+                    'label' => 'Email',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'password',
+                    'label' => 'Password',
+                    'rules' => 'required'
+                ),
+            );
+            $this->form_validation->set_rules($rules);
+            if ($this->form_validation->run() == FALSE) {
+                $this->session->set_flashdata('pesan', '<script>
+                    swal({
+                        text: "Data tidak boleh kosong",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    });
+                </script>');
+                redirect('register');
+            }
+            else
+
 
             //cek nomor hp sudah pernah terdaftar
             $proses_cek=$this->db->get_where('tb_pelanggan',array('no_hp'=>$this->input->post('no_hp')))->num_rows();
@@ -311,6 +353,29 @@ class Register extends CI_controller
     //menyimpan tanda tangan digital ke dalam folder
     private function upload_signature($value='')
     {
+        $this->load->library('form_validation');
+        $rules = array(
+            array(
+                'field' => 'signed',
+                'label' => 'signed',
+                'rules' => 'required'
+            )
+        );
+        $this->form_validation->set_rules($rules);
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('pesan', '<script>
+                swal({
+                    title: "Gagal",
+                    text: "Tanda Tangan Tidak Boleh Kosong",
+                    type: "error",
+                    timer: 2000,
+                    showConfirmButton: true,,
+                    confirmButtonText: "OKEE"
+                });
+            </script>');
+            redirect('promo');
+        }
+
         $folderPath = "./template/signature/";
         if(empty($this->input->post('signed'))){
             return "default.jpg";
@@ -351,6 +416,49 @@ class Register extends CI_controller
         );
             
         if (isset($_POST['kirim'])) {
+            $this->load->library('form_validation');
+            $rules = array(
+                array(
+                    'field' => 'nama',
+                    'label' => 'nama',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'alamat',
+                    'label' => 'alamat',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'no_hp',
+                    'label' => 'no_hp',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'email',
+                    'label' => 'email',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'password',
+                    'label' => 'password',
+                    'rules' => 'required'
+                ),
+            );
+            $this->form_validation->set_rules($rules);
+            if ($this->form_validation->run() == FALSE) {
+                $this->session->set_flashdata('pesan', '<script>
+                    swal({
+                        title: "Gagal",
+                        text: "Data Tidak Boleh Kosong",
+                        type: "error",
+                        timer: 2000,
+                        showConfirmButton: true,,
+                        confirmButtonText: "OKEE"
+                    });
+                </script>');
+                redirect('promo');
+            }
+            else
 
             //cek nomor hp sudah pernah terdaftar
             $proses_cek=$this->db->get_where('tb_pelanggan',array('no_hp'=>$this->input->post('no_hp')))->num_rows();
