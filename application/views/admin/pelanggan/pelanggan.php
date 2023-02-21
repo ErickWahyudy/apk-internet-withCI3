@@ -87,11 +87,21 @@
                             <td><?= $pelanggan['status_plg'] ?></td>
                         </tr>
                         <tr>
-                            <td>Hapus Data Pelanggan</td>
-                            <td><a href="<?= base_url('admin/pelanggan/hapus/'.$pelanggan['id_pelanggan']) ?>"
-                                    class="btn btn-danger"
-                                    onclick="return confirm('Yakin ingin menghapus data ini?')"><i
-                                        class="fa fa-trash"></i></a></td>
+                            <td>Kirim WA</td>
+                            <td><a href="https://api.whatsapp.com/send?phone=<?= $pelanggan['no_hp'] ?>&text=
+								Berikut kami sampaikan data akun anda yang digunakan di system aplikasi KassandraWiFi%0A
+								Nama : <?= $pelanggan['nama'] ?> %0A
+								Alamat : <?= $pelanggan['alamat'] ?> %0A
+								No HP : <?= $pelanggan['no_hp'] ?> %0A
+								Email Login : <?= $pelanggan['email'] ?> %0A%0A
+								Jika ada perubahan data silakan lakukan perubahan data melalui link berikut %0A
+								https://wifi.kassandra.my.id/login %0A%0A
+								_Pesan ini dikirim oleh system aplikasi KassandraWifi._%0A
+								-wifi@kassandra.my.id-"
+								 target=" _blank" title="Pesan WhatsApp" class="btn btn-success">
+									<i class="fa fa-whatsapp"></i> WA</i>
+								</a>
+                            </td>
                         </tr>
                     </table>
                 </div>
