@@ -85,7 +85,7 @@ if($aksi == "lihat"):
                 <table class="table table-bordered table-striped">
 					<p class="text-danger">* Jika ingin mengubah paket internet yang diambil silahkan hubungi admin
 						<a href="https://wifi.kassandra.my.id/contact" target="_blank">Klik Disini</a></p>
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="<?= base_url('pelanggan/profile/edit/'.$id_pelanggan) ?>" method="POST" enctype="multipart/form-data">
                         <tr>
                             <th>Nama</th>
 						</tr>

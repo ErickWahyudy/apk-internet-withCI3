@@ -93,7 +93,6 @@ $this->m_pelanggan->update($id,$SQLupdate);
                           '<br>No HP : '.$this->input->post('no_hp') .
                           '<br>Paket internet : '.$this->input->post('id_paket') .
                           '<br>Email : '.$this->input->post('email') .
-                          '<br>Password : '.$this->input->post('password') .
                           '<br>Status : Aktif' .
                           '<br><br><p align=center colspan=2 style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif>
                           <a href="https://wifi.kassandra.my.id" style=color:rgb(255,255,255);background-color:#589bf2;border-width:initial;border-style:none;border-radius:15px;padding:10px 20px target=_blank >' .
