@@ -191,17 +191,6 @@
                                 </td>
                             </tr>
 
-                            <!-- <tr><th>Foto</th><td>
-	<?php 
-      if($aksi == "edit"){
-        echo '<img src="'.base_url('template/data/'.$foto).'" class="img-responsive" style="width:200px;height:200px">';
-      }else{
-
-      }
-	?>
-<input type="file" name="gambar" value="" class="form-control">
-</td></tr> -->
-
                             <tr>
                                 <td></td>
                                 <td>
