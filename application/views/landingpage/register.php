@@ -248,6 +248,7 @@
                             <div class="col-12 text-center">
                                 <input type="submit" name="kirim" value="Daftar sekarang" class="btn btn-primary rounded-pill py-3 px-5">
                             </div>
+                            <p>Sudah punya akun ? <a href="<?= base_url('login') ?>">Login disini</a></p>
                         </div>
                     </form>
                 </div>

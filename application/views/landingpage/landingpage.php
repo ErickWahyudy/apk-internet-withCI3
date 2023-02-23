@@ -185,6 +185,7 @@
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-4 animated zoomIn">Kami hadir untuk memenuhi</h4>
                             <h1 class="display-1 text-white mb-0 animated zoomIn">Kebutuhan internet yang semakin bertambah</h1>
+                            <p><a href="register" class="btn btn-primary rounded-pill py-2 px-4 mt-4 animated zoomIn">Daftar sekarang</a></p>
                         </div>
                     </div>
                 </div>
@@ -192,8 +193,9 @@
                     <img class="w-100" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan2.jpg" alt="Image">
                     <div class="carousel-caption">
                         <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-4 animated zoomIn">Komitmen kami adalah</h4>
-                            <h1 class="display-1 text-white mb-0 animated zoomIn">Mengutamakan kualitas dan kenyamanan pelanggan</h1>
+                            <h4 class="text-white text-uppercase mb-4 animated zoomIn">Komitmen kami adalah mengutamakan</h4>
+                            <h1 class="display-1 text-white mb-0 animated zoomIn">kualitas dan kenyamanan pelanggan</h1>
+                            <p><a href="register" class="btn btn-primary rounded-pill py-2 px-4 mt-4 animated zoomIn">Daftar sekarang</a></p>
                         </div>
                     </div>
                 </div>
@@ -203,6 +205,7 @@
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-4 animated zoomIn">layanan internet hotspot wifi</h4>
                             <h1 class="display-1 text-white mb-0 animated zoomIn">Berbasis kabel fiber optic & wireless</h1>
+                            <p><a href="register" class="btn btn-primary rounded-pill py-2 px-4 mt-4 animated zoomIn">Daftar sekarang</a></p>
                         </div>
                     </div>
                 </div>
@@ -212,6 +215,7 @@
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-4 animated zoomIn">Memenuhi kebutuhan masyarakat dengan</h4>
                             <h1 class="display-1 text-white mb-0 animated zoomIn">Harga yang terjangkau</h1>
+                            <p><a href="register" class="btn btn-primary rounded-pill py-2 px-4 mt-4 animated zoomIn">Daftar sekarang</a></p>
                         </div>
                     </div>
                 </div>
