@@ -5,12 +5,12 @@
 <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
     rel="stylesheet">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="<?= base_url('template/kassandra-wifi') ?>/signature/js/jquery.signature.min.js">
+<script type="text/javascript" src="<?= base_url('themes/kassandra-wifi') ?>/signature/js/jquery.signature.min.js">
 </script>
 <script type="text/javascript"
-    src="<?= base_url('template/kassandra-wifi') ?>/signature/js/jquery.ui.touch-punch.min.js"></script>
+    src="<?= base_url('themes/kassandra-wifi') ?>/signature/js/jquery.ui.touch-punch.min.js"></script>
 <link rel="stylesheet" type="text/css"
-    href="<?= base_url('template/kassandra-wifi') ?>/signature/css/jquery.signature.css">
+    href="<?= base_url('themes/kassandra-wifi') ?>/signature/css/jquery.signature.css">
 
 <style>
 .kbw-signature {
