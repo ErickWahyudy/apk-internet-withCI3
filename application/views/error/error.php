@@ -13,7 +13,7 @@
     <meta content='index,follow' name='robots' />
 
     <!-- Favicon -->
-    <link href="<?= base_url('template/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,15 +25,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="<?= base_url('template/kassandra-wifi') ?>/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="<?= base_url('template/kassandra-wifi') ?>/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="<?= base_url('template/kassandra-wifi') ?>/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="<?= base_url('template/kassandra-wifi') ?>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="<?= base_url('template/kassandra-wifi') ?>/css/style.css" rel="stylesheet">
+    <!-- themes Stylesheet -->
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -50,7 +50,7 @@
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container text-center">
             <div class="row justify-content-center">
-            <img src="<?= base_url('template/kassandra-wifi') ?>/img/maintenance.gif" style="width: 420pt; height: 100%; object-fit: cover;">
+            <img src="<?= base_url('themes/kassandra-wifi') ?>/img/maintenance.gif" style="width: 420pt; height: 100%; object-fit: cover;">
                 <div class="col-lg-6">
                     <i class="bi bi-exclamation-triangle display-1 text-primary"></i>                   
                     <h3 class="mb-4">Page Not Found</h3>
@@ -69,15 +69,15 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url('template/kassandra-wifi') ?>/lib/wow/wow.min.js"></script>
-    <script src="<?= base_url('template/kassandra-wifi') ?>/lib/easing/easing.min.js"></script>
-    <script src="<?= base_url('template/kassandra-wifi') ?>/lib/waypoints/waypoints.min.js"></script>
-    <script src="<?= base_url('template/kassandra-wifi') ?>/lib/counterup/counterup.min.js"></script>
-    <script src="<?= base_url('template/kassandra-wifi') ?>/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="<?= base_url('template/kassandra-wifi') ?>/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="<?= base_url('themes/kassandra-wifi') ?>/lib/wow/wow.min.js"></script>
+    <script src="<?= base_url('themes/kassandra-wifi') ?>/lib/easing/easing.min.js"></script>
+    <script src="<?= base_url('themes/kassandra-wifi') ?>/lib/waypoints/waypoints.min.js"></script>
+    <script src="<?= base_url('themes/kassandra-wifi') ?>/lib/counterup/counterup.min.js"></script>
+    <script src="<?= base_url('themes/kassandra-wifi') ?>/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="<?= base_url('themes/kassandra-wifi') ?>/lib/lightbox/js/lightbox.min.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="<?= base_url('template/kassandra-wifi') ?>/js/main.js"></script>
+    <!-- Javascript -->
+    <script src="<?= base_url('themes/kassandra-wifi') ?>/js/main.js"></script>
     <script type="text/javascript">
         // info tahun
         var tahun = new Date().getFullYear();

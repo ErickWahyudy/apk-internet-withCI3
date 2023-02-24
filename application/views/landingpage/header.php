@@ -13,8 +13,8 @@
     <link rel="manifest" href="<?= base_url('static/manifest.json') ?>">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= base_url('template') ?>/favicon.ico" type="image/x-icon">
-    <link href="<?= base_url('template') ?>favicon.ico" rel="icon">
+    <link rel="shortcut icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
+    <link href="<?= base_url('themes') ?>favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,15 +26,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="<?= base_url('template/kassandra-wifi') ?>/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="<?= base_url('template/kassandra-wifi') ?>/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="<?= base_url('template/kassandra-wifi') ?>/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="<?= base_url('template/kassandra-wifi') ?>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="<?= base_url('template/kassandra-wifi') ?>/css/style.css" rel="stylesheet">
+    <!--Stylesheet -->
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/css/style.css" rel="stylesheet">
+
+    <!-- sweetalert -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
@@ -155,7 +159,7 @@
                     </div>
                 </div>
             </div>
-            <a href="register" target="" class="btn btn-sm btn-light rounded-pill py-2 px-4 <?php if($this->uri->segment(1)=="register"){echo "active";}?>">Daftar sekarang ?</a>
+            <a href="register" target="" class="btn btn-sm btn-light rounded-pill py-2 px-4">Daftar sekarang ?</a>
         </div>
     </nav>
     <!-- Navbar End -->

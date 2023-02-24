@@ -9,27 +9,27 @@
   <meta name="keywords" content="wifi kassandra my id, kassandra my id, kassandra wifi, kassandra, kassandra hd production, KASSANDRA, KASSANDRA HD PRODUCTION">
   <meta name="description" content="Layanan hotspot wifi unlimited 24 jam non stop tanpa lemot kecuali saat wifi down">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="<?= base_url('template/admin') ?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?= base_url('template/admin') ?>/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<?= base_url('template/admin') ?>/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?= base_url('template/admin') ?>/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
- <link rel="stylesheet" href="<?= base_url('template/admin') ?>/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="<?= base_url('template/admin') ?>/dist/css/skins/_all-skins.min.css">
+ <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
-  <link rel="stylesheet" href="<?= base_url('template/admin') ?>/bower_components/morris.js/morris.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/morris.js/morris.css">
   <!-- jvectormap -->
-  <link rel="stylesheet" href="<?= base_url('template/admin') ?>/bower_components/jvectormap/jquery-jvectormap.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Date Picker -->
-  <!-- <link rel="stylesheet" href="<?= base_url('template/admin') ?>/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"> -->
+  <!-- <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"> -->
   <!-- Daterange picker -->
-  <!-- <link rel="stylesheet" href="<?= base_url('template/admin') ?>/bower_components/bootstrap-daterangepicker/daterangepicker.css"> -->
+  <!-- <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/bootstrap-daterangepicker/daterangepicker.css"> -->
   <!-- bootstrap wysihtml5 - text editor -->
- <script src="<?= base_url('template/admin') ?>/bower_components/jquery/jquery-1.11.2.min.js"></script>
+ <script src="<?= base_url('themes/admin') ?>/bower_components/jquery/jquery-1.11.2.min.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -45,7 +45,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="<?= base_url('template') ?>/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
  
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -98,9 +98,9 @@ if($this->session->userdata('level') =="Administrator"){
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <?php if($this->session->userdata('level') == "Administrator"){ ?>
-              <img src="<?= base_url('template/admin') ?>/dist/komp.png" class="user-image" width="20%" alt="User Image">
+              <img src="<?= base_url('themes/admin') ?>/dist/komp.png" class="user-image" width="20%" alt="User Image">
                   <?php }elseif($this->session->userdata('level') == "PLG"){ ?>
-                    <img src="<?= base_url('template/admin') ?>/dist/user.png" class="user-image" width="20%" alt="User Image">                  
+                    <img src="<?= base_url('themes/admin') ?>/dist/user.png" class="user-image" width="20%" alt="User Image">                  
               <?php } ?> 
               <span class="hidden-xs"><?= $data['nama'] ?></span>
             </a>
@@ -108,9 +108,9 @@ if($this->session->userdata('level') =="Administrator"){
               <!-- User image -->
               <li class="user-header">
                 <?php if($this->session->userdata('level') == "Administrator"){ ?>
-                  <img src="<?= base_url('template/admin') ?>/dist/komp.png" class="img-circle" width="20%" alt="User Image"> <br>
+                  <img src="<?= base_url('themes/admin') ?>/dist/komp.png" class="img-circle" width="20%" alt="User Image"> <br>
                     <?php }elseif($this->session->userdata('level') == "PLG"){ ?>
-                      <img src="<?= base_url('template/admin') ?>/dist/user.png" class="img-circle" width="20%" alt="User Image"> <br>                  
+                      <img src="<?= base_url('themes/admin') ?>/dist/user.png" class="img-circle" width="20%" alt="User Image"> <br>                  
                 <?php } ?> 
                 <p>
                   <?= $data['nama'] ?> <br>
@@ -165,9 +165,9 @@ if($this->session->userdata('level') =="Administrator"){
           <br /><br />
         </div>
           <?php if($this->session->userdata('level') == "Administrator"){ ?>
-            <img src="<?= base_url('template/admin') ?>/dist/komp.png" class="img-circle" width="20%" alt="User Image">
+            <img src="<?= base_url('themes/admin') ?>/dist/komp.png" class="img-circle" width="20%" alt="User Image">
             <?php }elseif($this->session->userdata('level') == "PLG"){ ?>
-              <img src="<?= base_url('template/admin') ?>/dist/user.png" class="img-circle" width="20%" alt="User Image">                  
+              <img src="<?= base_url('themes/admin') ?>/dist/user.png" class="img-circle" width="20%" alt="User Image">                  
           <?php } ?> 
         <span class="pull-left info"><?= ucfirst($data['nama']) ?> <br><br>
         <small class="label label-warning">

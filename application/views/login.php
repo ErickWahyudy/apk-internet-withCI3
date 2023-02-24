@@ -10,17 +10,17 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="<?= base_url('template/admin/') ?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin/') ?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?= base_url('template/admin/') ?>/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin/') ?>/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<?= base_url('template/admin/') ?>/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin/') ?>/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?= base_url('template/admin/') ?>/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin/') ?>/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="<?= base_url('template/admin/') ?>/plugins/iCheck/square/blue.css">
+  <link rel="stylesheet" href="<?= base_url('themes/admin/') ?>/plugins/iCheck/square/blue.css">
   <!-- Favicon -->
-  <link href="<?= base_url('template/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
+  <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,7 +34,7 @@
 </head>
 <!-- <div class="content">
   <div class="col-md-12">
- <img src="<?= base_url('template/logo.png') ?>" class="img-responsive">
+ <img src="<?= base_url('themes/logo.png') ?>" class="img-responsive">
 </div>
 </div> -->
 
@@ -42,14 +42,14 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 
-<body class="hold-transition" background="<?= base_url('template/kassandra-wifi') ?>/img/img/bgmember.jpg" style="background-size: cover; background-repeat: repeat; background-position: center center;">
+<body class="hold-transition" background="<?= base_url('themes/kassandra-wifi') ?>/img/img/bgmember.jpg" style="background-size: cover; background-repeat: repeat; background-position: center center;">
 <div class="login-box">
    
 <?= $this->session->flashdata('pesan') ?>
 		<!-- /.login-logo -->
 		<div class="login-box-body">
 			<center>
-				<img src="<?= base_url('template/kassandra-wifi') ?>/img/img/komp.png" width=170px />
+				<img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/komp.png" width=170px />
 				<h4>
 					<b>
 						APLIKASI TAGIHAN INTERNET (KASSANDRA WIFI)
@@ -91,11 +91,11 @@
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->
-<script src="<?= base_url('template/admin/') ?>/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="<?= base_url('themes/admin/') ?>/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="<?= base_url('template/admin/') ?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?= base_url('themes/admin/') ?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="<?= base_url('template/admin/') ?>/plugins/iCheck/icheck.min.js"></script>
+<script src="<?= base_url('themes/admin/') ?>/plugins/iCheck/icheck.min.js"></script>
 <script>
   $(function () {
     $('input').iCheck({
