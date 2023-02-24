@@ -26,7 +26,7 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="img/team-1.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-1.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="img/team-2.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-2.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="img/team-3.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-3.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="img/team-2.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-2.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="img/team-3.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-3.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>

@@ -120,7 +120,7 @@
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" src="<?= base_url('template/kassandra-wifi') ?>/img/testimonial-1.jpg" alt="">
+                        <img class="flex-shrink-0 rounded-circle border p-1" src="<?= base_url('themes/kassandra-wifi') ?>/img/testimonial-1.jpg" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">Client Name</h5>
                             <span>Profession</span>
@@ -131,7 +131,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" src="<?= base_url('template/kassandra-wifi') ?>/img/testimonial-2.jpg" alt="">
+                        <img class="flex-shrink-0 rounded-circle border p-1" src="<?= base_url('themes/kassandra-wifi') ?>/img/testimonial-2.jpg" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">Client Name</h5>
                             <span>Profession</span>
@@ -142,7 +142,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" src="<?= base_url('template/kassandra-wifi') ?>/img/testimonial-3.jpg" alt="">
+                        <img class="flex-shrink-0 rounded-circle border p-1" src="<?= base_url('themes/kassandra-wifi') ?>/img/testimonial-3.jpg" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">Client Name</h5>
                             <span>Profession</span>
@@ -153,7 +153,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" src="<?= base_url('template/kassandra-wifi') ?>/img/testimonial-4.jpg" alt="">
+                        <img class="flex-shrink-0 rounded-circle border p-1" src="<?= base_url('themes/kassandra-wifi') ?>/img/testimonial-4.jpg" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">Client Name</h5>
                             <span>Profession</span>

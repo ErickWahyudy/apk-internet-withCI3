@@ -97,37 +97,37 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="">
-                        <img class="img-fluid rounded mb-4" src="img/1.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/1.jpg" alt="">
                         <h4 class="mb-0">KASSANDRA WIFI</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="">
-                        <img class="img-fluid rounded mb-4" src="img/2.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/2.jpg" alt="">
                         <h4 class="mb-0">Game online stabil</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="">
-                        <img class="img-fluid rounded mb-4" src="img/3.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/3.jpg" alt="">
                         <h4 class="mb-0">Menemani waktu santai</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="">
-                        <img class="img-fluid rounded mb-4" src="img/4.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/4.jpg" alt="">
                         <h4 class="mb-0">Iuran bulanan yang terjangkau</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="">
-                        <img class="img-fluid rounded mb-4" src="img/5.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/5.jpg" alt="">
                         <h4 class="mb-0">Teknisi yang stanbay 24 jam kecuali saat sibuk</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="">
-                        <img class="img-fluid rounded mb-4" src="img/6.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/6.jpg" alt="">
                         <h4 class="mb-0">Let's join our us!</h4>
                     </a>
                 </div>
@@ -190,7 +190,7 @@
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="img-border">
-                        <img class="img-fluid" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan4.jpg" alt="">
+                        <img class="img-fluid" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan4.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -210,7 +210,7 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/team-1.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-1.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>
@@ -229,7 +229,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/team-2.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-2.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>
@@ -248,7 +248,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/team-3.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-3.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>

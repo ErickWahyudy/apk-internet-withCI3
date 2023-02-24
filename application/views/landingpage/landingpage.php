@@ -5,21 +5,21 @@
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
-                    <img class="img-fluid" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan1.jpg" alt="Image">
+                    <img class="img-fluid" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan1.jpg" alt="Image">
                 </button>
                 <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="1" aria-label="Slide 2">
-                    <img class="img-fluid" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan2.jpg" alt="Image">
+                    <img class="img-fluid" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan2.jpg" alt="Image">
                 </button>
                 <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="2" aria-label="Slide 3">
-                    <img class="img-fluid" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan3.jpg" alt="Image">
+                    <img class="img-fluid" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan3.jpg" alt="Image">
                 </button>
                 <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="3" aria-label="Slide 4">
-                    <img class="img-fluid" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan4.jpg" alt="Image">
+                    <img class="img-fluid" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan4.jpg" alt="Image">
                 </button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan1.jpg" alt="Image">
+                    <img class="w-100" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan1.jpg" alt="Image">
                     <div class="carousel-caption">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-4 animated zoomIn">Kami hadir untuk memenuhi</h4>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan2.jpg" alt="Image">
+                    <img class="w-100" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan2.jpg" alt="Image">
                     <div class="carousel-caption">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-4 animated zoomIn">Komitmen kami adalah mengutamakan</h4>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan3.jpg" alt="Image">
+                    <img class="w-100" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan3.jpg" alt="Image">
                     <div class="carousel-caption">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-4 animated zoomIn">layanan internet hotspot wifi</h4>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan4.jpg" alt="Image">
+                    <img class="w-100" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan4.jpg" alt="Image">
                     <div class="carousel-caption">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-4 animated zoomIn">Memenuhi kebutuhan masyarakat dengan</h4>
@@ -155,37 +155,37 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="#">
-                        <img class="img-fluid rounded mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/1.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/1.jpg" alt="">
                         <h4 class="mb-0">KASSANDRA WIFI</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="#">
-                        <img class="img-fluid rounded mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/2.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/2.jpg" alt="">
                         <h4 class="mb-0">Game online stabil</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="#">
-                        <img class="img-fluid rounded mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/3.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/3.jpg" alt="">
                         <h4 class="mb-0">Menemani waktu santai</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="#">
-                        <img class="img-fluid rounded mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/4.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/4.jpg" alt="">
                         <h4 class="mb-0">Iuran bulanan yang terjangkau</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="#">
-                        <img class="img-fluid rounded mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/5.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/5.jpg" alt="">
                         <h4 class="mb-0">Teknisi yang stanbay 24 jam kecuali saat sibuk</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="#">
-                        <img class="img-fluid rounded mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/6.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/6.jpg" alt="">
                         <h4 class="mb-0">Let's join our us!</h4>
                     </a>
                 </div>
@@ -243,7 +243,7 @@
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="img-border">
-                        <img class="img-fluid" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan4.jpg" alt="">
+                        <img class="img-fluid" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan4.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -262,7 +262,7 @@
             <?php foreach($data->result_array() as $feedback): ?>
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" style="width:22%" src="<?= base_url('template/kassandra-wifi') ?>/img/img/user.png" alt="">
+                        <img class="flex-shrink-0 rounded-circle border p-1" style="width:22%" src="<?= base_url('themes/kassandra-wifi') ?>/img/img/user.png" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">
                                 <?= htmlentities(shortname($feedback['nama'])) ?>
@@ -295,7 +295,7 @@
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('template/kassandra-wifi') ?>/img/img/transferbank.png" alt="">
+                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('themes/kassandra-wifi') ?>/img/img/transferbank.png" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">Transfer Antar Bank</h5>
                             <span>Payment</span>
@@ -305,7 +305,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('template/kassandra-wifi') ?>/img/img/dana.png" alt="">
+                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('themes/kassandra-wifi') ?>/img/img/dana.png" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">Dana</h5>
                             <span>Payment</span>
@@ -314,7 +314,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('template/kassandra-wifi') ?>/img/img/linkaja.png" alt="">
+                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('themes/kassandra-wifi') ?>/img/img/linkaja.png" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">LinkAja</h5>
                             <span>Payment</span>
@@ -324,7 +324,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('template/kassandra-wifi') ?>/img/img/shopeepay.png" alt="">
+                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('themes/kassandra-wifi') ?>/img/img/shopeepay.png" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">ShopeePay</h5>
                             <span>Payment</span>
@@ -334,7 +334,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('template/kassandra-wifi') ?>/img/img/alfamart.png" alt="">
+                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('themes/kassandra-wifi') ?>/img/img/alfamart.png" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">Alfamart</h5>
                             <span>Payment</span>
@@ -344,7 +344,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('template/kassandra-wifi') ?>/img/img/indomaret.png" alt="">
+                        <img class="flex-shrink-0 rounded-square border p-1" style="width:50%" src="<?= base_url('themes/kassandra-wifi') ?>/img/img/indomaret.png" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1">Indomart</h5>
                             <span>Payment</span>
@@ -367,7 +367,7 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/team-1.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-1.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>
@@ -383,7 +383,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/team-2.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-2.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>
@@ -399,7 +399,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('template/kassandra-wifi') ?>/img/team-3.jpg" alt="">
+                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="<?= base_url('themes/kassandra-wifi') ?>/img/team-3.jpg" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>Kassandra WiFi</h5>

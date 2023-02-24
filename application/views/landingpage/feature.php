@@ -109,7 +109,7 @@
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="img-border">
-                        <img class="img-fluid" src="<?= base_url('template/kassandra-wifi') ?>/img/iklan4.jpg" alt="">
+                        <img class="img-fluid" src="<?= base_url('themes/kassandra-wifi') ?>/img/iklan4.jpg" alt="">
                     </div>
                 </div>
             </div>

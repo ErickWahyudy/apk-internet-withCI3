@@ -109,7 +109,7 @@ public function tagihan($id='')
     $this->db->from($this->table3);
     $this->db->where('id_pelanggan', $id);
     $this->db->order_by('status', 'BL');
-    $this->db->order_by('id_tagihan', 'ASC');
+    $this->db->order_by('id_tagihan', 'Desc');
     return $this->db->get();
 }
 

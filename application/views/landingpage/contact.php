@@ -78,9 +78,9 @@
       </div>
     </div>
   </div>
-  <script src="<?= base_url('template/kassandra-wifi') ?>/js/bootstrapiklan.min.js"></script>
-  <script src="<?= base_url('template/kassandra-wifi') ?>/js/chat.js"></script>
-  <script src="<?= base_url('template/kassandra-wifi') ?>/js/jqueryiklan.min.js"></script>
+  <script src="<?= base_url('themes/kassandra-wifi') ?>/js/bootstrapiklan.min.js"></script>
+  <script src="<?= base_url('themes/kassandra-wifi') ?>/js/chat.js"></script>
+  <script src="<?= base_url('themes/kassandra-wifi') ?>/js/jqueryiklan.min.js"></script>
 
 
      <!-- Google Map Start -->

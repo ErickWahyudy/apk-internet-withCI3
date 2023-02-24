@@ -6,7 +6,7 @@ if($aksi == "cetak_struk_bulanan"):
 <head>
     <title>Nota KassandraWiFi Bulan <?= $bulan;?> <?= htmlentities($id_tagihan); ?> <?= $nama; ?>
     </title>
-    <link rel="shortcut icon" href="<?= base_url('template/kassandra-wifi') ?>/img/favicon.ico" type="image/x-icon">  
+    <link rel="shortcut icon" href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" type="image/x-icon">  
     <meta name="keywords" content="wifi kassandra my id, kassandra my id, kassandra wifi, kassandra, kassandra hd production, KASSANDRA, KASSANDRA HD PRODUCTION">
     <meta name="description" content="Layanan hotspot wifi unlimited 24 jam non stop tanpa lemot kecuali saat wifi down">
 </head>
@@ -110,7 +110,7 @@ if($aksi == "cetak_struk_bulanan"):
                         <td align='center'>Diterima Oleh,<br><br><br><br><br>(<u>.................</u>)</td>
                         <td style='border:0px solid black; padding:5px; text-align:left; width:40%'></td>
                         <td align='center'>Admin,<br>
-                            <img src="<?= base_url('template/kassandra-wifi') ?>/img/img/ttd-erik.jpg" style="width: 40px; height: 40px;"><br>
+                            <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/ttd-erik.jpg" style="width: 40px; height: 40px;"><br>
                             (<u>Kassandra WiFi</u>)
                         </td>
                     </tr>
@@ -219,7 +219,7 @@ elseif($aksi == "cetak_struk_tagihan_lain"):
                         <td align='center'>Diterima Oleh,<br><br><br><br><br>(<u>.................</u>)</td>
                         <td style='border:0px solid black; padding:5px; text-align:left; width:40%'></td>
                         <td align='center'>Admin,<br>
-                            <img src="<?= base_url('template/kassandra-wifi') ?>/img/img/ttd-erik.jpg" style="width: 40px; height: 40px;"><br>
+                            <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/ttd-erik.jpg" style="width: 40px; height: 40px;"><br>
                             (<u>Kassandra WiFi</u>)
                         </td>
                     </tr>

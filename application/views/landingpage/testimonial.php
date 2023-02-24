@@ -31,7 +31,7 @@
             ?> 
                 <div class="testimonial-item bg-light rounded p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" style="width:22%" src="dist/img/user.png" alt="">
+                        <img class="flex-shrink-0 rounded-circle border p-1" style="width:22%" src="<?= base_url('themes/kassandra-wifi') ?>/dist/img/user.png" alt="">
                         <div class="ms-4">
                             <h5 class="mb-1"><?php echo shortname ($data['nama']); ?></h5>
                             <span><?php echo tanggal ($data['tanggal']); ?></span> 
@@ -47,3 +47,45 @@
 <!-- Feedback Pelanggan End -->
 
 <?php $this->load->view('landingpage/footer') ?>
+<?php
+//format tanggal indonesia
+function tanggal($tanggal){
+    $bulan = array (
+      1 =>   'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember'
+    );
+    $pecahkan = explode('-', $tanggal);
+    
+    // variabel pecahkan 0 = tanggal
+    // variabel pecahkan 1 = bulan
+    // variabel pecahkan 2 = tahun
+    
+    return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+  }
+
+//membuat shortname
+function shortname($name){
+	$short = explode(" ", $name);
+	$shortname = $short[0];
+	return $shortname;
+}
+
+//menampilkan hasil nilai dengan format rating ( * )
+function rating($nilai){
+	$hasil = "";
+	for ($i=0; $i < $nilai; $i++) { 
+		$hasil .= "<span class='fa fa-star checked'></span>";
+	}
+	return $hasil;
+}
+?>
