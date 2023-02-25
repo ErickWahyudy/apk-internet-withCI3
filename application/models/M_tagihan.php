@@ -75,7 +75,7 @@ public function konfirmasi_byrView($value='')
     $this->db->from($this->konfirmasi);
     $this->db->join($this->table1 , 'tb_tagihan_konfirmasi.id_pelanggan = tb_pelanggan.id_pelanggan');
     $this->db->join($this->table3 , 'tb_tagihan_konfirmasi.id_tagihan = tb_tagihan.id_tagihan');
-    $this->db->order_by('id_konfirmasi', 'DESC');
+    $this->db->order_by('tgl_konfirmasi', 'DESC');
     return $this->db->get();
 }
 

@@ -13,7 +13,7 @@ public function view($value='')
 {
   $this->db->select ('*');
   $this->db->from ($this->table);
-  $this->db->order_by('keterangan');
+  $this->db->order_by('tanggal', 'DESC');
   return $this->db->get();
 }
 
