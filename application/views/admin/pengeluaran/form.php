@@ -105,7 +105,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="date" name="tanggal" class="form-control" placeholder="Tanggal" value="<?= date('Y-m-d') ?>" required="">
+                                    <input type="date" name="tanggal" class="form-control" placeholder="Tanggal" value="<?= date('Y-m-d') ?>" >
                                 </td>
                             </tr>
 
