@@ -178,7 +178,7 @@ for (i = 0; i < locations.length; i++) {
     marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
-        icon: '<?= base_url('template/marker.png') ?>',
+        icon: '<?= base_url('themes/marker.png') ?>',
     });
 
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -230,7 +230,7 @@ function taruhMarker(peta, posisiTitik) {
         marker = new google.maps.Marker({
             position: posisiTitik,
             map: peta,
-            icon: '<?= base_url('template/marker.png') ?>',
+            icon: '<?= base_url('themes/marker.png') ?>',
         });
     }
 
