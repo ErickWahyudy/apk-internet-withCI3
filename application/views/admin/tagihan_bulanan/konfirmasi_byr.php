@@ -31,8 +31,8 @@
                     <?php } ?>                                   
                  </td>
                 <td>
-                <a href="<?= base_url('template/bukti_bayar/'.$tagihan['bukti_bayar']) ?>" target="_blank">
-                  <img src="<?= base_url('template/bukti_bayar/'.$tagihan['bukti_bayar']) ?>" class="img-responsive" style="width: 100px;height: 100xp">
+                <a href="<?= base_url('themes/bukti_bayar/'.$tagihan['bukti_bayar']) ?>" target="_blank">
+                  <img src="<?= base_url('themes/bukti_bayar/'.$tagihan['bukti_bayar']) ?>" class="img-responsive" style="width: 100px;height: 100xp">
                 </td>
                 <td><?= tgl_indo($tagihan['tgl_konfirmasi']) ?></td>
                                    
