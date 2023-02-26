@@ -103,21 +103,21 @@ $this->m_pelanggan->update($id,$SQLupdate);
               <tr>
                               <td style=padding-left:1em;padding-right:1em>
                               <a>
-                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/iklan1.jpg width=35%>
+                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/iklan1.jpg width=35%>
                 </a>
 
                 <a>
-                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/kassandra.jpg width=60%>
+                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/kassandra.jpg width=60%>
                 </a>
 
                 <br>
 
                 <a>
-                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/iklan3.jpg width=35%>
+                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/iklan3.jpg width=35%>
                 </a>
 
                 <a>
-                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/payment.png width=60%>
+                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/payment.png width=60%>
                 </a>
 
               </td>
@@ -125,7 +125,7 @@ $this->m_pelanggan->update($id,$SQLupdate);
               </thead></table>
                               <p style=font-size:16px>
               <i>Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi</i>
-              <br><img src="https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png">
+              <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
               <br><b>~ wifi@kassandra.my.id ~</b></p>' ;
                               
           $mail->Body = $content;
@@ -136,7 +136,7 @@ $this->m_pelanggan->update($id,$SQLupdate);
    }else{
 
 
-        $config['upload_path']    = './template/data/'; 
+        $config['upload_path']    = './themes/data/'; 
         $config['allowed_types']  = 'bmp|jpg|png';  
         $config['file_name']      = 'foto_'.time();  
         $this->load->library('upload', $config);
@@ -278,21 +278,21 @@ $SQLupdate=array(
                               <tr>
                               <td style=padding-left:1em;padding-right:1em>
                               <a>
-                              <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/iklan1.jpg width=35%>
+                              <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/iklan1.jpg width=35%>
                               </a>
 
                               <a>
-                              <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/kassandra.jpg width=60%>
+                              <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/kassandra.jpg width=60%>
                               </a>
 
                               <br>
 
                               <a>
-                              <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/iklan3.jpg width=35%>
+                              <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/iklan3.jpg width=35%>
                               </a>
 
                               <a>
-                              <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/payment.png width=60%>
+                              <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/payment.png width=60%>
                               </a>
 
                             </td>
@@ -300,7 +300,7 @@ $SQLupdate=array(
                             </thead></table>
                                             <p style=font-size:16px>
                             <i>Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi</i>
-                            <br><img src="https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png">
+                            <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
                             <br><b>~ wifi@kassandra.my.id ~</b></p>' ;
                               
           $mail->Body = $content;

@@ -58,7 +58,7 @@ class Email extends CI_controller
                         '<br></td></tr></thead></table> 
                         <p style=font-size:16px;padding-left:1em;padding-right:1em>
                             <i>Pesan ini dikirim otomatis oleh system aplikasi '.$this->input->post('nama_pengirim').'</i>
-                            <br><img src="https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png">
+                            <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
                             <br><b>~ ' .$this->input->post('ttd'). ' ~</b>';
                             
         $mail->Body = $content;
@@ -169,7 +169,7 @@ class Email extends CI_controller
                         '<br></td></tr></thead></table> 
                         <p style=font-size:16px;padding-left:1em;padding-right:1em>
                             <i>Pesan ini dikirim otomatis oleh system aplikasi '.$data['nama_pengirim'].'</i>
-                            <br><img src="https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png">
+                            <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
                             <br><b>~ ' .$data['tanda_tangan']. ' ~</b>';
                             
         $mail->Body = $content;
@@ -227,7 +227,7 @@ public function kirimemail_umum()
                         '<br></td></tr></thead></table> 
                         <p style=font-size:16px;padding-left:1em;padding-right:1em>
                             <i>Pesan ini dikirim otomatis oleh system aplikasi '.$this->input->post('nama_pengirim').'</i>
-                            <br><img src="https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png">
+                            <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
                             <br><b>~ ' .$this->input->post('ttd'). ' ~</b>';
                             
         $mail->Body = $content;
@@ -263,9 +263,7 @@ public function sendmail_bulanan()
         //kirim email ke semua pelanggan yang belum bayar
         $result = $this->db->query("SELECT * FROM tb_tagihan join tb_pelanggan on tb_tagihan.id_pelanggan = tb_pelanggan.id_pelanggan where status = 'BL'");
         $result = $result->result_array();
-        
-        foreach ($result as $data) {
-
+                    
             $mail = new PHPMailer();
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
@@ -275,6 +273,8 @@ public function sendmail_bulanan()
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
             $mail->setFrom('kassandramikrotik@gmail.com' , 'Kassandra WiFi'); // Email dan nama pengirim
+
+            foreach ($result as $data) {
             $mail->addAddress($data['email'], $data['nama']); // Email dan nama penerima
             $mail->Subject = 'Yth. '.$data['nama'].' Ada Tagihan Baru KassandraWiFi bulan '.$data['bulan']. ' / ' .$data['tahun']. ' Yang Belum Dibayar'; // Subject email
             $mail->isHTML(true);
@@ -297,27 +297,27 @@ public function sendmail_bulanan()
                             <tr>
                             <td style=padding-left:1em;padding-right:1em>
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/transferbank.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/transferbank.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/shopeepay.png height=22px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/shopeepay.png height=22px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/linkaja.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/linkaja.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/dana.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/dana.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/alfamart.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/alfamart.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/indomaret.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/indomaret.png height=35px>
                                 </a>
                             </td>
                             </tr>
@@ -325,7 +325,7 @@ public function sendmail_bulanan()
 
                             <p style=font-size:16px;padding-left:1em;padding-right:1em>
                             <i>Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi</i>
-                            <br><img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png>
+                            <br><img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png>
                             <br><b>~ wifi@kassandra.my.id ~</b></p>'
                         ;
                                 
@@ -398,27 +398,27 @@ public function sendmail_bl_lain()
                             <tr>
                             <td style=padding-left:1em;padding-right:1em>
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/transferbank.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/transferbank.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/shopeepay.png height=22px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/shopeepay.png height=22px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/linkaja.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/linkaja.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/dana.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/dana.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/alfamart.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/alfamart.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/indomaret.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/indomaret.png height=35px>
                                 </a>
                             </td>
                             </tr>
@@ -426,7 +426,7 @@ public function sendmail_bl_lain()
 
                             <p style=font-size:16px;padding-left:1em;padding-right:1em>
                             <i>Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi</i>
-                            <br><img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png>
+                            <br><img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png>
                             <br><b>~ wifi@kassandra.my.id ~</b></p>'
                         ;
                                 
@@ -494,27 +494,27 @@ public function sendmail_bl_lain()
                             <tr>
                             <td style=padding-left:1em;padding-right:1em>
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/transferbank.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/transferbank.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/shopeepay.png height=22px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/shopeepay.png height=22px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/linkaja.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/linkaja.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/dana.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/dana.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/alfamart.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/alfamart.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/indomaret.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/indomaret.png height=35px>
                                 </a>
                             </td>
                             </tr>
@@ -522,7 +522,7 @@ public function sendmail_bl_lain()
 
                             <p style=font-size:16px;padding-left:1em;padding-right:1em>
                             <i>Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi</i>
-                            <br><img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png>
+                            <br><img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png>
                             <br><b>~ wifi@kassandra.my.id ~</b></p>'
                         ;
                                 

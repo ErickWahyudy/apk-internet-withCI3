@@ -155,21 +155,21 @@ class Reset_password extends CI_controller
                                 <tr>
                                 <td style=padding-left:1em;padding-right:1em>
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/iklan1.jpg width=35%>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/iklan1.jpg width=35%>
                                 </a>
   
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/kassandra.jpg width=60%>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/kassandra.jpg width=60%>
                                 </a>
   
                                 <br>
   
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/iklan3.jpg width=35%>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/iklan3.jpg width=35%>
                                 </a>
   
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/payment.png width=60%>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/payment.png width=60%>
                                 </a>
   
                               </td>
@@ -177,7 +177,7 @@ class Reset_password extends CI_controller
                               </thead></table>
                                               <p style=font-size:16px>
                               <i>Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi</i>
-                              <br><img src="https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png">
+                              <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
                               <br><b>~ wifi@kassandra.my.id ~</b></p>' ;
                                 
             $mail->Body = $content;
@@ -283,21 +283,21 @@ class Reset_password extends CI_controller
                               <tr>
                               <td style=padding-left:1em;padding-right:1em>
                               <a>
-                              <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/iklan1.jpg width=35%>
+                              <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/iklan1.jpg width=35%>
                               </a>
 
                               <a>
-                              <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/kassandra.jpg width=60%>
+                              <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/kassandra.jpg width=60%>
                               </a>
 
                               <br>
 
                               <a>
-                              <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/iklan3.jpg width=35%>
+                              <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/iklan3.jpg width=35%>
                               </a>
 
                               <a>
-                              <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/payment.png width=60%>
+                              <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/payment.png width=60%>
                               </a>
 
                             </td>
@@ -305,7 +305,7 @@ class Reset_password extends CI_controller
                             </thead></table>
                                             <p style=font-size:16px>
                             <i>Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi</i>
-                            <br><img src="https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png">
+                            <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
                             <br><b>~ wifi@kassandra.my.id ~</b></p>' ;
                               
           $mail->Body = $content;

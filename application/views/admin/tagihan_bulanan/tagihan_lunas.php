@@ -1,4 +1,5 @@
 <?php $this->load->view('template/header'); ?>
+<?= $this->session->flashdata('pesan') ?>
 
 <?php if($depan == TRUE): 
     $kode_tahun = date('Y');
@@ -21,8 +22,6 @@
 </table>
 
 <?php elseif($depan == FALSE): ?>
-
-<?= $this->session->flashdata('pesan') ?>
 
 <div class="alert alert-info alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

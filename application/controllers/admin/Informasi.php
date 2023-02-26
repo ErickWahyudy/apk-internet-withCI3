@@ -117,7 +117,7 @@ class Informasi extends CI_controller
 
     private function berkas($value='')
     {
-      $config['upload_path']          = './template/file_informasi/';
+      $config['upload_path']          = './themes/file_informasi/';
       $config['allowed_types']        = 'pdf|doc|docx|xls|xlsx|ppt|pptx|jpg|png|jpeg|txt';
       $config['max_size']             = 10000;
       $config['max_width']            = 10000;
@@ -170,7 +170,7 @@ class Informasi extends CI_controller
       //hapus file di folder berdasarkan id
       $data=$this->m_informasi->view_id($id)->row_array();
       $file=$data['berkas'];
-      unlink('./template/file_informasi/'.$file);
+      unlink('./themes/file_informasi/'.$file);
       //hapus data di database
       $cek=$this->m_informasi->delete($id);
      if ($cek) {

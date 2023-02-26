@@ -91,8 +91,8 @@ public function hapus($id='')
     $data=$this->m_promo->promo_view_id($id)->row_array();
     $promo_del=$data['bukti_ktp'];
     $promo_del2=$data['signature'];
-    unlink('./template/bukti_ktp/'.$promo_del);
-    unlink('./template/signature/'.$promo_del2);
+    unlink('./themes/bukti_ktp/'.$promo_del);
+    unlink('./themes/signature/'.$promo_del2);
     //hapus data di database
     $cek=$this->m_promo->delete_promo($id);
 	 if ($cek) {

@@ -262,6 +262,6 @@ if($aksi == "kirimemail_plg"):
     <!-- /.content-wrapper -->
 
 <?php endif; ?>
-    <script type="text/javascript" src="<?php echo base_url('template/kassandra-wifi/ckeditor/ckeditor.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('themes/kassandra-wifi/ckeditor/ckeditor.js')?>"></script>
 
 <?php $this->load->view('template/footer'); ?>

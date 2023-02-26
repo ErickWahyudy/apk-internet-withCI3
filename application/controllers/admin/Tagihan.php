@@ -155,27 +155,27 @@ class Tagihan extends CI_controller
                             <tr>
                             <td style=padding-left:1em;padding-right:1em>
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/transferbank.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/transferbank.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/shopeepay.png height=22px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/shopeepay.png height=22px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/linkaja.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/linkaja.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/dana.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/dana.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/alfamart.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/alfamart.png height=35px>
                                 </a>
 
                                 <a>
-                                <img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/indomaret.png height=35px>
+                                <img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/indomaret.png height=35px>
                                 </a>
                             </td>
                             </tr>
@@ -183,7 +183,7 @@ class Tagihan extends CI_controller
 
                             <p style=font-size:16px;padding-left:1em;padding-right:1em>
                             <i>Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi</i>
-                            <br><img src=https://wifi.kassandra.my.id/template/kassandra-wifi/img/img/wifi.png>
+                            <br><img src=https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png>
                             <br><b>~ wifi@kassandra.my.id ~</b></p>'
                         ;
                                 

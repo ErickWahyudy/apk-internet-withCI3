@@ -144,7 +144,7 @@ public function index($id='')
                 $ekstensi = strtolower(end($x));
                 $ukuran = $_FILES['bukti_bayar']['size'];
                 $file_tmp = $_FILES['bukti_bayar']['tmp_name'];
-                $folderPath = "./template/bukti_bayar/";
+                $folderPath = "./themes/bukti_bayar/";
                 if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
                     if($ukuran < 10044070){      
                         $fileName = $this->input->post('nama').'_'.$nama . '.' . $ekstensi;
