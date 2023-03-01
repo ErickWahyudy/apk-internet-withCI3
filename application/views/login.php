@@ -42,7 +42,7 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 
-<body class="hold-transition" background="<?= base_url('themes/kassandra-wifi') ?>/img/img/bgmember.jpg" style="background-size: cover; background-repeat: repeat; background-position: center center;">
+<body class="hold-transition" background="<?= base_url('themes/kassandra-wifi') ?>/img/img/bgmember.jpg" style="background-size: cover; background-attachment: fixed;">
 <div class="login-box">
    
 <?= $this->session->flashdata('pesan') ?>
