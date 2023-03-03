@@ -24,13 +24,13 @@
                  <td><?= tgl_indo($pelanggan['tgl_daftar']) ?></td>
                  <td><?= $pelanggan['status'] ?></td>
                  <td>
-                  <a href="<?= base_url('template/bukti_ktp/'.$pelanggan['bukti_ktp']) ?>" target="_blank">
-                  <img src="<?= base_url('template/bukti_ktp/'.$pelanggan['bukti_ktp']) ?>" class="img-responsive" style="width: 100px;height: 100xp">
+                  <a href="<?= base_url('themes/bukti_ktp/'.$pelanggan['bukti_ktp']) ?>" target="_blank">
+                  <img src="<?= base_url('themes/bukti_ktp/'.$pelanggan['bukti_ktp']) ?>" class="img-responsive" style="width: 100px;height: 100xp">
                   </a>
                  </td>
                  <td>
-                  <a href="<?= base_url('template/signature/'.$pelanggan['signature']) ?>" target="_blank">
-                  <img src="<?= base_url('template/signature/'.$pelanggan['signature']) ?>" class="img-responsive" style="width: 100px;height: 100xp">
+                  <a href="<?= base_url('themes/signature/'.$pelanggan['signature']) ?>" target="_blank">
+                  <img src="<?= base_url('themes/signature/'.$pelanggan['signature']) ?>" class="img-responsive" style="width: 100px;height: 100xp">
                   </a>                           
                  <td>
                   <a href="<?= base_url('admin/promo/hapus/'.$pelanggan['id_promo']) ?>" class="btn btn-warning" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>

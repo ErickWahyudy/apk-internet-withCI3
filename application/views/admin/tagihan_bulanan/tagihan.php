@@ -2,6 +2,7 @@
 
 <?php if($depan == TRUE): 
       $kode_tahun = date("Y");
+      $kode_bulan = date("m");
       
 ?>
 <?= $this->session->flashdata('pesan') ?>
@@ -13,7 +14,7 @@
                 <select name="bulan" class="form-control" required="">
                     <option value="">--Pilih Bulan--</option>
                     <?php foreach($bulan as $bln): ?>
-                    <option value="<?= $bln['id_bulan'] ?>">
+                    <option value="<?= $bln['id_bulan'] ?>" <?= $bln['id_bulan'] == $kode_bulan ? 'selected' : '' ?>>
                         <?= ucfirst($bln['bulan']) ?>
                     </option>
                     <?php endforeach; ?>
