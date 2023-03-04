@@ -33,6 +33,7 @@ class Maps extends CI_controller
                 'nama' => $row->nama,
                 'alamat' => $row->alamat,
                 'no_hp' => $row->no_hp,
+                'terdaftar_mulai' => $row->terdaftar_mulai,
                 'latitude' => $row->latitude,
                 'longitude' => $row->longitude
             );

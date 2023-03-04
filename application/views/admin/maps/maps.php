@@ -8,8 +8,11 @@
         //menampilkan data json dari controller untuk ditampilkan di peta
         var data = <?php echo $data; ?>;
         var locations = [];
+        //membuat tgl daftar menjadi format 1 Januari 2020
+        var tgl = new Date(data[0].terdaftar_mulai).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+
         for (var i = 0; i < data.length; i++) {
-            locations.push(['<h4>'+data[i].nama+'</h4><p>'+data[i].no_hp+'<br>'+data[i].alamat+'</p>', 
+            locations.push(['<h4>'+data[i].nama+'</h4><p>'+data[i].no_hp+'<br>'+data[i].alamat+'<br> Tgl Daftar : '+tgl+'</p>',
             data[i].latitude, 
             data[i].longitude]);
         }
@@ -39,6 +42,7 @@
           }
         })(marker, i));
       }
+      
     </script>
 
 <?php $this->load->view('template/footer'); ?>
