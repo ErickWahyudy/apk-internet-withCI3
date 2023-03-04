@@ -8,11 +8,9 @@
         //menampilkan data json dari controller untuk ditampilkan di peta
         var data = <?php echo $data; ?>;
         var locations = [];
-        //membuat tgl daftar menjadi format indonesia contoh : 12 Januari 2019
-        var tgl = new Date(data[0].terdaftar_mulai).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
+        
         for (var i = 0; i < data.length; i++) {
-            locations.push(['<h4>'+data[i].nama+'</h4><p>'+data[i].no_hp+'<br>'+data[i].alamat+'<br> Tgl Daftar : '+tgl+'</p>',
+            locations.push(['<h4>'+data[i].nama+'</h4><p>'+data[i].no_hp+'<br>'+data[i].alamat+'<br> Tgl Daftar : '+data[i].terdaftar_mulai+'</p>',
             data[i].latitude, 
             data[i].longitude]);
         }
