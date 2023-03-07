@@ -102,7 +102,7 @@ if($aksi == "cetak_struk_bulanan"):
                     </tr>
                 </table>
 
-                <table style='width:650; font-size:7pt;' cellspacing='2'>
+                <table style='width:650; font-size:8pt;' cellspacing='2'>
                     <tr>
                         <td align='center'>Ponorogo, <?= tgl_indo(date('Y-m-d')); ?></td>
                     </tr>
@@ -211,7 +211,7 @@ elseif($aksi == "cetak_struk_tagihan_lain"):
                     </tr>
                 </table>
 
-                <table style='width:650; font-size:7pt;' cellspacing='2'>
+                <table style='width:650; font-size:8pt;' cellspacing='2'>
                     <tr>
                         <td align='center'>Ponorogo, <?= tgl_indo(date('Y-m-d')); ?></td>
                     </tr>
