@@ -256,21 +256,21 @@ elseif($aksi == "merchant"):
 
 
     <center>
-        <a href="<?= base_url('template') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
-            <img src="<?= base_url('template/kassandra-wifi') ?>/img/img/transferbank.png" alt="" style="height:50px">
+        <a href="<?= base_url('themes') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
+            <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/transferbank.png" alt="" style="height:50px">
         </a>
         <a href="https://shopee.co.id" class="btn btn">
-            <img src="<?= base_url('template/kassandra-wifi') ?>/img/img/shopeepay.png" alt="" style="height:35px">
+            <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/shopeepay.png" alt="" style="height:35px">
             <a href="https://linkaja.onelink.me/Mk5Y/app" lass="btn btn">
-                <img src="<?= base_url('template/kassandra-wifi') ?>/img/img/linkaja.png" alt="" style="height:50px">
+                <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/linkaja.png" alt="" style="height:50px">
                 <a href="https://link.dana.id/lBx7Kcflieb" lass="btn btn"> &emsp;
-                    <img src="<?= base_url('template/kassandra-wifi') ?>/img/img/dana.png" alt="" style="height:50px">
-                    <a href="<?= base_url('template') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
-                        <img src="<?= base_url('template/kassandra-wifi') ?>/img/img/alfamart.png" alt=""
+                    <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/dana.png" alt="" style="height:50px">
+                    <a href="<?= base_url('themes') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
+                        <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/alfamart.png" alt=""
                             style="height:45px">
                     </a>
-                    <a href="<?= base_url('template') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
-                        <img src="<?= base_url('template/kassandra-wifi') ?>/img/img/indomaret.png" alt=""
+                    <a href="<?= base_url('themes') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
+                        <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/indomaret.png" alt=""
                             style="height:45px">
                     </a>
     </center>
@@ -279,7 +279,7 @@ elseif($aksi == "merchant"):
         <ul>
             <li>
                 <p>Nomor pembayaran yang perlu dimasukkan bisa dilihat disini
-                    <a href="<?= base_url('template') ?>/Linkpembayaran.txt" target="blank">
+                    <a href="<?= base_url('themes') ?>/Linkpembayaran.txt" target="blank">
                         <u>Nomor Pembayaran</u></a>
                 </p>
             </li>

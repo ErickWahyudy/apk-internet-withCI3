@@ -17,7 +17,7 @@
                  <td><?= $no ?></td>
                   <td><?= htmlentities($informasi['informasi']) ?></td>
                   <td>
-                    <a href="<?= base_url('template/file_informasi/'.$informasi['berkas']) ?>" target="_blank"><?= $informasi['berkas'] ?></a> <br>
+                    <a href="<?= base_url('themes/file_informasi/'.$informasi['berkas']) ?>" target="_blank"><?= $informasi['berkas'] ?></a> <br>
                   </td>
                  </tr>
                  <?php $no++; endforeach; ?>
