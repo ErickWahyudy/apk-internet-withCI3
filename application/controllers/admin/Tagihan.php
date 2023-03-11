@@ -190,7 +190,7 @@ class Tagihan extends CI_controller
             $mail->Body = $content;
           if ($mail->send());
   	 	$this->session->set_flashdata('pesan',$pesan);
-      redirect(base_url('admin/tagihan/lunas'));
+      redirect(base_url('admin/tagihan'));
     }
   }
 
