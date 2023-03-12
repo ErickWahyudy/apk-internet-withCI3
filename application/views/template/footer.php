@@ -9,8 +9,8 @@
   
   <footer class="main-footer">
     <strong>Copyright &copy; <?php echo date('Y'); ?>
-					<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved.<br>
-          <i>Access application with <?php echo "". get_client_browser()."";?>. <?php echo "". get_client_ip()."";?></i>
+					<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved. APP Version 1.0.0
+    <br><i>Access application with <?php echo "". get_client_browser()."";?>. <?php echo "". get_client_ip()."";?></i>
   </footer>
 
   <!-- Add the sidebar's background. This div must be placed
