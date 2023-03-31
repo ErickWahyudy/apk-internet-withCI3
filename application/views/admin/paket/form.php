@@ -43,7 +43,7 @@
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                        <form action="<?= base_url('admin/paket/add') ?>" method="post">
+                        <form id="add" method="post">
                             <tr>
                                 <th>Paket</th>
                             </tr>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                        <form action="<?= base_url('admin/paket/edit/'.$paket['id_paket']) ?>" method="post">
+                        <form id="edit" method="post">
                             <tr>
                                 <th>ID Paket</th>
                             </tr>
@@ -126,9 +126,8 @@
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
                                     &nbsp;&nbsp;
                                     <input type="submit" name="kirim" value="Simpan" class="btn btn-success"> &nbsp;&nbsp;
-                                    <a href="<?= base_url('admin/paket/hapus/'.$paket['id_paket']) ?>"
-                                        class="btn btn-danger" onclick="return confirm('Yakin Hapus Data Ini ?')"><i
-                                            class="fa fa-trash"></i> Hapus</a>
+                                    <a href="javascript:void(0)" onclick="hapuspaket('<?= $paket['id_paket'] ?>')"
+                                        class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
 
@@ -141,11 +140,128 @@
     <?php endforeach; ?>
     <!-- End Modal -->
 
+    <script>
+        //add data
+        $(document).ready(function () {
+        $('#add').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('admin/paket/api_add') ?>",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#modalTambahPaket');
+                    $('#add')[0].reset();
+                    swal({
+                        title: "Berhasil",
+                        text: "Data berhasil ditambahkan",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE",
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+
+        //edit file
+        $(document).on('submit', '#edit', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/paket/api_edit/') ?>" + form_data.get('id_paket'),
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#edit' + form_data.get('id_paket'));
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Diubah",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Diubah",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+        //ajax hapus paket
+        function hapuspaket(id_paket) {
+        swal({
+            title: "Apakah Anda Yakin?",
+            text: "Data Akan Dihapus",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result.value) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/paket/api_hapus/') ?>" + id_paket,
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Data Berhasil Dihapus",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Data Gagal Dihapus",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
+            }
+        });
+    }
+    </script>
+
     <?php $this->load->view('template/footer'); ?>
 
-    <?php 
+<?php 
 
 function rupiah($angka){
   $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
   return $hasil_rupiah;
 }
+?>

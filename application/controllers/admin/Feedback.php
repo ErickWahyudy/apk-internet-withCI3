@@ -12,6 +12,7 @@ class Feedback extends CI_controller
       // needed ???
       $this->load->database();
       $this->load->library('session');
+      $this->load->library('form_validation');
       
 	 // error_reporting(0);
 	 if($this->session->userdata('admin') != TRUE){
@@ -27,6 +28,17 @@ class Feedback extends CI_controller
      $view = array('judul'     =>'Data Feedback',
                    'data'      =>$this->m_feedback->view(),);
       $this->load->view('admin/feedback/form',$view);
+    }
+
+    private function acak_id($panjang)
+    {
+        $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+        $string = '';
+        for ($i = 0; $i < $panjang; $i++) {
+            $pos = rand(0, strlen($karakter) - 1);
+            $string .= $karakter{$pos};
+        }
+        return $string;
     }
     
      //mengambil id feedback urut terakhir
@@ -55,124 +67,134 @@ class Feedback extends CI_controller
       $tgl=date('Y-m-d');
       return $tgl;
      }
-    
-     public function add($value='')
-     {
-      $x = array(
-       'judul'              =>'Tambah Data Tagihan Lain' , 
-       'aksi'               =>'tambah',
-       'id_feedback'        =>$this->id_feedback_urut(),
-       'nama'               =>'',
-       'no_hp'              =>'',
-       'nilai'              =>'',
-       'feedback'           =>'',
-       'tanggal'            =>$this->tgl(),
-     );
-       
-      if (isset($_POST['kirim'])) {
-        $this->load->library('form_validation');
-      $rules = array(
-        array(
-          'field' => 'nama',
-          'label' => 'Nama',
-          'rules' => 'required'
-        ),
-        array(
-          'field' => 'no_hp',
-          'label' => 'No HP',
-          'rules' => 'required'
-        ),
-        array(
-          'field' => 'nilai',
-          'label' => 'Nilai',
-          'rules' => 'required'
-        ),
-        array(
-          'field' => 'feedback',
-          'label' => 'Feedback',
-          'rules' => 'required'
-        ),
-      );
-      $this->form_validation->set_rules($rules);
-      
-                
-    $SQLinsert=array(
-    'id_feedback'           =>$this->id_feedback_urut(),
-    'nama'                  =>$this->input->post('nama'),
-    'no_hp'                 =>$this->input->post('no_hp'),
-    'nilai'                 =>$this->input->post('nilai'),
-    'feedback'              =>$this->input->post('feedback'),
-    'tanggal'               =>$this->tgl(),
+
+
+  //API add feedback
+  public function api_add($value='')
+  {
+    $rules = array(
+      array(
+        'field' => 'nama',
+        'label' => 'nama',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'no_hp',
+        'label' => 'no_hp',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'feedback',
+        'label' => 'feedback',
+        'rules' => 'required'
+      )
     );
-    
-    $cek=$this->m_feedback->add($SQLinsert);
-    if($cek){
-       $pesan='<script>
-              swal({
-                  title: "Berhasil Menyimpan Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	$this->session->set_flashdata('pesan',$pesan);
-        redirect(base_url('admin/feedback'));
-    }else{
-    echo "QUERY SQL ERROR";
-    }
-    
-         // }else{
-         // 	echo $this->upload->display_errors();
-         // }
-    
-       }else{
-         $this->load->view('admin/feedback/feedback_form',$x);
-       } 
-    
-     }
-        
-    public function edit($id='') {
-        if(isset($_POST['kirim'])){
-          $SQLupdate=array(
-            'nilai'                    =>$this->input->post('nilai'),
-            'feedback'                 =>$this->input->post('feedback'),
-            'tanggal'                  =>$this->input->post('tanggal'),
-          );
-          $cek=$this->m_feedback->update($id,$SQLupdate);
-          if($cek){
-            $pesan='<script>
-              swal({
-                  title: "Berhasil Edit Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	    $this->session->set_flashdata('pesan',$pesan);
-         redirect(base_url('admin/feedback'));
+    $this->form_validation->set_rules($rules);
+    if ($this->form_validation->run() == FALSE) {
+      $response = [
+        'status' => false,
+        'message' => 'Tidak ada data'
+      ];
+    } else {
+      $SQLinsert = [
+        'id_feedback'      =>$this->id_feedback_urut(),
+        'nama'             =>$this->input->post('nama'),
+        'no_hp'            =>$this->input->post('no_hp'),
+        'nilai'            =>$this->input->post('nilai'),
+        'feedback'         =>$this->input->post('feedback'),
+        'tanggal'          =>$this->input->post('tanggal')
+      ];
+      if ($this->m_feedback->add($SQLinsert)) {
+        $response = [
+          'status' => true,
+          'message' => 'Berhasil menambahkan data'
+        ];
+      } else {
+        $response = [
+          'status' => false,
+          'message' => 'Gagal menambahkan data'
+        ];
+      }
+  }
+  
+  $this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response));
+}
+
+      //API edit feedback
+      public function api_edit($id='', $SQLupdate='')
+      {
+        $rules = array(
+          array(
+            'field' => 'nilai',
+            'label' => 'nilai',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'feedback',
+            'label' => 'feedback',
+            'rules' => 'required'
+          ),
+          array(
+            'field' => 'tanggal',
+            'label' => 'tanggal',
+            'rules' => 'required'
+          )
+        );
+        $this->form_validation->set_rules($rules);
+        if ($this->form_validation->run() == FALSE) {
+          $response = [
+            'status' => false,
+            'message' => 'Tidak ada data'
+          ];
+        } else {
+          $SQLupdate = [
+            'nilai' => $this->input->post('nilai'),
+            'feedback' => $this->input->post('feedback'),
+            'tanggal' => $this->input->post('tanggal')
+          ];
+          if ($this->m_feedback->update($id, $SQLupdate)) {
+            $response = [
+              'status' => true,
+              'message' => 'Berhasil mengubah data'
+            ];
+          } else {
+            $response = [
+              'status' => false,
+              'message' => 'Gagal mengubah data'
+            ];
           }
         }
+        $this->output
+          ->set_content_type('application/json')
+          ->set_output(json_encode($response));
       }
-    
       
-      public function hapus($id='')
+      //API hapus feedback
+      public function api_hapus($id='')
       {
-        $cek=$this->m_feedback->delete($id);
-       if ($cek) {
-         $pesan='<script>
-              swal({
-                  title: "Berhasil Hapus Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	$this->session->set_flashdata('pesan',$pesan);
-         redirect(base_url('admin/feedback'));
-       }
+        if(empty($id)){
+          $response = [
+            'status' => false,
+            'message' => 'Data kosong'
+          ];
+        }else{
+          if ($this->m_feedback->delete($id)) {
+            $response = [
+              'status' => true,
+              'message' => 'Berhasil menghapus data'
+            ];
+          } else {
+            $response = [
+              'status' => false,
+              'message' => 'Gagal menghapus data'
+            ];
+          }
+        }
+        $this->output
+          ->set_content_type('application/json')
+          ->set_output(json_encode($response));
       }
 	
 }

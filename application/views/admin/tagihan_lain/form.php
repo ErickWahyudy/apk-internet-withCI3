@@ -77,7 +77,7 @@
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                        <form action="<?= base_url('admin/tagihan_lain/add') ?>" method="post">
+                        <form id="add" method="post">
 
                             <tr>
                                 <th>Nama Pelanggan</th>
@@ -166,8 +166,7 @@
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                        <form action="<?= base_url('admin/tagihan_lain/edit/'.$tagihan_lain['id_tagihan_lain']) ?>"
-                            method="post">
+                        <form id="edit" method="post">
                             <tr>
                                 <th class="col-md-2">ID Tagihan Lain</th>
                                 <td>
@@ -224,9 +223,8 @@
                                     &nbsp;&nbsp;
                                     <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
                                     &nbsp;&nbsp;
-                                    <a href="<?= base_url('admin/tagihan_lain/hapus/'.$tagihan_lain['id_tagihan_lain']) ?>"
-                                        class="btn btn-danger" onclick="return confirm('Yakin Hapus Data Ini ?')"><i
-                                            class="fa fa-trash"></i> Hapus</a>
+                                    <a href="javascript:void(0)" onclick="hapustagihan_lain('<?= $tagihan_lain['id_tagihan_lain'] ?>')"
+                                        class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
 
@@ -238,6 +236,122 @@
     </div>
     <?php endforeach; ?>
     <!-- End Modal-->
+
+    <script>
+        //add data
+        $(document).ready(function () {
+        $('#add').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('admin/tagihan_lain/api_add') ?>",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#modalTambahTagihanlain');
+                    $('#add')[0].reset();
+                    swal({
+                        title: "Berhasil",
+                        text: "Data berhasil ditambahkan",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE",
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+
+        //edit tagihan_lain
+        $(document).on('submit', '#edit', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/tagihan_lain/api_edit/') ?>" + form_data.get('id_tagihan_lain'),
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#edit' + form_data.get('id_tagihan_lain'));
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Diubah",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Diubah",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+        //ajax hapus tagihan_lain
+        function hapustagihan_lain(id_tagihan_lain) {
+        swal({
+            title: "Apakah Anda Yakin?",
+            text: "Data Akan Dihapus",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result.value) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/tagihan_lain/api_hapus/') ?>" + id_tagihan_lain,
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Data Berhasil Dihapus",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Data Gagal Dihapus",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
+            }
+        });
+    }
+    </script>
 
     <?php $this->load->view('template/footer'); ?>
 

@@ -98,8 +98,8 @@ $kode_tgl = date("d-m-Y");
                     <?php } ?>
                 </td>
                 <td>
-                    <a href="<?= base_url('admin/tagihan/bayar/'.$tagihan['id_tagihan']) ?>" name="bayar"
-                        class="btn btn-info"><i class="fa fa-check"></i> Bayar</a>
+                <a href="javascript:void(0)" onclick="bayar_tagihan('<?= $tagihan['id_tagihan'] ?>')"
+                                        class="btn btn-info"><i class="fa fa-check"></i> Bayar</a>
                     <a href="" class="btn btn-warning" data-toggle="modal"
                         data-target="#editBL<?= $tagihan['id_tagihan'] ?>"><i class="fa fa-edit"></i></a>
                     <a href="<?= base_url('email/kirim_email_tagihan_bulanan/'.$tagihan['id_tagihan']) ?>" name="kirim"
@@ -158,21 +158,23 @@ $kode_tgl = date("d-m-Y");
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                        <form action="<?= base_url('admin/tagihan/editBL/'.$tagihan['id_tagihan']) ?>" method="post">
-                        <tr>
-                                <th class="col-md-2">ID Tagihan</th>
+                    <form id="edit" method="post">
+                            <tr>
+                                <th class="">ID Tagihan</th>
                             </tr>
                             <tr>
                                 <td>
-                                    <p class="form-control"><?= $tagihan['id_tagihan'] ?></p>
+                                    <input type="text" name="id_tagihan"
+                                        value="<?= $tagihan['id_tagihan'] ?>" class="form-control" readonly>
                                 </td>
                             </tr>
                             <tr>
-                                <th>ID Pelanggan</th>
+                                <th>Nama Pelanggan</th>
                             </tr>
                             <tr>
                                 <td>
-                                    <p class="form-control"><?= $tagihan['id_pelanggan'] ?> | <?= $tagihan['nama'] ?></p>
+                                    <input type="text" name="nama" value="<?= $tagihan['nama'] ?>" class="form-control"
+                                        readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -180,51 +182,44 @@ $kode_tgl = date("d-m-Y");
                             </tr>
                             <tr>
                                 <td>
-                                    <p class="form-control"><?= $tagihan['bulan'] ?> / <?= $tagihan['tahun'] ?></p>
+                                    <input type="text" name="bulan" value="<?= $tagihan['bulan'] ?> / <?= $tagihan['tahun'] ?>" class="form-control"
+                                        readonly>
                                 </td>
                             </tr>
+                            <tr>
+                                <th>Biaya</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" name="tagihan"
+                                        value="<?= $tagihan['tagihan'] ?>" class="form-control"
+                                        required="">
+                                </td>
+                            </tr>
+
                             <tr>
                                 <th>Status</th>
                             </tr>
                             <tr>
                                 <td>
                                     <select name="status" class="form-control">
-                                        <option value="BL" <?php if($tagihan['status'] == "BL"){echo "selected";} ?>>
-                                            Belum Di Bayar</option>
-                                        <option value="LS" <?php if($tagihan['status'] == "LS"){echo "selected";} ?>>
-                                            LUNAS</option>
+                                        <option value="BL"
+                                            <?php if($tagihan['status'] == "BL"){echo "selected";} ?>>
+                                            Belum Saya Bayar</option>
+                                        <option value="LS"
+                                            <?php if($tagihan['status'] == "LS"){echo "selected";} ?>>LUNAS
+                                        </option>
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
-                                <th>Tgl bayar</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="date" name="tgl_bayar" value="<?= $tagihan['tgl_bayar'] ?>"
-                                        class="form-control">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>tagihan</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="number" name="tagihan" value="<?= $tagihan['tagihan'] ?>"
-                                        class="form-control">
-                                </td>
-                            </tr>
-
 
                             <tr>
                                 <td>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button href="" class="btn btn-warning" data-dismiss="modal">Kembali</button>
                                     &nbsp;&nbsp;
-                                    <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
-                                    &nbsp;&nbsp;
-                                    <a href="<?= base_url('admin/tagihan/hapus/'.$tagihan['id_tagihan']) ?>"
-                                        class="btn btn-danger" onclick="return confirm('Yakin Hapus Data Ini ?')"><i
-                                            class="fa fa-trash"></i> Hapus</a>
+                                    <input type="submit" name="kirim" value="Simpan" class="btn btn-success"> &nbsp;&nbsp;
+                                    <a href="javascript:void(0)" onclick="hapustagihan('<?= $tagihan['id_tagihan'] ?>')"
+                                        class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
 
@@ -236,6 +231,139 @@ $kode_tgl = date("d-m-Y");
     </div>
     <?php endforeach; ?>
     <!-- End Modal edit tagihan bulanan-->
+
+    <script>
+        //ajax bayar tagihan
+        function bayar_tagihan(id_tagihan) {
+        swal({
+            title: "Konfirmasi Pembayaran",
+            text: "Bayar Tagihan ini?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3CB371",
+            confirmButtonText: "Ya, Bayar!",
+            cancelButtonColor: "#DD6B55",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result.value) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/tagihan/api_bayar/') ?>" + id_tagihan,
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Tagihan Berhasil Dibayar",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Tagihan Gagal Dibayar",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal bayar", "Tagihan tidak jadi dibayar", "error");
+            }
+        });
+    }
+    
+    //edit tagihan
+    $(document).on('submit', '#edit', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/tagihan/api_editBL/') ?>" + form_data.get('id_tagihan'),
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#edit' + form_data.get('id_tagihan'));
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Diubah",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Diubah",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+        //ajax hapus tagihan
+        function hapustagihan(id_tagihan) {
+        swal({
+            title: "Apakah Anda Yakin?",
+            text: "Data Akan Dihapus",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result.value) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/tagihan/api_hapus/') ?>" + id_tagihan,
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Data Berhasil Dihapus",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Data Gagal Dihapus",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
+            }
+        });
+    }
+    </script>
 
     <?php endif; ?>
     <?php $this->load->view('template/footer'); ?>

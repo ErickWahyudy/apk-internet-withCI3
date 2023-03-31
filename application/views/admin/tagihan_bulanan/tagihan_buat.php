@@ -11,7 +11,7 @@
 <?= $this->session->flashdata('pesan') ?>
 
 <table class="table">
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form id="add" method="post">
    <tr>
     <th class="col-sm-2 control-label">Bulan</th>
     <td class="col-sm-10">
@@ -68,5 +68,34 @@
                </table>
 </form>
 </div>
-
+<script>
+        //add tagihan
+        $(document).ready(function () {
+        $('#add').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('admin/tagihan/api_add') ?>",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#buat_tagihan');
+                    $('#add')[0].reset();
+                    swal({
+                        title: "Berhasil",
+                        text: "Data berhasil ditambahkan",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE",
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+</script>
 <?php $this->load->view('template/footer'); ?>

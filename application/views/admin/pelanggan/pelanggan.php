@@ -127,8 +127,7 @@
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
 
-                        <form action="<?= base_url('admin/pelanggan/add') ?>" method="post"
-                            enctype="multipart/form-data">
+                        <form id="add" method="post">
                             <tr>
                                 <th>Nama</th>
                                 <td>
@@ -205,8 +204,42 @@
             </div>
         </div>
     </div>
+    <br><br>
+    <div id="result"></div>
     <!-- end modal tambah data pelanggan -->
 
+    <script>      
+
+        //add data
+        $(document).ready(function () {
+        $('#add').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('admin/pelanggan/api_add') ?>",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#modalTambahPelanggan');
+                    $('#add')[0].reset();
+                    swal({
+                        title: "Berhasil",
+                        text: "Data berhasil ditambahkan",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE",
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+
+    </script>
 
     <?php $this->load->view('template/footer'); ?>
     <?php 

@@ -3,12 +3,12 @@
 /**
 * 
 */
-class M_feedback extends CI_model
+class M_maps extends CI_model
 {
 
-private $table = 'tb_feedback';
+private $table = 'tb_maps';
 
-//feedback INTERNET
+//maps INTERNET
 public function view($value='')
 {
   $this->db->select ('*');
@@ -19,13 +19,13 @@ public function view($value='')
 
 public function view_id($id='')
 {
- return $this->db->select ('*')->from ($this->table)->where ('id_feedback', $id)->get ();
+ return $this->db->select ('*')->from ($this->table)->where ('id_maps', $id)->get ();
 }
 
-//mengambil id feedback urut terakhir
+//mengambil id maps urut terakhir
 public function id_urut($value='')
 { 
-  $this->db->select_max('id_feedback');
+  $this->db->select_max('id_maps');
   $this->db->from ($this->table);
 }
 
@@ -34,12 +34,12 @@ public function add($SQLinsert){
 }
 
 public function update($id='',$SQLupdate){
-  $this->db->where('id_feedback', $id);
+  $this->db->where('id_maps', $id);
   return $this->db-> update($this->table, $SQLupdate);
 }
 
 public function delete($id=''){
-  $this->db->where('id_feedback', $id);
+  $this->db->where('id_maps', $id);
   return $this->db-> delete($this->table);
 }
 

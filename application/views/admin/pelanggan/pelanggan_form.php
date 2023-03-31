@@ -8,7 +8,7 @@ if($aksi == "edit"):
 <a href="../edit_map/<?= $id_pelanggan ?>" class="btn btn-warning"><i class="fa fa-map-marker"></i> Edit Lokasi</a>
 
 <table class="table table-striped">
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form id="edit" method="post">
         <tr>
             <th>ID Pelanggan</th>
             <td>
@@ -95,8 +95,8 @@ if($aksi == "edit"):
             <td>
                 <a href="../" class="btn btn-warning">Kembali</a> &nbsp;&nbsp;
                 <input type="submit" name="kirim" value="Simpan" class="btn btn-success"> &nbsp;&nbsp;
-                <a href="<?= base_url('admin/pelanggan/hapus/'.$id_pelanggan) ?>" class="btn btn-danger"
-                    onclick="return confirm('Yakin Hapus Data Ini ?')"><i class="fa fa-trash"> Hapus</i></a>
+                <a href="javascript:void(0)" onclick="hapuspelanggan('<?= $id_pelanggan ?>')"
+                                        class="btn btn-danger">Hapus</a>
             </td>
         </tr>
 
@@ -114,43 +114,39 @@ if($aksi == "edit"):
                 <h4 class="modal-title" id="myModalLabel">Ganti Password</h4>
             </div>
             <div class="modal-body table-responsive">
-                <table class="table table-bordered table-striped">
-                    <form action="<?= base_url('admin/pelanggan/ganti_password/'.$id_pelanggan) ?>" method="POST">
-                        <tr>
-                            <th class="col-md-12">Nama Pelanggan</th>
-						</tr>
-						<tr>
-                            <td>
-                                <input type="text" name="nama" class="form-control" value="<?= $nama ?>" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Password lama</th>
-						</tr>
-						<tr>
-                            <td>
-                                <input type="text" name="password" class="form-control" value="<?= $password ?>"
-                                    readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Masukkan Password Baru</th>
-						</tr>
-						<tr>
-                            <td>
-                                <input type="password" name="password" class="form-control" value=<?= $password ?>
-                                    required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <button class="btn btn-warning" data-dismiss="modal">Batal</button>
-                                <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
-                            </th>
-                        </tr>
-                    </form>
-                </table>
-            </div>
+                    <table class="table table-bordered table-striped">
+                        <form id="password" method="post">
+                            <input type="hidden" name="id_pelanggan" value="<?= $id_pelanggan ?>" class="form-control" readonly>
+                            <tr>
+                                <th>Password Lama</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name="passwordlama" value="<?= $password ?>"
+                                        class="form-control" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Password Baru</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="password" name="password" value="<?= $password ?>"
+                                        class="form-control" required="">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+                                    &nbsp;&nbsp;
+                                    <button type="submit" name="kirim" class="btn btn-success">Simpan</button>
+                                </td>
+                            </tr>
+
+                        </form>
+                    </table>
+                </div>
         </div>
     </div>
 </div>
@@ -194,7 +190,8 @@ for (i = 0; i < locations.length; i++) {
 elseif($aksi == "edit_lokasi"):
 ?>
 <table class="table table-reposive">
-    <form action="" method="POST">
+    <form id="edit_map" method="post">
+        <input type="hidden" name="id_pelanggan" value="<?= $id_pelanggan ?>" class="form-control" readonly>
         <tr>
             <th class="col-md-3">Nama Pelanggan</th>
             <td>
@@ -262,5 +259,171 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
 <?php endif; ?>
+<script>
+        //edit data
+        $(document).on('submit', '#edit', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
 
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/pelanggan/api_edit/') ?>" + form_data.get('id_pelanggan'),
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#edit' + form_data.get('id_pelanggan'));
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Diubah",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Diubah",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+        //ajax ganti password
+        $(document).on('submit', '#password', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/pelanggan/api_ubah_password/') ?>" + form_data.get('id_pelanggan'),
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#password' + form_data.get('id_pelanggan'));
+                swal({
+                    title: "Berhasil",
+                    text: "Berhasil perbarui password",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Gagal perbarui password",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+    //edit map
+    $(document).on('submit', '#edit_map', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/pelanggan/api_edit_maps/') ?>" + form_data.get('id_pelanggan'),
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#edit_map' + form_data.get('id_pelanggan'));
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Diubah",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.href = "<?= site_url('admin/pelanggan/edit/') ?>" + form_data.get('id_pelanggan');
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Diubah",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+
+        //ajax hapus pelanggan
+        function hapuspelanggan(id_pelanggan) {
+        swal({
+            title: "Apakah Anda Yakin?",
+            text: "Data Akan Dihapus",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result.value) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/pelanggan/api_hapus/') ?>" + id_pelanggan,
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Data Berhasil Dihapus",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.href = "<?= site_url('admin/pelanggan') ?>";
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Data Gagal Dihapus",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
+            }
+        });
+    }
+    </script>
 <?php $this->load->view('template/footer'); ?>

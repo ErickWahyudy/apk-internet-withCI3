@@ -46,7 +46,7 @@ class Email extends CI_controller
         // $mail->Host = 'smtp.gmail.com';
         // $mail->SMTPAuth = true;
         // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-        // $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
+        // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
         // $mail->SMTPSecure = 'tls';
         // $mail->Port = 587;
         $mail->setFrom($this->input->post('email_pengirim'), $this->input->post('nama_pengirim')); // Email pengirim
@@ -157,7 +157,7 @@ class Email extends CI_controller
         // $mail->Host = 'smtp.gmail.com';
         // $mail->SMTPAuth = true;
         // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-        // $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
+        // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
         // $mail->SMTPSecure = 'tls';
         // $mail->Port = 587;
         $mail->setFrom($this->input->post('email_pengirim'), $this->input->post('nama_pengirim')); // Email pengirim
@@ -215,7 +215,7 @@ public function kirimemail_umum()
         // $mail->Host = 'smtp.gmail.com';
         // $mail->SMTPAuth = true;
         // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-        // $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
+        // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
         // $mail->SMTPSecure = 'tls';
         // $mail->Port = 587;
         $mail->setFrom($this->input->post('email_pengirim'), $this->input->post('nama_pengirim')); // Email pengirim
@@ -269,7 +269,7 @@ public function sendmail_bulanan()
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-            $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
+            $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
             $mail->setFrom('kassandramikrotik@gmail.com' , 'Kassandra WiFi'); // Email dan nama pengirim
@@ -372,7 +372,7 @@ public function sendmail_bl_lain()
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-            $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
+            $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
             $mail->setFrom('kassandramikrotik@gmail.com' , 'Kassandra WiFi'); // Email dan nama pengirim
@@ -468,7 +468,7 @@ public function sendmail_bl_lain()
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-            $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
+            $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
             $mail->setFrom('kassandramikrotik@gmail.com' , 'Kassandra WiFi'); // Email dan nama pengirim

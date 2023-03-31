@@ -12,6 +12,7 @@ class Informasi extends CI_controller
       // needed ???
       $this->load->database();
       $this->load->library('session');
+      $this->load->library('form_validation');
       
 	 // error_reporting(0);
 	 if($this->session->userdata('admin') != TRUE){
@@ -66,9 +67,8 @@ class Informasi extends CI_controller
 //API Add Informasi
 public function api_add($value='')
 {
-  $this->load->library('form_validation');
   $this->form_validation->set_rules('informasi', 'Informasi', 'required');
-  if ($this->form_validation->run()) {
+  if ($this->form_validation->run() == FALSE) {
     $SQLinsert = [
       'id_informasi'  => $this->id_informasi_urut(),
       'informasi'     => $this->input->post('informasi'),
@@ -95,9 +95,8 @@ public function api_add($value='')
     //API Edit Informasi
     public function api_edit($id='')
     {
-      $this->load->library('form_validation');
       $this->form_validation->set_rules('informasi', 'Informasi', 'required');
-      if ($this->form_validation->run()) {
+      if ($this->form_validation->run() == FALSE) {
         $SQLupdate = [
           'informasi'     => $this->input->post('informasi'),
         ];
@@ -178,7 +177,6 @@ public function api_add($value='')
     //API Hapus Informasi
     public function api_hapus($id='')
     {
-      $this->load->library('form_validation');
       $this->form_validation->set_rules('id_informasi', 'ID Informasi', 'required');
       //hapus file di folder berdasarkan id
       $data=$this->m_informasi->view_id($id)->row_array();
@@ -212,3 +210,4 @@ public function api_add($value='')
  
 	
 }
+?>

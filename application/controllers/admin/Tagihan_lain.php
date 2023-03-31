@@ -12,6 +12,7 @@ class Tagihan_lain extends CI_controller
       // needed ???
       $this->load->database();
       $this->load->library('session');
+      $this->load->library('form_validation');
       
 	 // error_reporting(0);
 	 if($this->session->userdata('admin') != TRUE){
@@ -63,78 +64,151 @@ class Tagihan_lain extends CI_controller
        return $newID;
      }
     
-     public function add($value='') {      
-      if (isset($_POST['kirim'])) {
-                
-    $SQLinsert=array(
-    'id_tagihan_lain'     =>$this->id_tagihan_lain_urut(),
-    'id_pelanggan'        =>$this->input->post('id_pelanggan'),
-    'tagihan'             =>$this->input->post('tagihan'),
-    'status'              =>$this->input->post('status'),
-    'tgl_bayar'           =>$this->input->post('tgl_bayar'),
-    'keterangan'          =>$this->input->post('keterangan')
-    );
-    
-    $cek=$this->m_tagihan_lain->add($SQLinsert);
-    if($cek){
-      $pesan='<script>
-              swal({
-                  title: "Berhasil Menambahkan Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	$this->session->set_flashdata('pesan',$pesan);
-        redirect(base_url('admin/tagihan_lain'));
-        }
-      }    
-     }
-        
-    public function edit($id='') {
-        if(isset($_POST['kirim'])){
-          $SQLupdate=array(
-            'status'                    =>$this->input->post('status'),
-            'tgl_bayar'                 =>$this->input->post('tgl_bayar'),
-            'tagihan'                   =>$this->input->post('tagihan'),
-            'keterangan'                =>$this->input->post('keterangan'),
+     //API add tagihan_lain
+      public function api_add($value='')
+      {
+        $rules = [
+          [
+            'field' => 'id_pelanggan',
+            'label' => 'id_pelanggan',
+            'rules' => 'required'
+          ],
+          [
+            'field' => 'tagihan',
+            'label' => 'tagihan',
+            'rules' => 'required'
+          ],
+          [
+            'field' => 'status',
+            'label' => 'status',
+            'rules' => 'required'
+          ],
+          [
+            'field' => 'tgl_bayar',
+            'label' => 'tgl_bayar',
+            'rules' => 'required'
+          ],
+          [
+            'field' => 'keterangan',
+            'label' => 'keterangan',
+            'rules' => 'required'
+          ]
+        ];
+        $this->form_validation->set_rules($rules);
+        if ($this->form_validation->run() == FALSE) {
+          $response = [
+            'status' => false,
+            'message' => 'Data kosong'
+          ];
+        } else {
+          $SQLinsert=array(
+            'id_tagihan_lain'     =>$this->id_tagihan_lain_urut(),
+            'id_pelanggan'        =>$this->input->post('id_pelanggan'),
+            'tagihan'             =>$this->input->post('tagihan'),
+            'status'              =>$this->input->post('status'),
+            'tgl_bayar'           =>$this->input->post('tgl_bayar'),
+            'keterangan'          =>$this->input->post('keterangan')
           );
-          $cek=$this->m_tagihan_lain->update($id,$SQLupdate);
-          if($cek){
-           $pesan='<script>
-              swal({
-                  title: "Berhasil Edit Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	    $this->session->set_flashdata('pesan',$pesan);
-         redirect(base_url('admin/tagihan_lain'));
+          if ($this->m_tagihan_lain->add($SQLinsert)) {
+            $response = [
+              'status' => true,
+              'message' => 'Berhasil menambahkan data'
+            ];
+          } else {
+            $response = [
+              'status' => false,
+              'message' => 'Gagal menambahkan data'
+            ];
           }
         }
+        $this->output
+          ->set_content_type('application/json')
+          ->set_output(json_encode($response));
+      }
+
+
+    //API edit tagihan_lain
+      public function api_edit($id='')
+      {
+        $rules = [
+          [
+            'field' => 'tagihan',
+            'label' => 'tagihan',
+            'rules' => 'required'
+          ],
+          [
+            'field' => 'status',
+            'label' => 'status',
+            'rules' => 'required'
+          ],
+          [
+            'field' => 'tgl_bayar',
+            'label' => 'tgl_bayar',
+            'rules' => 'required'
+          ],
+          [
+            'field' => 'keterangan',
+            'label' => 'keterangan',
+            'rules' => 'required'
+          ]
+        ];
+        $this->form_validation->set_rules($rules);
+        if ($this->form_validation->run() == FALSE) {
+          $response = [
+            'status' => false,
+            'message' => 'Data kosong'
+          ];
+        } else {
+          $SQLupdate=array(
+            'tagihan'             =>$this->input->post('tagihan'),
+            'status'              =>$this->input->post('status'),
+            'tgl_bayar'           =>$this->input->post('tgl_bayar'),
+            'keterangan'          =>$this->input->post('keterangan')
+          );
+          if ($this->m_tagihan_lain->update($id,$SQLupdate)) {
+            $response = [
+              'status' => true,
+              'message' => 'Berhasil mengedit data'
+            ];
+          } else {
+            $response = [
+              'status' => false,
+              'message' => 'Gagal mengedit data'
+            ];
+          }
+        }
+        $this->output
+          ->set_content_type('application/json')
+          ->set_output(json_encode($response));
       }
     
       
-      public function hapus($id='')
+      //API hapus tagihan_lain
+      public function api_hapus($id='')
       {
-        $cek=$this->m_tagihan_lain->delete($id);
-       if ($cek) {
-         $pesan='<script>
-              swal({
-                  title: "Berhasil Hapus Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	$this->session->set_flashdata('pesan',$pesan);
-         redirect(base_url('admin/tagihan_lain'));
-       }
+        if(empty($id)){
+          $response = [
+            'status' => false,
+            'message' => 'Data kosong'
+          ];
+        }else{
+          if ($this->m_tagihan_lain->delete($id)) {
+            $response = [
+              'status' => true,
+              'message' => 'Berhasil menghapus data'
+            ];
+          } else {
+            $response = [
+              'status' => false,
+              'message' => 'Gagal menghapus data'
+            ];
+          }
+        }
+        $this->output
+          ->set_content_type('application/json')
+          ->set_output(json_encode($response));
       }
 
 	
 }
+?>
