@@ -107,7 +107,7 @@
                                 </tr>
                                 <tr>
                                     <th>Password</th>
-                                    <td><input type="password" name="password" class="form-control" value="<?= $admin['password'] ?>"
+                                    <td><input type="password" name="password" class="form-control"
                                             required=""></td>
                                 </tr>
                                 <tr>

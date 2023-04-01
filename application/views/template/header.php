@@ -132,7 +132,7 @@ if($this->session->userdata('level') =="Administrator"){
                   <a href="<?= base_url('admin/user_admin') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="btn btn-default btn-flat">Sign out</a>
+                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
               <?php }elseif($this->session->userdata('level') == "PLG"){ ?>
@@ -141,7 +141,7 @@ if($this->session->userdata('level') =="Administrator"){
                   <a href="<?= base_url('pelanggan/profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="btn btn-default btn-flat">Sign out</a>
+                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
               <?php } ?>
@@ -263,7 +263,7 @@ if($this->session->userdata('level') =="Administrator"){
   
 <?php } ?>
   <!-- logout -->
-  <li> <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-sign-out"></i>Sign out</a>
+  <li> <a href="javascript:void(0)" onclick="keluar()"><i class="fa fa-sign-out"></i> Sign out</a>
   <li class="header">END MAIN NAVIGATION</li>
       </ul>
     </section>

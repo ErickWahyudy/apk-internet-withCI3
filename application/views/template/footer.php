@@ -6,10 +6,56 @@
     </section>
     <!-- /.content -->
   </div> 
-  
+  <script>
+    //ajax keluar dari halaman admin
+    function keluar() {
+        swal({
+            title: "Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?> ?",
+            text: "Anda Akan Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?> ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3CB371",
+            confirmButtonText: "Ya, Keluar!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result.value) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('keluar') ?>",
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Anda Telah Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?>",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Anda Gagal Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?>",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal Keluar", "Anda Batal Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?>", "error");
+            }
+        });
+    }
+    </script>
+
   <footer class="main-footer">
     <strong>Copyright &copy; <?php echo date('Y'); ?>
-					<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved. APP Version 1.0.0
+					<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved. APP Version 2.0.0
     <br><i>Access application with <?php echo "". get_client_browser()."";?>. <?php echo "". get_client_ip()."";?></i>
   </footer>
 
