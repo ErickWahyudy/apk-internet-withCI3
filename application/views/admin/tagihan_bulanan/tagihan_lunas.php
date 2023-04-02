@@ -124,6 +124,22 @@
                             </tr>
 
                             <tr>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="status" class="form-control">
+                                        <option value="BL"
+                                            <?php if($tagihan['status'] == "BL"){echo "selected";} ?>>
+                                            Belum Saya Bayar</option>
+                                        <option value="LS"
+                                            <?php if($tagihan['status'] == "LS"){echo "selected";} ?>>LUNAS
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
                                 <th>Tanggal Bayar</th>
                             </tr>
                             <tr>

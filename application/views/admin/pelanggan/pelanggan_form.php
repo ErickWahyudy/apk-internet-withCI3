@@ -131,7 +131,7 @@ if($aksi == "edit"):
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="password" name="password" value="<?= $password ?>"
+                                    <input type="password" name="password"
                                         class="form-control" required="">
                                 </td>
                             </tr>

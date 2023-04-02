@@ -286,30 +286,6 @@ class Tagihan extends CI_controller
   }
 }
 
-  public function editLS($id='') {
-        if(isset($_POST['kirim'])){
-          $SQLupdate=array(
-            'status'                    =>$this->input->post('status'),
-            'tgl_bayar'                 =>$this->input->post('tgl_bayar'),
-            'tagihan'                   =>$this->input->post('tagihan'),
-          );
-          $cek=$this->m_tagihan->update($id,$SQLupdate);
-          if($cek){
-            $pesan='<script>
-              swal({
-                  title: "Berhasil Edit Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	    $this->session->set_flashdata('pesan',$pesan);
-         redirect(base_url('admin/tagihan/lunas'));
-          }
-        }
-      }
-
       //API edit tagihan BL
     public function api_editLS($id='') {
       $rules = [
@@ -318,6 +294,11 @@ class Tagihan extends CI_controller
           'label' => 'Tanggal bayar',
           'rules' => 'required'
         ],
+        [
+          'field' => 'status',
+          'label' => 'Status',
+          'rules' => 'required'
+        ]
       ];
       $this->form_validation->set_rules($rules);
       if ($this->form_validation->run() == FALSE) {
@@ -327,6 +308,7 @@ class Tagihan extends CI_controller
         ];
       }else{
         $SQLupdate=array(
+          'status'                    =>$this->input->post('status'),
           'tgl_bayar'                 =>$this->input->post('tgl_bayar'),
         );
         $cek=$this->m_tagihan->update($id,$SQLupdate);
