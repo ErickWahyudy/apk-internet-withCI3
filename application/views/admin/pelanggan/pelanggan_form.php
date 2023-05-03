@@ -66,9 +66,9 @@ if($aksi == "edit"):
         <tr>
             <th>Status</th>
             <td>
-                <input type="text" name="status_plg" value="<?= $status_plg ?>" class="form-control" readonly>
-                <input type="radio" name="status_plg" value="aktif"> Aktif
-                <input type="radio" name="status_plg" value="Tidak Aktif"> Tidak Aktif
+            <input type="radio" name="status_plg" value="Aktif" <?php if($status_plg == 'Aktif'){ echo 'checked'; } ?>> Aktif
+            <input type="radio" name="status_plg" value="Tidak Aktif" <?php if($status_plg == 'Tidak Aktif'){ echo 'checked'; } ?>> Tidak Aktif
+                                
             </td>
         </tr>
         <tr>

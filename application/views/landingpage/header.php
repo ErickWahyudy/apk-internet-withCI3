@@ -36,7 +36,9 @@
     <!--Stylesheet -->
     <link href="<?= base_url('themes/kassandra-wifi') ?>/css/style.css" rel="stylesheet">
 
-    <!-- sweetalert -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+   <!-- sweetalert -->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 </head>

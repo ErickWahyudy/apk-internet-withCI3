@@ -65,8 +65,9 @@ $route['testimonial'] = 'Landingpage/testimonial';
 $route['feedback']    = 'feedback/feedback_add';
 $route['lapor']       = 'Landingpage/lapor';
 
-$route['register']    = 'Register/add';
-$route['promo']       = 'Register/promo';
+$route['register']          = 'Register/add';
+$route['register_add']      = 'Register/api_add';
+$route['promo']             = 'Register/promo';
 
 $route['reset_password']            = 'reset_password/kirim_email';
 $route['password_baru/(:any)']      = 'reset_password/reset/$1';

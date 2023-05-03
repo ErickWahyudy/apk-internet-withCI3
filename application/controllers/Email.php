@@ -265,14 +265,14 @@ public function sendmail_bulanan()
         $result = $result->result_array();
                     
             $mail = new PHPMailer();
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-            $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-            $mail->setFrom('kassandramikrotik@gmail.com' , 'Kassandra WiFi'); // Email dan nama pengirim
+            // $mail->isSMTP();
+            // $mail->Host = 'smtp.gmail.com';
+            // $mail->SMTPAuth = true;
+            // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
+            // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
+            // $mail->SMTPSecure = 'tls';
+            // $mail->Port = 587;
+            $mail->setFrom('wifi@kassandra.my.id' , 'Kassandra WiFi'); // Email dan nama pengirim
 
             foreach ($result as $data) {
             $mail->addAddress($data['email'], $data['nama']); // Email dan nama penerima
@@ -368,14 +368,14 @@ public function sendmail_bl_lain()
         foreach ($result as $data) {
 
             $mail = new PHPMailer();
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-            $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-            $mail->setFrom('kassandramikrotik@gmail.com' , 'Kassandra WiFi'); // Email dan nama pengirim
+            // $mail->isSMTP();
+            // $mail->Host = 'smtp.gmail.com';
+            // $mail->SMTPAuth = true;
+            // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
+            // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
+            // $mail->SMTPSecure = 'tls';
+            // $mail->Port = 587;
+            $mail->setFrom('wifi@kassandra.my.id' , 'Kassandra WiFi'); // Email dan nama pengirim
             $mail->addAddress($data['email'], $data['nama']); // Email dan nama penerima
             $mail->Subject = 'Yth. '.$data['nama'].' Ada Tagihan Baru KassandraWiFi Yang Belum Dibayar'; // Subject email
             $mail->isHTML(true);
@@ -464,14 +464,14 @@ public function sendmail_bl_lain()
         $data = $data->row_array();
 
             $mail = new PHPMailer();
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-            $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-            $mail->setFrom('kassandramikrotik@gmail.com' , 'Kassandra WiFi'); // Email dan nama pengirim
+            // $mail->isSMTP();
+            // $mail->Host = 'smtp.gmail.com';
+            // $mail->SMTPAuth = true;
+            // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
+            // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
+            // $mail->SMTPSecure = 'tls';
+            // $mail->Port = 587;
+            $mail->setFrom('wifi@kassandra.my.id' , 'Kassandra WiFi'); // Email dan nama pengirim
             $mail->addAddress($data['email'], $data['nama']); // Email dan nama penerima
             $mail->Subject = 'Yth. '.$data['nama'].' Ada Tagihan Baru KassandraWiFi bulan '.$data['bulan']. ' / ' .$data['tahun']. ' Yang Belum Dibayar'; // Subject email
             $mail->isHTML(true);

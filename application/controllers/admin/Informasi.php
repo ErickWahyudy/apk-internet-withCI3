@@ -174,38 +174,32 @@ public function api_add($value='')
     }
 
 
-    //API Hapus Informasi
+    //API hapus data dari database dan folder
     public function api_hapus($id='')
     {
-      $this->form_validation->set_rules('id_informasi', 'ID Informasi', 'required');
-      //hapus file di folder berdasarkan id
-      $data=$this->m_informasi->view_id($id)->row_array();
-      if ($data['berkas'] != '') {
-        $file=$data['berkas'];
-        unlink('./themes/file_informasi/'.$file);
-      }
-      //hapus data di database
       if (empty($id)) {
-        $data = [
-          'status'  => 'error',
-          'message' => 'ID Informasi Tidak Ditemukan',
+        $response = [
+          'status' => false,
+          'message' => 'Tidak ada data'
         ];
       } else {
+        $data = $this->m_informasi->view_id($id)->row_array();
         if ($this->m_informasi->delete($id)) {
-          $data = [
-            'status'  => 'success',
-            'message' => 'Berhasil Menghapus Data',
+          unlink('./themes/file_informasi/'.$data['berkas']);
+          $response = [
+            'status' => true,
+            'message' => 'Berhasil menghapus data'
           ];
         } else {
-          $data = [
-            'status'  => 'error',
-            'message' => 'Gagal Menghapus Data',
+          $response = [
+            'status' => false,
+            'message' => 'Gagal menghapus data'
           ];
         }
-        
       }
-
-      echo json_encode($data);
+      $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response));
     }
  
 	
