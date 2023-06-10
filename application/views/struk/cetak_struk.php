@@ -6,7 +6,8 @@ if($aksi == "cetak_struk_bulanan"):
 <head>
     <title>Nota KassandraWiFi Bulan <?= $bulan;?> <?= htmlentities($id_tagihan); ?> <?= $nama; ?>
     </title>
-    <link rel="shortcut icon" href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" type="image/x-icon">  
+    <!-- Favicon -->
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
     <meta name="keywords" content="wifi kassandra my id, kassandra my id, kassandra wifi, kassandra, kassandra hd production, KASSANDRA, KASSANDRA HD PRODUCTION">
     <meta name="description" content="Layanan hotspot wifi unlimited 24 jam non stop tanpa lemot kecuali saat wifi down">
 </head>
@@ -125,7 +126,8 @@ elseif($aksi == "cetak_struk_tagihan_lain"):
 <head>
     <title>Nota KassandraWiFi <?= htmlentities($id_tagihan_lain); ?> <?= $nama; ?>
     </title>
-    <link rel="shortcut icon" href="../dist/img/favicon.ico" type="image/x-icon">
+    <!-- Favicon -->
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
 </head>
 
 <body>
