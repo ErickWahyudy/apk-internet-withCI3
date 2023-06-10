@@ -13,8 +13,7 @@
     <link rel="manifest" href="<?= base_url('static/manifest.json') ?>">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
-    <link href="<?= base_url('themes') ?>favicon.ico" rel="icon">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
