@@ -10,12 +10,18 @@
         var locations = [];
         
         for (var i = 0; i < data.length; i++) {
-            locations.push(['<h4>'+data[i].nama+'</h4><p>'+data[i].no_hp+'<br>'+data[i].alamat+'<br> Tgl Daftar : '+data[i].terdaftar_mulai+'</p>',
-            data[i].latitude, 
-            data[i].longitude]);
+
+        // Ubah format tanggal Indonesia
+        var tgl = new Date(data[i].terdaftar_mulai);
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        var formattedDate = new Intl.DateTimeFormat('id-ID', options).format(tgl);
+
+        locations.push(['<h4>'+data[i].nama+'</h4><p>'+data[i].no_hp+'<br>'+data[i].alamat+'<br> Tgl Daftar : '+formattedDate+'</p>',
+        data[i].latitude, 
+        data[i].longitude]);
         }
-        
- 
+
+         
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 17,
         center: new google.maps.LatLng(-7.951984, 111.430882),

@@ -156,7 +156,7 @@ if($aksi == "edit"):
 <script type="text/javascript">
 //menampilkan data maps berdasarkan id_pelanggan dengan select
 var locations = [
-    ['<h4><?= $nama ?></h4><p><?= $alamat ?></p>', <?= $latitude ?>, <?= $longitude ?>],
+    ['<h4><?= $nama ?></h4><p><?= $alamat ?> <br> <?= $no_hp ?> <br> <?= $email ?></p>', <?= $latitude ?>, <?= $longitude ?>],
 ];
 
 

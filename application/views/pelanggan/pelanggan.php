@@ -203,7 +203,10 @@ function viewPassword() {
 }
 //menampilkan data maps berdasarkan id_pelanggan dengan select
 var locations = [
-    ['<h4><?= $nama ?></h4><p><?= $alamat ?></p>', <?= $latitude ?>, <?= $longitude ?>],
+    ['<h4><?= $nama ?></h4><p><?= $alamat ?><br><?= $no_hp ?><br> Tgl Daftar : <?= tgl_indo($terdaftar_mulai) ?></p>',
+        <?= $latitude ?>,
+        <?= $longitude ?>
+    ]
 ];
 
 
