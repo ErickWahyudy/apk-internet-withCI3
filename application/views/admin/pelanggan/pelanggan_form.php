@@ -258,6 +258,35 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
+<?php 
+elseif($aksi == "edit_catatan"):
+?>
+<table class="table table-reposive">
+    <form id="edit_catatan" method="post">
+        <input type="hidden" name="id_pelanggan" value="<?= $id_pelanggan ?>" class="form-control" readonly>
+        <tr>
+            <th class="col-md-3">Nama Pelanggan</th>
+            <td>
+                <input type="text" name="nama" class="form-control" value="<?= $nama ?>" readonly>
+            </td>
+        </tr>
+        <tr>
+            <th>Catatan</th>
+            <td>
+                <textarea name="catatan" class="form-control ckeditor" rows="5"><?= $catatan ?></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <th>
+                <a href="../" class="btn btn-warning">Batal</a>
+                <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
+            </th>
+        </tr>
+    </form>
+</table>
+
+<script type="text/javascript" src="<?php echo base_url('themes/kassandra-wifi/ckeditor/ckeditor.js')?>"></script>
 <?php endif; ?>
 <script>
         //edit data
@@ -363,6 +392,46 @@ google.maps.event.addDomListener(window, 'load', initialize);
                     confirmButtonText: "OKEE",
                 }).then(function() {
                     location.href = "<?= site_url('admin/pelanggan/edit/') ?>" + form_data.get('id_pelanggan');
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Diubah",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+    //edit catatan
+    $(document).on('submit', '#edit_catatan', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/pelanggan/api_edit_catatan/') ?>" + form_data.get('id_pelanggan'),
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#edit' + form_data.get('id_pelanggan'));
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Diubah",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.href = "<?= site_url('admin/pelanggan') ?>";
                 });
             },
             //memanggil swall ketika gagal

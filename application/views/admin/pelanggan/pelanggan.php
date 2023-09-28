@@ -103,6 +103,14 @@
 								</a>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Catatan</td>
+                            <td>
+                                <?= $pelanggan['catatan'] ?>
+                                <a href="<?= base_url('admin/pelanggan/edit_catatan/'.$pelanggan['id_pelanggan']) ?>"
+                                class="btn btn-warning btn-xs"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 <div class="modal-footer">

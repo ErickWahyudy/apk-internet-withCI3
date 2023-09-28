@@ -456,7 +456,71 @@ if($cek){
       ->set_content_type('application/json')
       ->set_output(json_encode($response));
   }
-  
+
+  public function edit_catatan($id='')
+  {
+  	$data=$this->m_pelanggan->view_id($id)->row_array();
+    if (empty($data['id_pelanggan'])) {
+      $pesan='<script>
+                swal({
+                    title: "Gagal Edit Data",
+                    text: "ID Pelanggan Tidak Ditemukan",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: false
+                },
+                function(){
+                    window.location.href="'.base_url('admin/pelanggan').'";
+                });
+              </script>';
+      $this->session->set_flashdata('pesan',$pesan);
+      redirect(base_url('admin/pelanggan'));
+    }
+
+  	$x = array(
+    'aksi'            =>'edit_catatan',
+    'judul'           =>'Edit Catatan',
+    'id_pelanggan'    =>$data['id_pelanggan'],
+    'nama'            =>$data['nama'],
+    'catatan'         =>$data['catatan']
+  	);
+
+      $this->load->view('admin/pelanggan/pelanggan_form',$x);
+  }
+
+  //API edit catatan pelanggan
+  public function api_edit_catatan($id='')
+  {
+    $rules = array(
+      array(
+        'field' => 'catatan',
+        'label' => 'catatan',
+        'rules' => 'required'
+      )
+    );
+    $this->form_validation->set_rules($rules);
+    if ($this->form_validation->run() == FALSE) {
+      $response = [
+        'status' => false,
+        'message' => 'Tidak ada data'
+      ];
+    } else {
+      $SQLupdate = [
+        'catatan'         => $this->input->post('catatan'),
+      ];
+      if ($this->m_pelanggan->update($id, $SQLupdate)) {
+        $response = [
+          'status' => true,
+          'message' => 'Berhasil mengubah data'
+        ];
+    }
+    $this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response));
+  }
+}
 
 public function edit_map($id='')
   {
