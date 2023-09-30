@@ -147,57 +147,68 @@ class Email extends CI_controller
 
     public function sendmail_semua()
     {
-        //mengambil data email dari database
-        $result = $this->M_email->sendmail_semua();
-        $result = $result->result_array();
-        foreach ($result as $data) {
-            
+        $data = $this->M_email->view_id('E001')->row_array();
+
+        // Query untuk mengambil semua pelanggan yang aktif
+        $active_customers = $this->db->get_where('tb_pelanggan', array('status_plg' => 'Aktif'))->result_array();
+
+        // Inisialisasi objek PHPMailer dan pengaturan SMTP di sini
         $mail = new PHPMailer();
         // $mail->isSMTP();
         // $mail->Host = 'smtp.gmail.com';
         // $mail->SMTPAuth = true;
-        // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-        // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
+        // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail Anda
+        // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail Anda
         // $mail->SMTPSecure = 'tls';
         // $mail->Port = 587;
-        $mail->setFrom($this->input->post('email_pengirim'), $this->input->post('nama_pengirim')); // Email pengirim
-        $mail->addAddress($data['email'], $data['nama']); // Email penerima
+
+        $mail->setFrom($data['email_pengirim'], $data['nama_pengirim']); // Email pengirim
         $mail->Subject = $data['subject'];
         $mail->isHTML(true);
-        $content = '</p><table><thead><tr><td style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;border-width:1px;border-style:dashed;border-color:rgb(37,63,89);background:lavender;color:rgb(0,0,0);font-size:16px;padding-left:1em;padding-right:1em>'.
-                        $data['isi_pesan'].
-                        '<br></td></tr></thead></table> 
-                        <p style=font-size:16px;padding-left:1em;padding-right:1em>
-                            <i>Pesan ini dikirim otomatis oleh system aplikasi '.$data['nama_pengirim'].'</i>
-                            <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
-                            <br><b>~ ' .$data['tanda_tangan']. ' ~</b>';
-                            
-        $mail->Body = $content;
-        if ($mail->send()) {
-            $this->session->set_flashdata('pesan', '<script>
-            swal({
-                title: "Berhasil",
-                text: "Selamat Anda berhasil mengirim email",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonText: "OKEE"
-            });
-        </script>');
-        redirect(base_url('email/kirimemail_semua/E001'));
-        } else {
-            $this->session->set_flashdata('pesan', '<script>
-            swal({
-                title: "Gagal",
-                text: "Anda gagal mengirim email",
-                type: "error",
-                showConfirmButton: true,
-                confirmButtonText: "OKEE"
-            });
-        </script>');
-        redirect(base_url('email/kirimemail_semua/E001'));
+        $content = '</p><table><thead><tr><td style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;border-width:1px;border-style:dashed;border-color:rgb(37,63,89);background:lavender;color:rgb(0,0,0);font-size:16px;padding-left:1em;padding-right:1em>' .
+            $data['isi_pesan'] .
+            '<br></td></tr></thead></table> 
+                            <p style=font-size:16px;padding-left:1em;padding-right:1em>
+                                <i>Pesan ini dikirim otomatis oleh sistem aplikasi ' . $data['nama_pengirim'] . '</i>
+                                <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
+                                <br><b>~ ' . $data['tanda_tangan'] . ' ~</b>';
+
+        // Iterasi melalui pelanggan yang aktif dan kirim email ke masing-masing
+        foreach ($active_customers as $customer) {
+            // Set penerima email dan konten email di dalam loop
+            $mail->addAddress($customer['email'], $customer['nama']);
+            $mail->Body = $content;
+
+            if ($mail->send()) {
+                $this->session->set_flashdata('pesan', '<script>
+                    swal({
+                        title: "Berhasil",
+                        text: "Selamat Anda berhasil mengirim email",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    });
+                </script>');
+            } else {
+                $this->session->set_flashdata('pesan', '<script>
+                    swal({
+                        title: "Gagal",
+                        text: "Anda gagal mengirim email",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    });
+                </script>');
+            }
+
+            // Hapus alamat email penerima untuk pelanggan berikutnya
+            $mail->ClearAddresses();
         }
+
+        // Redirect setelah loop selesai
+        redirect(base_url('email/kirimemail_semua/E001'));
     }
-}
+
 
 public function kirimemail_umum()
     {
