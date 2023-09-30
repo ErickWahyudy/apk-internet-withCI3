@@ -9,7 +9,7 @@ if($aksi == "kirimemail_plg"):
     <section class="content">
         <div class="row">
             <div class="col-md-3">
-                <a href="<?= base_url('admin') ?>" class="btn btn-primary btn-block margin-bottom">Back to Home</a>
+                <a href="<?= base_url('admin/home') ?>" class="btn btn-primary btn-block margin-bottom">Back to Home</a>
 
                 <div class="box box-solid">
                     <div class="box-header with-border">
@@ -100,7 +100,7 @@ if($aksi == "kirimemail_plg"):
     <section class="content">
         <div class="row">
             <div class="col-md-3">
-                <a href="<?= base_url('admin') ?>" class="btn btn-primary btn-block margin-bottom">Back to home</a>
+                <a href="<?= base_url('admin/home') ?>" class="btn btn-primary btn-block margin-bottom">Back to Home</a>
 
                 <div class="box box-solid">
                     <div class="box-header with-border">
@@ -184,7 +184,7 @@ if($aksi == "kirimemail_plg"):
  <section class="content">
         <div class="row">
             <div class="col-md-3">
-                <a href="<?= base_url('admin') ?>" class="btn btn-primary btn-block margin-bottom">Back to Home</a>
+                <a href="<?= base_url('admin/home') ?>" class="btn btn-primary btn-block margin-bottom">Back to Home</a>
 
                 <div class="box box-solid">
                     <div class="box-header with-border">
