@@ -58,7 +58,7 @@ if($aksi == "kirimemail_plg"):
                                     <option value="">--Pilih Pelanggan--</option>
                                     <?php $no=1; foreach($pelanggan as $plg): ?>
                                     <option value="<?= $plg['email'] ?>">
-                                       <?= $no++ ?> | <?= ucfirst($plg['nama']) ?> | <?= ucfirst($plg['email']) ?>
+                                       <?= $no++ ?>. <?= ucfirst($plg['nama']) ?> | <?= ucfirst($plg['email']) ?>
                                     </option>
                                     <?php endforeach; ?>
                                 </select>

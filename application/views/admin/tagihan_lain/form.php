@@ -87,10 +87,11 @@
                                     <select name="id_pelanggan" class="form-control" required="">
                                         <option value="">--Pilih Pelanggan--</option>
                                         <?php 
-                                        $pelanggan = $this->db->get('tb_pelanggan')->result_array(); 
+                                        $no=1;
+                                        $pelanggan = $this->db->get_where('tb_pelanggan', ['status_plg' => 'Aktif'])->result_array();
                                         foreach($pelanggan as $plg): ?>
                                         <option value="<?= $plg['id_pelanggan'] ?>">
-                                            <?= ucfirst($plg['id_pelanggan']) ?> |
+                                            <?= $no++ ?>. 
                                             <?= ucfirst($plg['nama']) ?>
                                         </option>
                                         <?php endforeach; ?>
