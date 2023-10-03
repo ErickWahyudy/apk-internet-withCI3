@@ -8,12 +8,12 @@
     <meta name="keywords"
         content="wifi kassandra my id, kassandra my id, kassandra wifi, kassandra, kassandra hd production, KASSANDRA, KASSANDRA HD PRODUCTION">
     <meta name="description"
-        content="Layanan hotspot wifi unlimited 24 jam non stop tanpa lemot kecuali saat wifi down">
+        content="<?= $pesan ?>">
     <meta name="author" content="KASSANDRA, KASSANDRA HD PRODUCTION">
     <meta content='index,follow' name='robots' />
 
     <!-- Favicon -->
-    <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/img/maintenance.gif" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,9 +53,9 @@
             <img src="<?= base_url('themes/kassandra-wifi') ?>/img/maintenance.gif" style="width: 420pt; height: 100%; object-fit: cover;">
                 <div class="col-lg-6">
                     <i class="bi bi-exclamation-triangle display-1 text-primary"></i>                   
-                    <h3 class="mb-4" style="text-align: justify;"><?= $pesan ?><br><br>
-                        <i>information by KassandraWiFi</i>
+                    <h3 class="mb-4" style="text-align: justify;"><?= $pesan ?>
                     </h3>
+                    <p><b><i>information by KassandraWiFi</i></b></p>
                         <!-- mundur 1 kali ke halaman sebelumnya -->
                     <a href="landingpage" class="btn btn-primary">Go Back</a>
                 </div>
@@ -76,11 +76,6 @@
 
     <!-- Javascript -->
     <script src="<?= base_url('themes/kassandra-wifi') ?>/js/main.js"></script>
-    <script type="text/javascript">
-        // info tahun
-        var tahun = new Date().getFullYear();
-        document.getElementById("tahun").innerHTML = tahun;
-    </script>
 </body>
 
 </html>
