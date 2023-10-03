@@ -351,7 +351,6 @@ public function sendmail_bulanan()
                 confirmButtonText: "OKEE"
             });
         </script>');
-        redirect(base_url('admin/tagihan'));
         } else {
             $this->session->set_flashdata('pesan', '<script>
             swal({
@@ -362,10 +361,11 @@ public function sendmail_bulanan()
                 confirmButtonText: "OKEE"
             });
         </script>');
-        redirect(base_url('admin/tagihan'));
         }
- }
-}
+        $mail->ClearAddresses();
+        }
+        redirect(base_url('admin/tagihan'));
+    }
 
 public function sendmail_bl_lain()
  {
