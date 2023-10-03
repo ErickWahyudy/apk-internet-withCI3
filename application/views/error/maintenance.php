@@ -45,7 +45,7 @@
         <i class="fa fa-wifi fa-2x text-primary position-absolute top-50 start-50 translate-middle"></i>
     </div>
     <!-- Spinner End -->
-    <br><br><br>
+
     <!-- 404 Start -->
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container text-center">

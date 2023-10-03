@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Landingpage';
 $route['404_override'] = 'notfound/index';
 $route['maintenance'] = 'notfound/dalam_pengembangan';
+$route['maintenance-server'] = 'notfound/perbaikan_server';
 
 //landingpage
 $route['about']       = 'Landingpage/about';

@@ -236,7 +236,19 @@ if($this->session->userdata('level') =="Administrator"){
 
       <li class="header">OTHER</li>
       <li><a href="<?= base_url('admin/feedback'); ?>"><i class="fa fa-caret-square-o-up"></i> Feedback Pelanggan</a></li>
-      <li><a href="<?= base_url('admin/informasi'); ?>"><i class="fa fa-bullhorn"></i> Layanan Informasi </a></li>
+      <li class="treeview">
+          <a href="#">
+            <i class="fa fa-bullhorn"></i>
+            <span>Layanan Informasi</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?= base_url('admin/informasi'); ?>"><i class="fa fa-bullhorn"></i> Informasi Pelanggan</a></li>
+            <li><a href="<?= base_url('admin/maintenance/'); ?>"><i class="fa fa-wrench"></i> Maintenance Server</a></li>
+          </ul>
+        </li>
       <li><a href="<?= base_url('email/kirimemail_plg'); ?>"><i class="fa fa-envelope"></i> Kirim Email</a></li>
          <li><a href="<?= base_url('admin/user_admin') ?>" class="active"><i class="fa fa-user"></i> Data User</a></li>
         </li>

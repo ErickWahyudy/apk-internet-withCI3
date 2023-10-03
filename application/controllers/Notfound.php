@@ -19,4 +19,18 @@ class Notfound extends CI_controller
         $this->load->view('error/maintenance',$view);
     }
 
+    public function perbaikan_server()
+    {   
+        $this->load->helper('file'); // Load helper file untuk operasi file
+
+        // Mendapatkan pesan yang ingin ditampilkan dari file
+        $pesan = read_file(APPPATH . 'config/maintenance_message.txt');
+
+
+        $view = array('judul'  =>'Maintenance Server',
+                        'pesan'  => $pesan                    
+        );
+        $this->load->view('error/perbaikan_server',$view);
+    }
+
 }

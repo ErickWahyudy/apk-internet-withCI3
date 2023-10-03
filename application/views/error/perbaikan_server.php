@@ -36,7 +36,7 @@
     <link href="<?= base_url('themes/kassandra-wifi') ?>/css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body background="<?= base_url('themes/kassandra-wifi') ?>/img/img/white.jpg" style="background-size: cover; background-repeat: repeat; background-position: center center;">
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -53,13 +53,11 @@
             <img src="<?= base_url('themes/kassandra-wifi') ?>/img/maintenance.gif" style="width: 420pt; height: 100%; object-fit: cover;">
                 <div class="col-lg-6">
                     <i class="bi bi-exclamation-triangle display-1 text-primary"></i>                   
-                    <h3 class="mb-4">Page Not Found</h3>
-                    <p class="mb-4">We’re sorry, the page you have looked for does not exist in our website! Maybe go to
-                        our home page or try to use a search? <br>
-                        information by KassandraWiFi
-                    </p>
+                    <h3 class="mb-4" style="text-align: justify;"><?= $pesan ?><br><br>
+                        <i>information by KassandraWiFi</i>
+                    </h3>
                         <!-- mundur 1 kali ke halaman sebelumnya -->
-                    <a href="javascript:history.back()" class="btn btn-primary">Go Back</a>
+                    <a href="landingpage" class="btn btn-primary">Go Back</a>
                 </div>
             </div>
         </div>
