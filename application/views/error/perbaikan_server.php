@@ -36,7 +36,7 @@
     <link href="<?= base_url('themes/kassandra-wifi') ?>/css/style.css" rel="stylesheet">
 </head>
 
-<body background="<?= base_url('themes/kassandra-wifi') ?>/img/img/white.jpg" style="background-size: cover; background-repeat: repeat; background-position: center center;">
+<body style="background-color: white;">
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
