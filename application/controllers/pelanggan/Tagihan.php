@@ -206,7 +206,7 @@ public function konfirmasi_bayar($id='')
                   });
           </script>';
   	 	    $this->session->set_flashdata('pesan',$pesan);
-            redirect('pelanggan/bayar/'.$id);
+            redirect('pelanggan/tagihan/bayar/'.$id);
 
           }
           else
@@ -229,8 +229,42 @@ public function konfirmasi_bayar($id='')
                   confirmButtonText: "OKEE"
                   });
           </script>';
+                  // Kirim pesan ke Telegram
+                  $nama = $data['nama'];
+                  $alamat = $data['alamat'];
+                  $bukti_bayar = $this->upload_bukti_bayar();
+                  $tgl_konfirmasi = date('d F Y');
+
+                  // Konfigurasi pengiriman gambar ke Telegram
+                  $telegramBotToken = '1306451202:AAFL84nqcQjbAsEpRqVCziQ0VGty4qIAxt4';
+                  $telegramChatID = '1136312864';
+
+                  // Path ke gambar bukti bayar (ganti ini dengan alamat file yang benar)
+                  $pathToImage = './themes/bukti_bayar/' . $bukti_bayar;
+
+                  $isi_chat = "Bukti pembayaran dari " . "\n";
+                  $isi_chat .= "Nama : " . $nama . "\n";
+                  $isi_chat .= "Alamat : " . $alamat . "\n";
+                  $isi_chat .= "Tanggal konfirmasi : " . $tgl_konfirmasi . "\n";
+
+                  // Kirim pesan ke Telegram dengan foto bukti bayar
+                  $url = "https://api.telegram.org/bot" . $telegramBotToken . "/sendPhoto";
+                  $postFields = array(
+                      'chat_id' => $telegramChatID,
+                      'photo' => new CURLFile(realpath($pathToImage)),
+                      'caption' => $isi_chat
+                  );
+
+                  $ch = curl_init();
+                  curl_setopt($ch, CURLOPT_URL, $url);
+                  curl_setopt($ch, CURLOPT_POST, 1);
+                  curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+                  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:multipart/form-data']);
+                  $result = curl_exec($ch);
+                  curl_close($ch);
+
   	 	    $this->session->set_flashdata('pesan',$pesan);
-         redirect(base_url('pelanggan/bayar/'.$data['id_tagihan']));
+         redirect(base_url('pelanggan/tagihan//bayar/'.$data['id_tagihan']));
           }else{
            echo "ERROR input Data";
           }

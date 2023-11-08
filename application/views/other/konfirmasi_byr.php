@@ -227,7 +227,7 @@
                                                
                                                    <input type="file" class="form-control" style="background-color: white;" id="bukti_bayar" name="bukti_bayar" placeholder="bukti_bayar" autocomplete="off" onchange="previewBAYAR()" required>
                                                <img id="preview_bayar" alt="image preview" width="50%" />
-                                                   <button type="submit" name="kirim" class="btn btn-primary btn-sm" style="margin-top: 10px">Konfirmasi</button>
+                                                   <button type="submit" name="kirim" class="btn btn-primary btn-md" style="margin-top: 10px">Konfirmasi</button>
                                                </form>
                                        </tr>                           
                            </table>

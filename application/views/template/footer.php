@@ -65,6 +65,20 @@
 </div>
 <!-- ./wrapper -->
 
+    <script>
+        //preview gambar
+        function previewBAYAR() {
+        document.getElementById("preview_bayar").style.display = "block";
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("bukti_bayar").files[0]);
+                 
+        oFReader.onload = function(oFREvent) {
+        document.getElementById("preview_bayar").src = oFREvent.target.result;
+         };
+                
+       };
+    </script>
+
 <!-- jQuery 3 -->
 <script src="<?= base_url('themes/admin') ?>/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
