@@ -233,6 +233,8 @@ if($this->session->userdata('level') =="Administrator"){
         <li><a href="<?= base_url('admin/tagihan_lain'); ?>"><i class="fa fa-calculator"></i> Tagihan Lainnya</a>
 
         <li><a href="<?= base_url('admin/pengeluaran'); ?>"><i class="fa fa-dollar"></i> Data Pengeluaran</a>
+        <li><a href="<?= base_url('admin/laporan'); ?>"><i class="fa  fa-file-archive-o"></i> Laporan Keuangan</a>
+      </li>
 
       <li class="header">OTHER</li>
       <li><a href="<?= base_url('admin/feedback'); ?>"><i class="fa fa-caret-square-o-up"></i> Feedback Pelanggan</a></li>
