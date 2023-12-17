@@ -253,6 +253,7 @@ if($this->session->userdata('level') =="Administrator"){
         </li>
       <li><a href="<?= base_url('email/kirimemail_plg'); ?>"><i class="fa fa-envelope"></i> Kirim Email</a></li>
          <li><a href="<?= base_url('admin/user_admin') ?>" class="active"><i class="fa fa-user"></i> Data User</a></li>
+         <li><a href="<?= base_url('admin/backup') ?>" class="active"><i class="fa fa-database"></i> Backup Database</a></li>
         </li>
 
 <?php }elseif($this->session->userdata('level') == "PLG"){ ?>
