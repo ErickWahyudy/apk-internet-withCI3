@@ -2,7 +2,7 @@
 
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahPelanggan"><i class="fa fa-plus"></i>
     Tambah</a>
-<a href="https://docs.google.com/spreadsheets/d/1y0-1HHY3ZVqvulj2Hgg42wN-VkUeCjygwx6EJvDQBFM/edit#gid=778747165"
+<a href="https://docs.google.com/spreadsheets/d/1y0-1HHY3ZVqvulj2Hgg42wN-VkUeCjygwx6EJvDQBFM"
     title="Tambah Data" class="btn btn-success" target="blank">
     <i class="glyphicon glyphicon"></i> DATA GOOGLESHEET</a>
 <br /><br /><br />
