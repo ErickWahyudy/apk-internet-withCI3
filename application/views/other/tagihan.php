@@ -297,7 +297,7 @@
                                         <?php $stt = $status  ?>
                                         <?php if($stt == 'BL'){ ?>
                                         <span class="">
-                                            <a href=<?= base_url('struk/merchant/'.$id_tagihan) ?> title="Bayar"
+                                            <a href=<?= base_url('api/payment/qris/'.$id_tagihan) ?> title="Bayar"
                                                 class="btn btn-warning" style="font-size:16px;">
                                                 <i class="fa fa-dollar"></i> Bayar Sekarang
                                             </a>

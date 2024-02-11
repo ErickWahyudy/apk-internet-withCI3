@@ -21,10 +21,14 @@
                 <td><?= $no ?></td>
                 <td><?= $informasi['informasi'] ?></td>
                 <td>
-                    <a href="<?= base_url('themes/file_informasi/'.$informasi['berkas']) ?>"
-                        target="_blank"><?= $informasi['berkas'] ?></a> <br>
-                    <a href="" class="btn btn-info" data-toggle="modal"
+                    <?php $stt = $informasi['berkas']; ?>
+                        <?php if($stt == ""): ?>
+                            <a href="" class="btn btn-info" data-toggle="modal"
                         data-target="#editFile<?= $informasi['id_informasi'] ?>"><i class="fa fa-upload"></i></a>
+                        <?php else: ?>
+                            <a href="<?= base_url('themes/file_informasi/'.$informasi['berkas']) ?>" target="_blank"><?= $informasi['berkas'] ?></a>
+                            <a href="javascript:void(0)" onclick="hapusfile('<?= $informasi['id_informasi'] ?>')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                        <?php endif; ?>
                 </td>
 
                 <td>
@@ -289,6 +293,54 @@
             }
         });
     });
+
+    //ajax hapus file
+    function hapusfile(id_informasi) {
+        swal({
+            title: "Apakah Anda Yakin?",
+            text: "Qris Akan Dihapus",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result
+                .value
+            ) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/informasi/api_hapusfile/') ?>" +
+                        id_informasi,
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Qris Berhasil Dihapus",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Qris Gagal Dihapus",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal hapus", "file Tidak Jadi Dihapus", "error");
+            }
+        });
+    }
 
 
         //ajax hapus informasi

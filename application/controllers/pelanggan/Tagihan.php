@@ -60,15 +60,16 @@ public function index($id='')
           }
       }
 
-      public function merchant($id='')
+      public function qris($id='')
       {
       $data=$this->m_tagihan->view_id($id)->row_array();
-      $x = array('judul'                =>'merchant KassandraWiFi' ,
-                  'aksi'                =>'merchant',
+      $x = array('judul'                =>'QRIS KassandraWiFi' ,
+                  'aksi'                =>'qris',
                   'id_tagihan'          =>$data['id_tagihan'],
                   'id_pelanggan'        =>$data['id_pelanggan'],
                   'id_paket'            =>$data['id_paket'],
                   'paket'               =>$data['paket'],
+                  'qris'                =>$data['qris'],
                   'nama'                =>$data['nama'],
                   'bulan'               =>$data['bulan'],
                   'tahun'               =>$data['tahun'],

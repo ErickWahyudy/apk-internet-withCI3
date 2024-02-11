@@ -110,13 +110,13 @@ $kode_tgl = date("d-m-Y");
                     <a href="https://api.whatsapp.com/send?phone=<?= $tagihan['no_hp']; ?>&text=Pelanggan Yth. Sdr/i%20<?= $tagihan['nama']; ?>, Tagihan hotspot KassandraWiFi untuk Bulan <?= $tagihan['bulan'] ?> Tahun <?= $tagihan['tahun'] ?> dgn rincian
 					%0ABiaya Tagihan : <?= rupiah($tagihan['tagihan']); ?>
 					%0ASudah dapat dibayarkan mulai hari ini. Mohon melakukan pembayaran sebelum tgl 10 - <?= $tagihan['bulan'] ?> - <?= $tagihan['tahun'] ?> demi kenyamanan internet bersama.
-                    %0A%0APembayaran dapat dilakukan secara Tunai maupun transfer Bank, ShopeePay, LinkAja, Dana, Alfamart atau platform digital lainnya.
-                    %0A%0ABerikut kami sampaikan link pembayaran via transfer.
-                    %0A<?= base_url('struk/bayar_tagihan/'.$tagihan['id_tagihan']) ?>
-                    %0A%0AAnda jg dapat melakukan konfirmasi pembayaran secara langsung melalui link berikut ini.
-                    %0A<?= base_url('struk/konfirmasi_bayar/'.$tagihan['id_tagihan']) ?>
+                    %0A%0ABayar lebih mudah dngn QRIS, nominal tagihan akan tertera sesuai paket Anda tanpa biaya tambahan.
+                    %0A%0ABerikut link pembayaran via QRIS Anda.
+                    %0A<?= base_url('api/payment/qris/'.$tagihan['id_tagihan']) ?>
+                    %0A%0AAnda jg dapat melakukan konfirmasi scr langsung dngn mengirim bukti pembayaran pada whatsapp ini.
+
                     %0A%0A_Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi._
-                    -wifi@kassandra.my.id-" target=" _blank" title="Pesan WhatsApp" class="btn btn-success">
+                    %0A-wifi@kassandra.my.id-" target=" _blank" title="Pesan WhatsApp" class="btn btn-success">
                         <b>Whatsapp</b>
                     </a>
 
@@ -124,15 +124,14 @@ $kode_tgl = date("d-m-Y");
                     <a href="https://api.whatsapp.com/send?phone=<?= $tagihan['no_hp']; ?>&text=Pelanggan Yth. Sdr/i <?= $tagihan['nama']; ?>, Tagihan hotspot KassandraWiFi untuk Bulan <?= $tagihan['bulan'] ?> Tahun <?= $tagihan['tahun'] ?> dgn rincian
 					%0ABiaya Tagihan : <?= rupiah($tagihan['tagihan']); ?>
                     %0A*Hari ini adalah batas terakhir pembayaran sdr/i <?= $tagihan['nama']; ?>*. Mohon segera melakukan pembayaran demi kenyamanan internet bersama.
-                    %0A%0APembayaran dapat dilakukan secara Tunai maupun transfer Bank, ShopeePay, LinkAja, Dana, Alfamart atau platform digital lainnya.
+                    %0A%0ABayar lebih mudah dngn QRIS, nominal tagihan akan tertera sesuai paket Anda tanpa biaya tambahan.
                     %0A_Abaikan pesan jika sudah melakukan pembayaran. Terima kasih._
-                    %0A%0ABerikut kami sampaikan link pembayaran via transfer.
-                    %0A<?= base_url('struk/bayar_tagihan/'.$tagihan['id_tagihan']) ?>
-                    %0A%0AAnda jg dapat melakukan konfirmasi pembayaran secara langsung melalui link berikut ini.
-                    %0A<?= base_url('struk/konfirmasi_bayar/'.$tagihan['id_tagihan']) ?>
+                    %0A%0ABerikut link pembayaran via QRIS Anda.
+                    %0A<?= base_url('api/payment/qris/'.$tagihan['id_tagihan']) ?>
+                    %0A%0AAnda jg dapat melakukan konfirmasi scr langsung dngn mengirim bukti pembayaran pada whatsapp ini.
 
                     %0A%0A_Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi._
-                    -wifi@kassandra.my.id-" target=" _blank" title="Pesan WhatsApp" class="btn btn-success">
+                    %0A-wifi@kassandra.my.id-" target=" _blank" title="Pesan WhatsApp" class="btn btn-success">
                         <b>Whatsapp</b>
                     </a>
                     <?php } ?>

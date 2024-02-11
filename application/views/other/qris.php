@@ -67,7 +67,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="logo">
+            <a href="../../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"></span>
                 <!-- logo for regular state and mobile devices -->
@@ -106,11 +106,11 @@
                                 </li>
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                    <a href="../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"
+                                    <a href="../../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"
                                             class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                    <a href="../../login" class="btn btn-default btn-flat">Login</a>
+                                    <a href="../../../login" class="btn btn-default btn-flat">Login</a>
                                     </div>
                                 </li>
                             </ul>
@@ -145,7 +145,7 @@
                     <li class="header">MAIN NAVIGATION</li>
 
                     <li class="">
-                        <a href="../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))">
+                        <a href="../../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))">
                             <i class="fa fa-dashboard"></i> <span>Dasboard</span>
                             <span class="pull-right-container">
                                 <small class="label pull-right bg-green">Home</small>
@@ -154,14 +154,14 @@
                     </li>
                     <li class="header">OLAH DATA</li>
                     <li class="treeview">
-                    <li><a href="../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-user"></i>Data Profile</a></li>
-                    <li><a href="../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-dollar"></i>Data Tagihan</a>
+                    <li><a href="../../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-user"></i>Data Profile</a></li>
+                    <li><a href="../../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-dollar"></i>Data Tagihan</a>
                     </li>
-                    <li><a href="../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-money"></i>Data Tagihan Lain</a></li>
+                    <li><a href="../../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-money"></i>Data Tagihan Lain</a></li>
                     </li>
 
                     <li class="header">OTHER</li>
-                    <li><a href="../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-info-circle"></i> <span>Informasi</span></a></li>
+                    <li><a href="../../../login"onclick="return(confirm('Anda harus login untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-info-circle"></i> <span>Informasi</span></a></li>
                     <li class="header">END MAIN NAVIGATION</li>
                 </ul>
             </section>
@@ -183,48 +183,62 @@
                 </ol>
             </section>
 
-            <!-- Main content -->
-            <section class="content">
+             <!-- Main content -->
+             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="box box-success">
                             <div class="box-header with-border">
 
+                            <?php $stt = $status  ?>
+                                <?php if($stt == 'BL'){ ?>
+                                <b style="font-size: 14pt">QRIS Pembayaran <?= $nama ?>. Bulan <?= $bulan ?> / <?= $tahun ?>. <?= rupiah($tagihan) ?></b>
+                                <div class="box-tools pull-right">
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+
                             <?= $this->session->flashdata('pesan') ?>
                             <center>
-							<a href="<?= base_url('themes') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
-								<img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/transferbank.png" alt="" style="height:50px">
-							</a>
-							<a href="https://shopee.co.id" class="btn btn"> 
-								<img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/shopeepay.png" alt="" style="height:35px">
-							<a href="https://linkaja.onelink.me/Mk5Y/app" lass="btn btn"> 
-								<img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/linkaja.png" alt="" style="height:50px">
-						    <a href="https://link.dana.id/lBx7Kcflieb" lass="btn btn"> &emsp;
-								<img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/dana.png" alt="" style="height:50px">
-							<a href="<?= base_url('themes') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
-								<img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/alfamart.png" alt="" style="height:45px">
-							</a>
-							<a href="<?= base_url('themes') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
-								<img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/indomaret.png" alt="" style="height:45px">
-							</a>
+                            <!-- download qris -->
+                            <a href="<?= base_url('themes/qris/'.$qris) ?>" download="<?= $qris ?>" title="Download QRIS">
+                                <button class="btn btn-primary btn-sm"><i class="fa fa-download"></i></button></a>
+                            <a href="<?= base_url('themes/qris/'.$qris) ?>" title="Lihat QRIS" target="_blank">
+                                <img src="<?= base_url('themes/qris/'.$qris) ?>" class="img-thumbnail img-responsive" width="75%" alt="QRIS">
+                            </a>
+                           
 					        </center>
 
                         <div class="box-header with-border">
                             <ul>
                                 <li>
-                                    <p>Nomor pembayaran yang perlu dimasukkan bisa dilihat disini 
-                                        <a href="<?= base_url('themes') ?>/Linkpembayaran.txt" target="blank">
-                                        <u>Nomor Pembayaran</u></a></p>
+                                    Pastikan nominal pembayaran yang muncul sesuai dengan tagihan Anda.
                                 </li>
                                 <li>
-                                    <p>Setelah melakukan pembayaran, silahkan konfirmasi melalui link berikut
-                                        <a href="<?= base_url('struk/konfirmasi_bayar/'.$id_tagihan) ?>"
+                                    Setelah berhasil melakukan pembayaran, silahkan kirim bukti pembayaran Anda pada WhatsApp kami.
+                                    <a href="https://wa.me/6281456141227" title="Kirim Bukti Pembayaran">
+                                        <button class="btn btn-success btn-sm"><i class="fa fa-whatsapp"></i> WhatsApp</button></a>
+                                        <!-- <a href="<?= base_url('struk/konfirmasi_bayar/'.$id_tagihan) ?>"
                                                 title="Konfirmasi">
-                                        <button class="btn btn-primary btn-sm">Konfirmasi Pembayaran</button></a></p>
+                                        <button class="btn btn-primary btn-sm">Konfirmasi Pembayaran</button></a> -->
+                                </li>
+                                <li>
+                                    Untuk struk pembayaran, dapat anda download dengan klik tombol dibawah ini.
+                                    <a href="<?= base_url('struk/bayar_tagihan/'.$id_tagihan) ?>"
+                                        title="Struk Pembayaran">
+                                        <button class="btn btn-primary btn-sm">Struk Pembayaran</button></a>
+
                                 </li>
                             </ul>
 				        </div>
+                        <?php }elseif($stt == 'LS'){ ?>
+                            <center>
+                                <h3>
+                                    Anda Sudah Melakukan Pembayaran Tagihan Bulan <?= $bulan ?> / <?= $tahun ?>, pada tgl <?= tgl_indo($tgl_bayar) ?>.
+                                </h3>
+                            </center>
+                        <?php } ?>
 
 <!-- footer -->
 <?php $this->load->view('template/footer'); ?>

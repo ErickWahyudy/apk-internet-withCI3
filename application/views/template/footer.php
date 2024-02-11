@@ -55,7 +55,7 @@
 
   <footer class="main-footer">
     <strong>Copyright &copy; <?php echo date('Y'); ?>
-					<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved. APP Version 2.0.0
+					<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved. APP Version 2.4.73
     <br><i>Access application with <?php echo "". get_client_browser()."";?>. <?php echo "". get_client_ip()."";?></i>
   </footer>
 

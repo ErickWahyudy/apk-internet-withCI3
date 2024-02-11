@@ -173,6 +173,41 @@ public function api_add($value='')
       echo json_encode($data);
     }
 
+    //API hapus data dari database dan folder
+  public function api_hapusfile($id='')
+  {
+    if (empty($id)) {
+      $response = [
+        'status' => false,
+        'message' => 'Tidak ada data'
+      ];
+    } else {
+      $data = $this->m_informasi->view_id($id)->row_array();
+      $file = $data['berkas'];
+      unlink('./themes/file_informasi/' . $file);
+
+      //SQL update
+      $SQLupdate = [
+        'berkas'    => ''
+      ];
+      if ($this->m_informasi->update($id, $SQLupdate)) {
+        $response = [
+          'status' => true,
+          'message' => 'Berhasil menghapus data'
+        ];
+      } else {
+        $response = [
+          'status' => false,
+          'message' => 'Gagal menghapus data'
+        ];
+      }
+
+    }
+    $this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response));
+  }
+
 
     //API hapus data dari database dan folder
     public function api_hapus($id='')

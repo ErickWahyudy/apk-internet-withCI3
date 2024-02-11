@@ -79,4 +79,6 @@ $route['api/v1/promo_view']         = 'API/pelanggan/promo_view';
 $route['api/v1/email_view']         = 'API/email/view_email';
 $route['api/v1/email_send']         = 'API/email/send_mail_all';
 
+$route['api/payment/qris/(:any)']  = 'Struk/qris/$1';
+
 $route['translate_uri_dashes'] = FALSE;

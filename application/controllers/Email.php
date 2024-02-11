@@ -294,15 +294,15 @@ public function sendmail_bulanan()
                         '<p style=font-size:18px>Pelanggan Yth. Sdr/i '.$data['nama']. ' Ada tagihan hotspot
                         KassandraWiFi untuk Bulan '.$data['bulan'] . ' / Tahun ' .$data['tahun']. ' yang belum dibayar.</p>'.
                         'Dengan rincian Biaya Tagihan : <br><b>Rp. '.number_format($data['tagihan'], 0, ',', '.') . '</b>'.
-                        '<br>Pembayaran dapat dilakukan secara Tunai maupun transfer Bank, ShopeePay, LinkAja, Dana, Alfamart atau platform digital lainnya.
+                        '<br>Bayar lebih mudah dngn QRIS sekarang!
                         <br><br>Anda dapat melunasi pembayaran sebelum batas akhir pada tanggal 10 - '.$data['bulan'] . ' - ' .$data['tahun'] . 
                         '. Mari lunasi tagihan ini segera, demi kenyamanan internet bersama!
                         <p align=center colspan=2 style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif>
-                        <a href="https://wifi.kassandra.my.id/struk/bayar_tagihan/' .$data['id_tagihan']. '" style=color:rgb(255,255,255);background-color:#589bf2;border-width:initial;border-style:none;border-radius:15px;padding:10px 20px target=_blank >' .
-                        ' Bayar Sekarang</a></p><br><br>Abaikan pesan jika sudah melakukan pembayaran. Terima kasih.' .
+                        <a href="https://wifi.kassandra.my.id/api/payment/qris/' .$data['id_tagihan']. '" style=color:rgb(255,255,255);background-color:#589bf2;border-width:initial;border-style:none;border-radius:15px;padding:10px 20px target=_blank >' .
+                        ' QRIS Pembayaran</a></p><br><br>Abaikan pesan jika sudah melakukan pembayaran. Terima kasih.' .
                         '<br><br></td></tr></thead></table> 
                             <p style=font-size:18px;padding-left:1em;padding-right:1em>
-                                Bayar lebih mudah melalui merchant KassandraWifi berikut ini :
+                                Support by :
                                 </p>
                                 <table><thead>
                             <tr>
@@ -403,7 +403,7 @@ public function sendmail_bl_lain()
                         ' Bayar Sekarang</a></p><br><br>Abaikan pesan jika sudah melakukan pembayaran. Terima kasih.' .
                         '<br><br></td></tr></thead></table> 
                             <p style=font-size:18px;padding-left:1em;padding-right:1em>
-                                Bayar lebih mudah melalui merchant KassandraWifi berikut ini :
+                               Support by :
                                 </p>
                                 <table><thead>
                             <tr>
@@ -491,15 +491,15 @@ public function sendmail_bl_lain()
                         '<p style=font-size:18px>Pelanggan Yth. Sdr/i '.$data['nama']. ' Ada tagihan hotspot
                         KassandraWiFi untuk Bulan '.$data['bulan'] . ' / Tahun ' .$data['tahun']. ' yang belum dibayar.</p>'.
                         'Dengan rincian Biaya Tagihan : <br><b>Rp. '.number_format($data['tagihan'], 0, ',', '.') . '</b>'.
-                        '<br>Pembayaran dapat dilakukan secara Tunai maupun transfer Bank, ShopeePay, LinkAja, Dana, Alfamart atau platform digital lainnya.
+                        '<br>Bayar lebih mudah dngn QRIS sekarang!
                         <br><br>Anda dapat melunasi pembayaran sebelum batas akhir pada tanggal 10 - '.$data['bulan'] . ' - ' .$data['tahun'] . 
                         '. Mari lunasi tagihan ini segera, demi kenyamanan internet bersama!
                         <p align=center colspan=2 style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif>
-                        <a href="https://wifi.kassandra.my.id/struk/bayar_tagihan/' .$data['id_tagihan']. '" style=color:rgb(255,255,255);background-color:#589bf2;border-width:initial;border-style:none;border-radius:15px;padding:10px 20px target=_blank >' .
-                        ' Bayar Sekarang</a></p><br><br>Abaikan pesan jika sudah melakukan pembayaran. Terima kasih.' .
+                        <a href="https://wifi.kassandra.my.id/api/payment/qris/' .$data['id_tagihan']. '" style=color:rgb(255,255,255);background-color:#589bf2;border-width:initial;border-style:none;border-radius:15px;padding:10px 20px target=_blank >' .
+                        ' QRIS Pembayaran</a></p><br><br>Abaikan pesan jika sudah melakukan pembayaran. Terima kasih.' .
                         '<br><br></td></tr></thead></table> 
                             <p style=font-size:18px;padding-left:1em;padding-right:1em>
-                                Bayar lebih mudah melalui merchant KassandraWifi berikut ini :
+                               Support by :
                                 </p>
                                 <table><thead>
                             <tr>

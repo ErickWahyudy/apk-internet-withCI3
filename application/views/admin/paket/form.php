@@ -12,6 +12,7 @@
                 <th>ID</th>
                 <th>Paket</th>
                 <th>Tarif</th>
+                <th>Qris</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -22,6 +23,16 @@
                 <td><?= $paket['id_paket'] ?></td>
                 <td><?= $paket['paket'] ?></td>
                 <td><?= rupiah ($paket['tarif']) ?></td>
+                <td>
+                    <?php $stt = $paket['qris']; ?>
+                        <?php if($stt == ""): ?>
+                            <img src="<?= base_url('themes/no_images.png') ?>" class="img-thumbnail" width="70px">
+                            <a href="" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editfoto<?= $paket['id_paket'] ?>"><i class="fa fa-edit"></i></a>
+                        <?php else: ?>
+                            <img src="<?= base_url('themes/qris/'.$paket['qris']) ?>" class="img-thumbnail" width="70px">
+                            <a href="javascript:void(0)" onclick="hapusfoto('<?= $paket['id_paket'] ?>')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                        <?php endif; ?>
+                </td>
                 <td>
                     <a href="" class="btn btn-warning" data-toggle="modal"
                         data-target="#edit<?= $paket['id_paket'] ?>"><i class="fa fa-edit"></i></a>
@@ -140,6 +151,75 @@
     <?php endforeach; ?>
     <!-- End Modal -->
 
+    <!-- Modal edit foto -->
+    <?php foreach($data->result_array() as $paket): ?>
+    <div class="modal fade" id="editfoto<?= $paket['id_paket'] ?>" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-purple">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Qris <?= $judul ?></h4>
+                </div>
+                <div class="modal-body table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <form id="editfoto" method="post" enctype="multipart/form-data">
+                            <tr>
+                                <th>ID Paket</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name="id_paket" value="<?= $paket['id_paket'] ?>"
+                                        class="form-control" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Qris</th>
+                            </tr>
+                            <tr>
+                            <td>
+                                <input type="file" name="foto" id="bukti_foto_profile" class="form-control"
+                                    onchange="previewLOGO()" autocomplete="off" accept="image/*" />
+                            </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img id="preview_bayar" alt="image preview" width="50%" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+                                    &nbsp;&nbsp;
+                                    <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
+                                </td>
+                            </tr>
+
+                        </form>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <?php endforeach; ?>
+    <!-- End Modal -->
+
+    <script>
+        //preview Logo
+        function previewLOGO() {
+            document.getElementById("preview_bayar").style.display = "block";
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("bukti_foto_profile").files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                document.getElementById("preview_bayar").src = oFREvent.target.result;
+            };
+
+        };
+    </script>
     <script>
         //add data
         $(document).ready(function () {
@@ -209,6 +289,95 @@
             }
         });
     });
+
+    //upload logo
+    $(document).on('submit', '#editfoto', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/paket/api_upload/') ?>" + form_data.get('id_paket'),
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#editfoto' + form_data.get('id_paket'));
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Diubah",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Diubah",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+
+    //ajax hapus foto
+    function hapusfoto(id_paket) {
+        swal({
+            title: "Apakah Anda Yakin?",
+            text: "Qris Akan Dihapus",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result
+                .value
+            ) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/paket/api_hapusfoto/') ?>" +
+                        id_paket,
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Qris Berhasil Dihapus",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Qris Gagal Dihapus",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal hapus", "Foto Tidak Jadi Dihapus", "error");
+            }
+        });
+    }
 
         //ajax hapus paket
         function hapuspaket(id_paket) {
