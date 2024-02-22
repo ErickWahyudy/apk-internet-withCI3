@@ -4,7 +4,7 @@
 <div class="alert alert-info alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <h4>
-        <i class="icon fa fa-info"></i>laporan Pendapatan dan Pengeluaran
+        <i class="icon fa fa-info"></i>laporan Pemasukan dan Pengeluaran
     </h4>
 </div>
 <div class="table-responsive">
@@ -21,10 +21,10 @@
             <?php $no=1; foreach ($years_range as $year): ?>
             <tr>
                 <td><b><?= $no; ?></b></td>
-                <td>Laporan Tahun <?= $year; ?></td>
+                <td><b>Laporan Tahun <?= $year; ?></b></td>
             </tr>
             <tr>
-                <td style="width: 20%; text-align:right;">Pendapatan </td>
+                <td style="width: 20%; text-align:right;">Pemasukan </td>
                 <td style="width: 80%;"><?= rupiah($data[$year]['sum_tagihanLS']); ?></td>
             </tr>
             <tr>
