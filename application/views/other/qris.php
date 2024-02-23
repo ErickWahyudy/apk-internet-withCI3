@@ -213,7 +213,7 @@
                         <div class="box-header with-border">
                             <ul>
                                 <li>
-                                    Pastikan nominal pembayaran yang muncul sesuai dengan tagihan Anda.
+                                    Pastikan pembayaran anda sesuai dengan nominal tagihan yang tertera di aplikasi.
                                 </li>
                                 <li>
                                     Setelah berhasil melakukan pembayaran, silahkan kirim bukti pembayaran Anda pada WhatsApp kami.
