@@ -14,9 +14,10 @@
         // Ubah format tanggal Indonesia
         var tgl = new Date(data[i].terdaftar_mulai);
         var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        var status = data[i].status == 'LS' ? 'Lunas' : 'Belum Lunas';
         var formattedDate = new Intl.DateTimeFormat('id-ID', options).format(tgl);
 
-        locations.push(['<h4>'+data[i].nama+'</h4><p>'+data[i].no_hp+'<br>'+data[i].alamat+'<br> Tgl Daftar : '+formattedDate+'</p>',
+        locations.push(['<h4>'+data[i].nama+'</h4><p>'+data[i].no_hp+'<br>'+data[i].alamat+'<br> Tgl Daftar : '+formattedDate+'<br><br> Status Tagihan Terakhir : '+status+'</p>',
         data[i].latitude, 
         data[i].longitude]);
         }
@@ -36,7 +37,8 @@
         marker = new google.maps.Marker({
           position: new google.maps.LatLng(locations[i][1], locations[i][2]),
           map: map,
-          icon: '<?= base_url('themes/marker.png') ?>',
+          //jika status lunas bayar maka icon warna hijau, jika tidak maka icon warna merah
+          icon: data[i].status == 'LS' ? 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
         });
  
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
