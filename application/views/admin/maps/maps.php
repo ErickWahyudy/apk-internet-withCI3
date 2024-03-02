@@ -7,9 +7,16 @@
 
         //menampilkan data json dari controller untuk ditampilkan di peta
         var data = <?php echo $data; ?>;
+        var tagihan = <?php echo $tagihan; ?>;
         var locations = [];
         
         for (var i = 0; i < data.length; i++) {
+          for (var j = 0; j < tagihan.length; j++) {
+            if (data[i].nama == tagihan[j].nama) {
+              data[i].status = tagihan[j].status;
+              break;
+            }
+          }
 
         // Ubah format tanggal Indonesia
         var tgl = new Date(data[i].terdaftar_mulai);
