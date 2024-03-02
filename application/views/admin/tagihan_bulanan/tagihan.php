@@ -116,7 +116,7 @@ $kode_tgl = date("d-m-Y");
                     %0A%0AAnda jg dapat melakukan konfirmasi scr langsung dngn mengirim bukti pembayaran pada whatsapp ini.
 
                     %0A%0A_Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi._
-                    %0A-wifi@kassandra.my.id-" target=" _blank" title="Pesan WhatsApp" class="btn btn-success">
+                    %0A-wifi@kassandra.my.id-" id="whatsappButton<?= $tagihan['id_tagihan'] ?>" onclick="disableButton(<?= $tagihan['id_tagihan'] ?>)" target=" _blank" title="Pesan WhatsApp" class="btn btn-success">
                         <b>Whatsapp</b>
                     </a>
 
@@ -131,7 +131,7 @@ $kode_tgl = date("d-m-Y");
                     %0A%0AAnda jg dapat melakukan konfirmasi scr langsung dngn mengirim bukti pembayaran pada whatsapp ini.
 
                     %0A%0A_Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi._
-                    %0A-wifi@kassandra.my.id-" target=" _blank" title="Pesan WhatsApp" class="btn btn-success">
+                    %0A-wifi@kassandra.my.id-" id="whatsappButton<?= $tagihan['id_tagihan'] ?>" onclick="disableButton(<?= $tagihan['id_tagihan'] ?>)" target=" _blank" title="Pesan WhatsApp" class="btn btn-success">
                         <b>Whatsapp</b>
                     </a>
                     <?php } ?>
@@ -141,7 +141,13 @@ $kode_tgl = date("d-m-Y");
             <?php $no++; endforeach; ?>
         </tbody>
     </table>
-
+    <script>
+        function disableButton(id_tagihan) {
+                var whatsappButton = document.getElementById("whatsappButton" + id_tagihan);
+                whatsappButton.setAttribute("disabled", "true");
+                whatsappButton.classList.add("disabled");
+            }
+    </script>
 
 
     <!-- Modal edit tagihan bulanan-->
