@@ -213,7 +213,7 @@
                         <div class="box-header with-border">
                             <ul>
                                 <li>
-                                    Pastikan pembayaran anda sesuai dengan nominal tagihan yang tertera di aplikasi.
+                                    Masukkan nominal pembayaran anda sesuai dengan nominal tagihan yang tertera di aplikasi KassandraWiFi.
                                 </li>
                                 <li>
                                     Setelah berhasil melakukan pembayaran, silahkan kirim bukti pembayaran Anda pada WhatsApp kami.
