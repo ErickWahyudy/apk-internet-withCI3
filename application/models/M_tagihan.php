@@ -105,9 +105,14 @@ public function tagihan($id='')
 {
     //buka data tagihan berdasarkan id
     $id = $this->session->userdata['id_pelanggan'];
+
+    //buka data 1 tahun terakhir
+    $tahun = date('Y', strtotime('-0 year'));
+
     $this->db->select('*');
     $this->db->from($this->table3);
     $this->db->where('id_pelanggan', $id);
+    $this->db->where('tahun >=', $tahun);
     $this->db->order_by('status', 'BL');
     $this->db->order_by('id_tagihan', 'Desc');
     return $this->db->get();
