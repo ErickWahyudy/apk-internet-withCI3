@@ -203,6 +203,27 @@ $SQLupdate=array(
 
   public function edit_map($id='')
   {
+
+    //validasi id_pelanggan apakah yang login sama dengan id_pelanggan yang di edit
+    $id_pelanggan=$this->session->userdata('id_pelanggan');
+    if ($id_pelanggan!=$id) {
+      $pesan='<script>
+                swal({
+                    title: "Gagal Edit Data",
+                    text: "ID Pelanggan Tidak Ditemukan",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: false
+                },
+                function(){
+                    window.location.href="'.base_url('pelanggan/profile').'";
+                });
+              </script>';
+      $this->session->set_flashdata('pesan',$pesan);
+      redirect(base_url('pelanggan/profile'));
+    }
   	$data=$this->m_pelanggan->view_id_maps($id)->row_array();
     if (empty($data['id_pelanggan'])) {
       $pesan='<script>
@@ -220,6 +241,7 @@ $SQLupdate=array(
                 });
               </script>';
       $this->session->set_flashdata('pesan',$pesan);
+   
       redirect(base_url('pelanggan/profile'));
     }
 

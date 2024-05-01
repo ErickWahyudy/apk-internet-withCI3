@@ -60,7 +60,7 @@ if($aksi == "cetak_struk_bulanan"):
                     <tr>
                         <th>Paket Internet</th>
                         <td>
-                            <?= $id_paket; ?> | <?= $paket; ?>
+                            <?= $id_paket; ?>
                         </td>
                     </tr>
 

@@ -34,6 +34,28 @@ public function index($id='')
   
   public function bayar($id='')
         {
+          //validasi id_pelanggan apakah yang login sama dengan id_pelanggan
+          $id_pelanggan = $this->session->userdata('id_pelanggan');
+          $id_tagihan = $this->m_tagihan->view_id($id)->row_array();
+          if ($id_pelanggan != $id_tagihan['id_pelanggan']) {
+            $pesan='<script>
+                      swal({
+                          title: "Gagal Buka Data",
+                          text: "ID Tagihan Tidak Ditemukan",
+                          type: "error",
+                          showConfirmButton: true,
+                          confirmButtonColor: "#DD6B55",
+                          confirmButtonText: "OK",
+                          closeOnConfirm: false
+                      },
+                      function(){
+                          window.location.href="'.base_url('pelanggan/tagihan').'";
+                      });
+                    </script>';
+            $this->session->set_flashdata('pesan',$pesan);
+            redirect(base_url('pelanggan/tagihan'));
+          }
+
         $data=$this->m_tagihan->view_id($id)->row_array();
         $x = array('judul'                =>'Bayar Tagihan' ,
                     'aksi'                =>'bayar_tagihan',
@@ -62,6 +84,28 @@ public function index($id='')
 
       public function qris($id='')
       {
+        //validasi id_pelanggan apakah yang login sama dengan id_pelanggan
+        $id_pelanggan = $this->session->userdata('id_pelanggan');
+        $id_tagihan = $this->m_tagihan->view_id($id)->row_array();
+        if ($id_pelanggan != $id_tagihan['id_pelanggan']) {
+          $pesan='<script>
+                    swal({
+                        title: "Gagal Buka Data",
+                        text: "ID Tagihan Tidak Ditemukan",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        window.location.href="'.base_url('pelanggan/tagihan').'";
+                    });
+                  </script>';
+          $this->session->set_flashdata('pesan',$pesan);
+          redirect(base_url('pelanggan/tagihan'));
+        }
+
       $data=$this->m_tagihan->view_id($id)->row_array();
       $x = array('judul'                =>'QRIS KassandraWiFi' ,
                   'aksi'                =>'qris',
@@ -183,6 +227,28 @@ public function index($id='')
         
 public function konfirmasi_bayar($id='')
       {
+        //validasi id_pelanggan apakah yang login sama dengan id_pelanggan
+        $id_pelanggan = $this->session->userdata('id_pelanggan');
+        $id_tagihan = $this->m_tagihan->view_id($id)->row_array();
+        if ($id_pelanggan != $id_tagihan['id_pelanggan']) {
+          $pesan='<script>
+                    swal({
+                        title: "Gagal Buka Data",
+                        text: "ID Tagihan Tidak Ditemukan",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        window.location.href="'.base_url('pelanggan/tagihan').'";
+                    });
+                  </script>';
+          $this->session->set_flashdata('pesan',$pesan);
+          redirect(base_url('pelanggan/tagihan'));
+        }
+
       $data=$this->m_tagihan->view_id($id)->row_array();
       $x = array('judul'                =>'Konfirmasi Pembayaran' ,
                   'aksi'                =>'konfirmasi_byr',
