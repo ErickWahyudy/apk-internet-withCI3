@@ -82,8 +82,8 @@
                     <div class="fact-item bg-light rounded text-center h-100 p-5">
                         <i class="fa fa-certificate fa-4x text-primary mb-4"></i>
                         <h5 class="mb-3">Biaya Pemasangan</h5>
-                        <h4 class="mb-3"><del style="color:red">Rp. 1.000.000</del></h4>
-                        <h4 class="mb-3">Rp. 350.000</h4>
+                        <h4 class="mb-3"><del style="color:red">Rp. 500.000</del></h4>
+                        <h4 class="mb-3">Rp. 250.000</h4>
                         <h6 class="text-muted"><small>S&k berlaku</small></h6>
                     </div>
                 </div>
