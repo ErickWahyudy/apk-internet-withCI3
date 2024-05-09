@@ -205,8 +205,11 @@
                             <a href="<?= base_url('themes/qris/'.$qris) ?>" download="<?= $qris ?>" title="Download QRIS">
                                 <button class="btn btn-primary btn-sm"><i class="fa fa-download"></i></button></a>
                             <a href="<?= base_url('themes/qris/'.$qris) ?>" title="Lihat QRIS" target="_blank">
-                                <img src="<?= base_url('themes/qris/'.$qris) ?>" class="img-thumbnail img-responsive" width="75%" alt="QRIS">
-                            </a>
+                                <img src="<?= base_url('themes/qris/'.$qris) ?>" class="img-thumbnail img-responsive" width="50%" alt="QRIS">
+                            </a><br>
+                                <!-- memperbesar gambar -->
+                                <a href="<?= base_url('themes/qris/'.$qris) ?>" title="Lihat QRIS" target="_blank">
+                                    <button class="btn btn-primary btn-sm"><i class="fa fa-search-plus"></i> Perbesar QRIS</button></a>
                            
 					        </center>
 
@@ -216,18 +219,18 @@
                                     Masukkan nominal pembayaran anda sesuai dengan nominal tagihan yang tertera di aplikasi KassandraWiFi.
                                 </li>
                                 <li>
-                                    Setelah berhasil melakukan pembayaran, silahkan kirim bukti pembayaran Anda pada WhatsApp kami.
-                                    <a href="https://wa.me/6281456141227" title="Kirim Bukti Pembayaran">
-                                        <button class="btn btn-success btn-sm"><i class="fa fa-whatsapp"></i> WhatsApp</button></a>
-                                        <!-- <a href="<?= base_url('struk/konfirmasi_bayar/'.$id_tagihan) ?>"
+                                    Setelah berhasil melakukan pembayaran, silahkan upload bukti pembayaran Anda pada link / klik tombol berikut.
+                                    <!-- <a href="https://wa.me/6281456141227" title="Kirim Bukti Pembayaran">
+                                        <button class="btn btn-success btn-sm"><i class="fa fa-whatsapp"></i> WhatsApp</button></a> -->
+                                        <a href="<?= base_url('struk/konfirmasi_bayar/'.$id_tagihan) ?>"
                                                 title="Konfirmasi">
-                                        <button class="btn btn-primary btn-sm">Konfirmasi Pembayaran</button></a> -->
+                                        <button class="btn btn-success btn-sm"><i class="fa fa-upload"></i> Upload bukti pembayaran</button></a>
                                 </li>
                                 <li>
                                     Untuk struk pembayaran, dapat anda download dengan klik tombol dibawah ini.
                                     <a href="<?= base_url('struk/bayar_tagihan/'.$id_tagihan) ?>"
                                         title="Struk Pembayaran">
-                                        <button class="btn btn-primary btn-sm">Struk Pembayaran</button></a>
+                                        <button class="btn btn-primary btn-sm"><i class="fa fa-print"></i> Struk Pembayaran</button></a>
 
                                 </li>
                             </ul>
