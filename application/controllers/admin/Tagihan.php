@@ -377,6 +377,7 @@ class Tagihan extends CI_controller
 
       if ($cek) {
         unlink('./themes/bukti_bayar/'.$file);
+        
         $response = [
           'status' => true,
           'message' => 'Berhasil menghapus data'

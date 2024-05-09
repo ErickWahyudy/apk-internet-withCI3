@@ -8,11 +8,25 @@
     <form action="" method="POST">
         <tr>
             <th>Dari</th>
-            <td><input type="number" name="dari" class="form-control" value="<?= $kode_tahun; ?>"></td>
+            <td>
+                <select name="dari" class="form-control" required="">
+                        <option value="">--Pilih Tahun--</option>
+                        <?php for($i = date('Y'); $i >= date('Y')-5; $i--){ ?>
+                        <option value="<?= $i ?>" <?= $i == $kode_tahun ? 'selected' : '' ?>><?= $i ?></option>
+                        <?php } ?>
+                    </select>
+            </td>
         </tr>
         <tr>
             <th>Sampai</th>
-            <td><input type="number" name="sampai" class="form-control" value="<?= $kode_tahun; ?>"></td>
+            <td>
+                <select name="sampai" class="form-control" required="">
+                        <option value="">--Pilih Tahun--</option>
+                        <?php for($i = date('Y'); $i >= date('Y')-5; $i--){ ?>
+                        <option value="<?= $i ?>" <?= $i == $kode_tahun ? 'selected' : '' ?>><?= $i ?></option>
+                        <?php } ?>
+                    </select>
+            </td>
         </tr>
         <tr>
             <th></th>

@@ -26,10 +26,21 @@ class Pengeluaran extends CI_controller
   //pengeluaran
   public function index($value='')
 {
-  $view = array('judul'  =>'Data Pengeluaran',
-            'data'        =>$this->m_pengeluaran->view(),
-            'pengeluaran'    => $this->db->select_sum('biaya_pengeluaran')->get_where('tb_pengeluaran',array('keterangan'=>'LUNAS','YEAR(tanggal)'=>date('Y')))->num_rows() > 0 ? $this->db->select_sum('biaya_pengeluaran')->get_where('tb_pengeluaran',array('keterangan'=>'LUNAS','YEAR(tanggal)'=>date('Y')))->row()->biaya_pengeluaran : 0,);
+  if (isset($_POST['cari'])) {
+    //cek data apabila berhasi Di kirim maka postdata akan melakukan cek .... dan sebaliknya
+    $tahun =$this->input->post('tahun');
+     $x=array(
+            'judul'         =>'Data Tagihan Pengeluaran',
+            'data'          =>$this->m_pengeluaran->view($tahun),
+            'pengeluaran'   => $this->db->select_sum('biaya_pengeluaran')->get_where('tb_pengeluaran',array('keterangan'=>'LUNAS','YEAR(tanggal)'=>$tahun))->num_rows() > 0 ? $this->db->select_sum('biaya_pengeluaran')->get_where('tb_pengeluaran',array('keterangan'=>'LUNAS','YEAR(tanggal)'=>$tahun))->row()->biaya_pengeluaran : 0,
+            'tahun'    =>$tahun,
+            'depan'    =>FALSE);
+     $this->load->view('admin/pengeluaran/form',$x);
+   }else{
+    $view = array('judul'  =>'Buka Data Pengeluaran',
+                    'depan'    =>TRUE);
    $this->load->view('admin/pengeluaran/form',$view);
+   }
 }
 
 

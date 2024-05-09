@@ -29,7 +29,12 @@
   <tr>
     <th>Tahun</th>
     <td>
-      <input type="number" name="tahun" class="form-control" value="<?= $kode_tahun ?>" placeholder="tahun" required="">
+        <select name="tahun" class="form-control" required="">
+          <option value="">--Pilih Tahun--</option>
+            <?php for($i = date('Y'); $i >= date('Y'); $i--){ ?>
+            <option value="<?= $i ?>" <?= $i == $kode_tahun ? 'selected' : '' ?>><?= $i ?></option>
+           <?php } ?>
+        </select>
     </td>
   </tr>
   <tr>

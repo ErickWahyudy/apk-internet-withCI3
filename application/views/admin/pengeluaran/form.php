@@ -1,5 +1,32 @@
 <?php $this->load->view('template/header'); ?>
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");
+      
+?>
+<?= $this->session->flashdata('pesan') ?>
+<table class="table table-striped">
+    <form action="" method="POST">
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <select name="tahun" class="form-control" required="">
+                    <option value="">--Pilih Tahun--</option>
+                    <?php for($i = date('Y'); $i >= date('Y')-5; $i--){ ?>
+                    <option value="<?= $i ?>" <?= $i == $kode_tahun ? 'selected' : '' ?>><?= $i ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Data" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
 
+<?php elseif($depan == FALSE): ?>
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahPengeluaran"><i class="fa fa-plus"></i>
     Tambah</a>
 <br /><br />
@@ -8,7 +35,7 @@
 <div class="alert alert-info alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <h4>
-        <i class="icon fa fa-info"></i> Total Pengeluaran Tahun <?= date('Y'); ?>
+        <i class="icon fa fa-info"></i> Total Pengeluaran Tahun <?= $tahun ?>
     </h4>
     <h4>
         <?= rupiah($pengeluaran);?>
@@ -327,6 +354,7 @@
         });
     }
     </script>
+    <?php endif; ?>
 
 <?php $this->load->view('template/footer'); ?>
 
