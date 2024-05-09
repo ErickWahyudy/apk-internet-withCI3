@@ -1,4 +1,38 @@
 <?php $this->load->view('template/header'); ?>
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");
+      
+?>
+<?= $this->session->flashdata('pesan') ?>
+<table class="table table-striped">
+    <form action="" method="POST">
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <select name="tahun" class="form-control" required="">
+                    <option value="">--Pilih Tahun--</option>
+                    <?php for($i = date('Y'); $i >= date('Y')-5; $i--){ ?>
+                    <option value="<?= $i ?>" <?= $i == $kode_tahun ? 'selected' : '' ?>><?= $i ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Data" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
+
+<?php elseif($depan == FALSE): ?>
+    <div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4>
+        <i class="icon fa fa-info"></i> Data Tagihan Lain Tahun <?= $tahun ?>
+    </h4>
+</div>
 
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahTagihanlain"><i class="fa fa-plus"></i>
     Tambah</a>
@@ -84,18 +118,18 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="id_pelanggan" class="form-control" required="">
-                                        <option value="">--Pilih Pelanggan--</option>
-                                        <?php 
-                                        $no=1;
-                                        $pelanggan = $this->db->get_where('tb_pelanggan', ['status_plg' => 'Aktif'])->result_array();
-                                        foreach($pelanggan as $plg): ?>
-                                        <option value="<?= $plg['id_pelanggan'] ?>">
-                                            <?= $no++ ?>. 
-                                            <?= ucfirst($plg['nama']) ?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <div id="modal-default">
+                                        <select name="id_pelanggan" class="form-control select2" style="width: 100%;" required="">
+                                            <option value="">--Pilih Pelanggan--</option>
+                                            <?php 
+                                            $pelanggan = $this->db->order_by('nama', 'ASC')->get_where('tb_pelanggan', ['status_plg' => 'Aktif'])->result_array();
+                                            foreach($pelanggan as $plg): ?>
+                                            <option value="<?= $plg['id_pelanggan'] ?>">
+                                                <?= ucfirst($plg['nama']) ?>
+                                            </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -239,6 +273,15 @@
     <!-- End Modal-->
 
     <script>
+         //select2 modal
+         $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2({
+                //modal
+                dropdownParent: $('#modal-default'),
+            })
+            })
+            
         //add data
         $(document).ready(function () {
         $('#add').submit(function (e) {
@@ -354,6 +397,7 @@
     }
     </script>
 
+    <?php endif; ?>
     <?php $this->load->view('template/footer'); ?>
 
     <?php 

@@ -33,7 +33,7 @@ class Email extends CI_controller
     {
         $view = array('judul'       =>'Kirim Email Pelanggan',
                     'aksi'          =>'kirimemail_plg',      
-                    'pelanggan'     => $this->db->get_where('tb_pelanggan',array('status_plg'=>'Aktif'))->result_array(),
+                    'pelanggan'     => $this->db->order_by('nama', 'ASC')->get_where('tb_pelanggan', ['status_plg' => 'Aktif'])->result_array(),
         );
         $this->load->view('admin/mailbox/compose',$view);
 

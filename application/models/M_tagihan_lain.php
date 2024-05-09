@@ -10,12 +10,13 @@ private $table1 = 'tb_tagihan_lain';
 private $table2 = 'tb_pelanggan';
 
 //TAGIHAN LAIN INTERNET
-public function view($value='')
+public function view($tahun='')
 {
   $this->db->select('*');
   $this->db->from($this->table1);
   $this->db->join($this->table2 , 'tb_tagihan_lain.id_pelanggan = tb_pelanggan.id_pelanggan');
-  $this->db->order_by('id_tagihan_lain', 'DESC');
+  $this->db->where('YEAR(tgl_bayar)', $tahun);
+  $this->db->order_by('tgl_bayar', 'DESC');
   return $this->db->get();
 }
 

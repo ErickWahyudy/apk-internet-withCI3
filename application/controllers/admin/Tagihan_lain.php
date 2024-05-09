@@ -27,11 +27,22 @@ class Tagihan_lain extends CI_controller
     //tagihan_lain
     public function index($value='')
     {
-     $view = array('judul'  =>'Data Tagihan Lain',
-                'data'      =>$this->m_tagihan_lain->view(),);
-      $this->load->view('admin/tagihan_lain/form',$view);
+      if (isset($_POST['cari'])) {
+        //cek data apabila berhasi Di kirim maka postdata akan melakukan cek .... dan sebaliknya
+        $tahun =$this->input->post('tahun');
+          $x=array(
+                  'judul'         =>'Data Tagihan Lain',
+                  'data'          =>$this->m_tagihan_lain->view($tahun),
+                  'tahun'         =>$tahun,
+                  'depan'         =>FALSE);
+          $this->load->view('admin/tagihan_lain/form',$x);
+        }else{
+          $view = array('judul'       =>'Buka Data Tagihan Lain',
+                          'depan'    =>TRUE);
+        $this->load->view('admin/tagihan_lain/form',$view);
+      }
     }
-
+    
     private function acak_id($panjang)
     {
         $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';

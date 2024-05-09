@@ -76,7 +76,7 @@ $this->m_pelanggan->update($id,$SQLupdate);
 				$time = date('H:i:s');
           
         $telegramBotToken = '1306451202:AAFL84nqcQjbAsEpRqVCziQ0VGty4qIAxt4'; // Ganti dengan token bot Telegram Anda
-        $telegramChatID = '1136312864'; // Ganti dengan chat ID tujuan admin
+        $telegramChatID = '-1001769208109'; // Ganti dengan chat ID tujuan admin
 
         $isi_chat = "Ada Pelanggan yang mengupdate data diri:\n";
         $isi_chat .= "Tgl / Waktu: " . $date . " / " . $time . "\n\n";
@@ -294,7 +294,7 @@ $SQLupdate=array(
 
                   // Konfigurasi pengiriman gambar ke Telegram
                   $telegramBotToken = '1306451202:AAFL84nqcQjbAsEpRqVCziQ0VGty4qIAxt4';
-                  $telegramChatID = '1136312864';
+                  $telegramChatID = '-1001769208109';
 
                   // Mengirimkan gambar ke Telegram
                   $url = "https://api.telegram.org/bot" . $telegramBotToken . "/sendPhoto?chat_id=" . $telegramChatID . "&caption=" . urlencode($isi_chat) . "&parse_mode=Markdown&photo=" . urlencode($mapsImageUrl);

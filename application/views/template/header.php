@@ -40,6 +40,8 @@
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" type="text/javascript"></script> -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZe7HOqihPIijMcH43anmVsJTZLcYdg28&callback=initMap" type="text/javascript"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- select2 -->
+  <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/select2/dist/css/select2.min.css">
 
    <!-- sweetalert -->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
