@@ -361,6 +361,36 @@ class Tagihan extends CI_controller
    $this->load->view('admin/tagihan_bulanan/konfirmasi_byr',$x);
   }
 
+  
+  public function api_hapus_konfir_bayar($id='')
+    {
+      if(empty($id)){
+        $response = [
+          'status' => false,
+          'message' => 'Data kosong'
+        ];
+      }else{
+        //hapus file di folder berdasarkan id
+      $data=$this->m_tagihan->konfirmasibyr_id($id)->row_array();
+      $file=$data['bukti_bayar'];
+      $cek=$this->m_tagihan->delete_konfir_bayar($id);
 
-	
+      if ($cek) {
+        unlink('./themes/bukti_bayar/'.$file);
+        $response = [
+          'status' => true,
+          'message' => 'Berhasil menghapus data'
+        ];
+      } else {
+        $response = [
+          'status' => false,
+          'message' => 'Gagal menghapus data'
+        ];
+      }
+    }
+    $this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response));
+  }
+
 }

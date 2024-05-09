@@ -226,7 +226,7 @@ class Struk extends CI_controller
 
                   // Konfigurasi pengiriman gambar ke Telegram
                   $telegramBotToken = '1306451202:AAFL84nqcQjbAsEpRqVCziQ0VGty4qIAxt4';
-                  $telegramChatID = '1136312864';
+                  $telegramChatID = '-1001769208109';
 
                   // Path ke gambar bukti bayar (ganti ini dengan alamat file yang benar)
                   $pathToImage = './themes/bukti_bayar/' . $bukti_bayar;
