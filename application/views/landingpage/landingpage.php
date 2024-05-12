@@ -83,7 +83,9 @@
                         <i class="fa fa-certificate fa-4x text-primary mb-4"></i>
                         <h5 class="mb-3">Biaya Pemasangan</h5>
                         <h4 class="mb-3"><del style="color:red">Rp. 500.000</del></h4>
-                        <h4 class="mb-3">Rp. 250.000</h4>
+                        <?php foreach($biaya_asli as $asli): ?>
+                            <h4 class="mb-3"><?= rupiah($asli['biaya_asli']); ?></h4>
+                        <?php endforeach; ?>
                         <h6 class="text-muted"><small>S&k berlaku</small></h6>
                     </div>
                 </div>
@@ -422,6 +424,12 @@
 
 
 <?php
+//format rupiah
+function rupiah($angka){
+  $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+  return $hasil_rupiah;
+}
+
 //format tanggal indonesia
 function tgl_indo($tanggal){
     $bulan = array (

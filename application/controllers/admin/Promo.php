@@ -56,12 +56,14 @@ public function edit($id='')
 	$x = array('judul'              =>'Edit Data Promo' ,
 	            'aksi'              =>'edit',
               'id_promo'          =>$data['id_promo'],
+              'biaya_asli'        =>$data['biaya_asli'],
               'biaya_promo'       =>$data['biaya_promo'],
               'status'            =>$data['status'],
               );
     if(isset($_POST['kirim'])){
       $SQLupdate2=array(
-      	'biaya_promo'             =>$this->input->post('biaya_promo'    ),
+        'biaya_asli'              =>$this->input->post('biaya_asli'),
+      	'biaya_promo'             =>$this->input->post('biaya_promo'),
         'status'                  =>$this->input->post('status'));
       $cek=$this->m_promo->promo_update($id,$SQLupdate2);
       if($cek){

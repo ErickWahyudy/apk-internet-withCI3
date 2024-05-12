@@ -67,8 +67,8 @@
                         <div class="fact-item bg-light rounded text-center h-100 p-5">
                             <i class="fa fa-certificate fa-4x text-primary mb-4"></i>
                             <h5 class="mb-3">Biaya Pemasangan</h5>
-                            <h4 class="mb-3"><del style="color:red">Rp. 350.000,00</del></h4>
                             <?php foreach($biaya_promo as $promo): ?>
+                            <h4 class="mb-3"><del style="color:red"><?= rupiah($promo['biaya_asli']); ?></del></h4>
                             <h4 class="mb-3"><?= rupiah($promo['biaya_promo']); ?></h4>
                             <?php endforeach; ?>
                             <h6 class="text-muted"><small>S&k berlaku</small></h6>
@@ -78,7 +78,7 @@
                         <div class="fact-item bg-light rounded text-center h-100 p-5">
                             <i class="fa fa-check fa-4x text-primary mb-4"></i>
                             <h5 class="mb-3">Iuran Bulanan</h5>
-                            <h4 class="mb-3">Rp. 80.000 s/d <br> Rp. 300.000</h4>
+                            <h4 class="mb-3">Rp. 100.000 s/d <br> Rp. 300.000</h4>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">

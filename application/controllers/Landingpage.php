@@ -15,8 +15,10 @@ class Landingpage extends CI_controller
 
     public function index()
 	{
-	 $view = array('judul'  =>'KASSANDRA WIFI',
-	               'data'      =>$this->M_feedback->view(),);
+	 $view = array('judul'          =>'KASSANDRA WIFI',
+	               'data'           =>$this->M_feedback->view(),
+                   'biaya_asli'     =>$this->db->get('tb_promo',1)->result_array(),
+                );
      $this->load->view('landingpage/landingpage',$view);
     }
 
