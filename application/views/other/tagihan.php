@@ -250,7 +250,7 @@
                                         <tr>
                                             <th class="col-sm-2">Paket Internet</th>
                                             <td>
-                                                : <?= $id_paket ?> | <?= $paket ?>
+                                                : <?= $id_paket ?>
                                             </td>
                                         </tr>
 

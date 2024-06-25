@@ -64,7 +64,7 @@
                     <tr>
                         <th class="col-sm-4">Paket Internet</th>
                         <td>
-                            : <?= $id_paket ?> | <?= $paket ?>
+                            : <?= $id_paket ?>
                         </td>
                     </tr>
 
