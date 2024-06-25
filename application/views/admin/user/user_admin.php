@@ -92,8 +92,9 @@
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                        <form action="<?= base_url('admin/user_admin/edit/'.$admin['id_pengguna']) ?>" method="post">
+                        <form id="edit" method="post">
                             <table class="table table-striped">
+                                <input type="hidden" name="id_pengguna" value="<?= $admin['id_pengguna'] ?>">
                                 <tr>
                                     <th>Nama</th>
                                     <td><input type="text" name="nama" class="form-control"
@@ -106,7 +107,7 @@
                                 </tr>
                                 <tr>
                                     <th>Password</th>
-                                    <td><input type="password" name="password" class="form-control" value="<?= $admin['password'] ?>"
+                                    <td><input type="password" name="password" class="form-control"
                                             required=""></td>
                                 </tr>
                                 <tr>
@@ -115,8 +116,8 @@
                                         <button type="button" class="btn btn-default"
                                             data-dismiss="modal">Kembali</button> &nbsp;&nbsp;
                                         <input type="submit" name="kirim" value="Entri Data" class="btn btn-primary"> &nbsp;&nbsp;
-                                        <a href="<?= base_url('admin/user_admin/hapus/'.$admin['id_pengguna']) ?>"
-                                        class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
+                                        <a href="javascript:void(0)" onclick="hapusadmin('<?= $admin['id_pengguna'] ?>')"
+                                        class="btn btn-danger">Hapus</a>
                                     </td>
                                 </tr>
                             </table>
@@ -128,6 +129,121 @@
     </div>
     <?php endforeach; ?>
     <!-- End Modal -->
+    <script>
+        //add user_admin
+        $(document).ready(function () {
+        $('#add').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('admin/user_admin/api_add') ?>",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#modalTambahAdmin');
+                    $('#add')[0].reset();
+                    swal({
+                        title: "Berhasil",
+                        text: "Data berhasil ditambahkan",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE",
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+
+        //edit user_admin
+        $(document).on('submit', '#edit', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/user_admin/api_edit/') ?>" + form_data.get('id_pengguna'),
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#edit' + form_data.get('id_pengguna'));
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Diubah",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Diubah",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+        //ajax hapus pengguna
+        function hapusadmin(id_pengguna) {
+        swal({
+            title: "Apakah Anda Yakin?",
+            text: "Data Akan Dihapus",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result.value) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/user_admin/api_hapus/') ?>" + id_pengguna,
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Data Berhasil Dihapus",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Data Gagal Dihapus",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
+            }
+        });
+    }
+    </script>
 
 
 

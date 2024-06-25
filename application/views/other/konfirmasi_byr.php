@@ -46,7 +46,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
 
     <!-- Google Font -->
     <link rel="stylesheet"
@@ -227,7 +227,7 @@
                                                
                                                    <input type="file" class="form-control" style="background-color: white;" id="bukti_bayar" name="bukti_bayar" placeholder="bukti_bayar" autocomplete="off" onchange="previewBAYAR()" required>
                                                <img id="preview_bayar" alt="image preview" width="50%" />
-                                                   <button type="submit" name="kirim" class="btn btn-primary btn-sm" style="margin-top: 10px">Konfirmasi</button>
+                                                   <button type="submit" name="kirim" class="btn btn-primary btn-md" style="margin-top: 10px">Konfirmasi</button>
                                                </form>
                                        </tr>                           
                            </table>

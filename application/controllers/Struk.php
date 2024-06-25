@@ -46,15 +46,16 @@ class Struk extends CI_controller
         }
       }
 
-      public function merchant($id='')
+      public function qris($id='')
       {
       $data=$this->m_tagihan->view_id($id)->row_array();
-      $x = array('judul'                =>'merchant KassandraWiFi' ,
-                  'aksi'                =>'merchant',
+      $x = array('judul'                =>'QRIS KassandraWiFi' ,
+                  'aksi'                =>'qris',
                   'id_tagihan'          =>$data['id_tagihan'],
                   'id_pelanggan'        =>$data['id_pelanggan'],
                   'id_paket'            =>$data['id_paket'],
                   'paket'               =>$data['paket'],
+                  'qris'                =>$data['qris'],
                   'nama'                =>$data['nama'],
                   'bulan'               =>$data['bulan'],
                   'tahun'               =>$data['tahun'],
@@ -70,7 +71,7 @@ class Struk extends CI_controller
            echo "ERROR input Data";
           }
         }else{
-         $this->load->view('other/merchant',$x);
+         $this->load->view('other/qris',$x);
         }
       }
 
@@ -216,6 +217,41 @@ class Struk extends CI_controller
                   confirmButtonText: "OKEE"
                   });
           </script>';
+
+                  // Kirim pesan ke Telegram
+                  $nama = $data['nama'];
+                  $alamat = $data['alamat'];
+                  $bukti_bayar = $this->upload_bukti_bayar();
+                  $tgl_konfirmasi = date('d F Y');
+
+                  // Konfigurasi pengiriman gambar ke Telegram
+                  $telegramBotToken = '1306451202:AAFL84nqcQjbAsEpRqVCziQ0VGty4qIAxt4';
+                  $telegramChatID = '-1001769208109';
+
+                  // Path ke gambar bukti bayar (ganti ini dengan alamat file yang benar)
+                  $pathToImage = './themes/bukti_bayar/' . $bukti_bayar;
+
+                  $isi_chat = "Bukti pembayaran dari " . "\n";
+                  $isi_chat .= "Nama : " . $nama . "\n";
+                  $isi_chat .= "Alamat : " . $alamat . "\n";
+                  $isi_chat .= "Tanggal konfirmasi : " . $tgl_konfirmasi . "\n";
+
+                  // Kirim pesan ke Telegram dengan foto bukti bayar
+                  $url = "https://api.telegram.org/bot" . $telegramBotToken . "/sendPhoto";
+                  $postFields = array(
+                      'chat_id' => $telegramChatID,
+                      'photo' => new CURLFile(realpath($pathToImage)),
+                      'caption' => $isi_chat
+                  );
+
+                  $ch = curl_init();
+                  curl_setopt($ch, CURLOPT_URL, $url);
+                  curl_setopt($ch, CURLOPT_POST, 1);
+                  curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+                  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:multipart/form-data']);
+                  $result = curl_exec($ch);
+                  curl_close($ch);
+
   	 	    $this->session->set_flashdata('pesan',$pesan);
          redirect(base_url('struk/bayar_tagihan/'.$id));
           }else{

@@ -79,6 +79,16 @@ public function konfirmasi_byrView($value='')
     return $this->db->get();
 }
 
+public function konfirmasibyr_id($id='')
+{
+    $this->db->select('*');
+    $this->db->from($this->konfirmasi);
+    $this->db->join($this->table1 , 'tb_tagihan_konfirmasi.id_pelanggan = tb_pelanggan.id_pelanggan');
+    $this->db->join($this->table3 , 'tb_tagihan_konfirmasi.id_tagihan = tb_tagihan.id_tagihan');
+    $this->db->where('id_konfirmasi', $id);
+    return $this->db->get();
+}
+
 public function bayar($id='',$SQLupdate){
   $this->db->where('id_tagihan', $id);
   return $this->db-> update($this->table3, $SQLupdate);
@@ -87,6 +97,11 @@ public function bayar($id='',$SQLupdate){
 public function delete($id=''){
   $this->db->where('id_tagihan', $id);
   return $this->db-> delete($this->table3);
+}
+
+public function delete_konfir_bayar($id=''){
+  $this->db->where('id_konfirmasi', $id);
+  return $this->db-> delete($this->konfirmasi);
 }
 
 public function pelanggan_view($value='')
@@ -105,9 +120,14 @@ public function tagihan($id='')
 {
     //buka data tagihan berdasarkan id
     $id = $this->session->userdata['id_pelanggan'];
+
+    //buka data 1 tahun terakhir
+    $tahun = date('Y', strtotime('-0 year'));
+
     $this->db->select('*');
     $this->db->from($this->table3);
     $this->db->where('id_pelanggan', $id);
+    $this->db->where('tahun >=', $tahun);
     $this->db->order_by('status', 'BL');
     $this->db->order_by('id_tagihan', 'Desc');
     return $this->db->get();

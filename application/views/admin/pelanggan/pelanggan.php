@@ -2,7 +2,7 @@
 
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahPelanggan"><i class="fa fa-plus"></i>
     Tambah</a>
-<a href="https://docs.google.com/spreadsheets/d/1y0-1HHY3ZVqvulj2Hgg42wN-VkUeCjygwx6EJvDQBFM/edit#gid=778747165"
+<a href="https://docs.google.com/spreadsheets/d/1y0-1HHY3ZVqvulj2Hgg42wN-VkUeCjygwx6EJvDQBFM"
     title="Tambah Data" class="btn btn-success" target="blank">
     <i class="glyphicon glyphicon"></i> DATA GOOGLESHEET</a>
 <br /><br /><br />
@@ -103,6 +103,14 @@
 								</a>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Catatan</td>
+                            <td>
+                                <?= $pelanggan['catatan'] ?>
+                                <a href="<?= base_url('admin/pelanggan/edit_catatan/'.$pelanggan['id_pelanggan']) ?>"
+                                class="btn btn-warning btn-xs"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -127,8 +135,7 @@
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
 
-                        <form action="<?= base_url('admin/pelanggan/add') ?>" method="post"
-                            enctype="multipart/form-data">
+                        <form id="add" method="post">
                             <tr>
                                 <th>Nama</th>
                                 <td>
@@ -205,8 +212,42 @@
             </div>
         </div>
     </div>
+    <br><br>
+    <div id="result"></div>
     <!-- end modal tambah data pelanggan -->
 
+    <script>      
+
+        //add data
+        $(document).ready(function () {
+        $('#add').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('admin/pelanggan/api_add') ?>",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#modalTambahPelanggan');
+                    $('#add')[0].reset();
+                    swal({
+                        title: "Berhasil",
+                        text: "Data berhasil ditambahkan",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE",
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+
+    </script>
 
     <?php $this->load->view('template/footer'); ?>
     <?php 

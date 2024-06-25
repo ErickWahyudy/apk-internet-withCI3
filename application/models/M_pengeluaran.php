@@ -9,10 +9,11 @@ class M_pengeluaran extends CI_model
 private $table = 'tb_pengeluaran';
 
 //PENGELUARAN INTERNET
-public function view($value='')
+public function view($tahun='')
 {
-  $this->db->select ('*');
-  $this->db->from ($this->table);
+  $this->db->select('*');
+  $this->db->from($this->table);
+  $this->db->where('YEAR(tanggal)', $tahun);
   $this->db->order_by('tanggal', 'DESC');
   return $this->db->get();
 }

@@ -62,19 +62,35 @@ class Login extends CI_controller
      $this->session->set_flashdata('pesan','<div class="btn btn-success">Anda Berhasil Login .....</div>');
      redirect(base_url('pelanggan/home'));
 
-     }else{
-          $pesan='<script>
-                  swal({
-                      title: "Username / Password Salah Atau Akun Anda Tidak Aktif",
-                      type: "error",
-                      showConfirmButton: true,
-                      confirmButtonText: "OKEE"
-                      });
-                </script>';
-        $this->session->set_flashdata('pesan', $pesan);
-       redirect(base_url('login'));
-
-     }
+     }else {
+      // Periksa apakah email/username benar
+      $isEmailValid = $this->Login_m->IsEmailValid($email);
+      if ($isEmailValid->num_rows() > 0) {
+          // Jika email benar, maka password salah
+          $pesan = '<script>
+          swal({
+              title: "Password Salah",
+              type: "error",
+              showConfirmButton: true,
+              confirmButtonText: "OKEE"
+          });
+          </script>';
+          $this->session->set_flashdata('pesan', $pesan);
+          redirect(base_url('login'));
+        } else {
+          // Jika email salah, maka email tidak terdaftar
+          $pesan = '<script>
+          swal({
+              title: "Email / Username / No HP salah atau akun belum terdaftar",
+              type: "error",
+              showConfirmButton: true,
+              confirmButtonText: "OKEE"
+          });
+          </script>';
+          $this->session->set_flashdata('pesan', $pesan);
+          redirect(base_url('login'));
+        }
+  }
 }else{ 
   $x = array(
   	          'judul' =>'Login Aplikasi');

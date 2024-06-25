@@ -10,6 +10,7 @@ class Maps extends CI_controller
      // needed ???
      $this->load->database();
      $this->load->library('session');
+     $this->load->model('m_tagihan');
 	 // error_reporting(0);
 	 if($this->session->userdata('admin') != TRUE){
         redirect(base_url(''));
@@ -25,14 +26,41 @@ class Maps extends CI_controller
         $this->db->select('*');
         $this->db->from('tb_maps');
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_maps = tb_maps.id_maps');
+        $this->db->join('tb_tagihan', 'tb_tagihan.id_pelanggan = tb_pelanggan.id_pelanggan');
         $this->db->where('status_plg', 'Aktif');
-        $this->db->order_by('nama');
         $query = $this->db->get();
         foreach ($query->result() as $row) {
             $data[] = array(
                 'nama' => $row->nama,
                 'alamat' => $row->alamat,
                 'no_hp' => $row->no_hp,
+                'status' => $row->status, //status tagihan
+                'terdaftar_mulai' => $row->terdaftar_mulai,
+                'latitude' => $row->latitude,
+                'longitude' => $row->longitude
+            );
+        }
+        //menjadilan data json
+        $data = json_encode($data);
+        return $data;
+    }
+
+    private function get_tagihan()
+    {
+        $data = array();
+        $this->db->select('*');
+        $this->db->from('tb_maps');
+        $this->db->join('tb_pelanggan', 'tb_pelanggan.id_maps = tb_maps.id_maps');
+        $this->db->join('tb_tagihan', 'tb_tagihan.id_pelanggan = tb_pelanggan.id_pelanggan');
+        $this->db->where('status_plg', 'Aktif');
+        $this->db->where('status', 'BL');
+        $query = $this->db->get();
+        foreach ($query->result() as $row) {
+            $data[] = array(
+                'nama' => $row->nama,
+                'alamat' => $row->alamat,
+                'no_hp' => $row->no_hp,
+                'status' => $row->status, //status tagihan
                 'terdaftar_mulai' => $row->terdaftar_mulai,
                 'latitude' => $row->latitude,
                 'longitude' => $row->longitude
@@ -44,10 +72,13 @@ class Maps extends CI_controller
     }
 
     public function index()
-    {
+    {        
         $view = array('judul'  =>'Data Peta Pelanggan',
-	            'data'         => $this->get_data(),);
+	            'data'         => $this->get_data(),
+                'tagihan'     => $this->get_tagihan()
+            );
         $this->load->view('admin/maps/maps', $view);
     }
+    
 
  }

@@ -1,5 +1,32 @@
 <?php $this->load->view('template/header'); ?>
+<?php if($depan == TRUE): 
+      $kode_tahun = date("Y");
+      
+?>
+<?= $this->session->flashdata('pesan') ?>
+<table class="table table-striped">
+    <form action="" method="POST">
+        <tr>
+            <th>Tahun</th>
+            <td>
+                <select name="tahun" class="form-control" required="">
+                    <option value="">--Pilih Tahun--</option>
+                    <?php for($i = date('Y'); $i >= date('Y')-5; $i--){ ?>
+                    <option value="<?= $i ?>" <?= $i == $kode_tahun ? 'selected' : '' ?>><?= $i ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" name="cari" value="Buka Data" class="btn btn-primary">
+            </td>
+        </tr>
+    </form>
+</table>
 
+<?php elseif($depan == FALSE): ?>
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahPengeluaran"><i class="fa fa-plus"></i>
     Tambah</a>
 <br /><br />
@@ -8,7 +35,7 @@
 <div class="alert alert-info alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <h4>
-        <i class="icon fa fa-info"></i> Total Pengeluaran Tahun <?= date('Y'); ?>
+        <i class="icon fa fa-info"></i> Total Pengeluaran Tahun <?= $tahun ?>
     </h4>
     <h4>
         <?= rupiah($pengeluaran);?>
@@ -69,7 +96,7 @@
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                        <form action="<?= base_url('admin/pengeluaran/add') ?>" method="post">
+                        <form id="add" method="post" >
 
                             <tr>
                                 <th>Jenis Pengeluaran</th>
@@ -138,7 +165,7 @@
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                        <form action="<?= base_url('admin/pengeluaran/edit/'.$pengeluaran['id_pengeluaran']) ?>" method="post">
+                        <form id="edit" method="post">
                             <tr>
                                 <th class="">ID Pengeluaran</th>
                             </tr>
@@ -198,9 +225,8 @@
                                     <button href="" class="btn btn-warning" data-dismiss="modal">Kembali</button>
                                     &nbsp;&nbsp;
                                     <input type="submit" name="kirim" value="Simpan" class="btn btn-success"> &nbsp;&nbsp;
-                                    <a href="<?= base_url('admin/pengeluaran/hapus/'.$pengeluaran['id_pengeluaran']) ?>"
-                                        class="btn btn-danger" onclick="return confirm('Yakin Hapus Data Ini ?')"><i
-                                            class="fa fa-trash"></i> Hapus</a> 
+                                    <a href="javascript:void(0)" onclick="hapuspengeluaran('<?= $pengeluaran['id_pengeluaran'] ?>')"
+                                        class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
 
@@ -212,6 +238,123 @@
     </div>
     <?php endforeach; ?>
     <!-- End Modal -->
+
+    <script>
+        //add pengeluaran
+        $(document).ready(function () {
+        $('#add').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('admin/pengeluaran/api_add') ?>",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#modalTambahPengeluaran');
+                    $('#add')[0].reset();
+                    swal({
+                        title: "Berhasil",
+                        text: "Data berhasil ditambahkan",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE",
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+
+        //edit pengeluaran
+        $(document).on('submit', '#edit', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/pengeluaran/api_edit/') ?>" + form_data.get('id_pengeluaran'),
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#edit' + form_data.get('id_pengeluaran'));
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Diubah",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Diubah",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+        //ajax hapus pengeluaran
+        function hapuspengeluaran(id_pengeluaran) {
+        swal({
+            title: "Apakah Anda Yakin?",
+            text: "Data Akan Dihapus",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result.value) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/pengeluaran/api_hapus/') ?>" + id_pengeluaran,
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Data Berhasil Dihapus",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Data Gagal Dihapus",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
+            }
+        });
+    }
+    </script>
+    <?php endif; ?>
 
 <?php $this->load->view('template/footer'); ?>
 

@@ -46,7 +46,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
 
     <!-- Google Font -->
     <link rel="stylesheet"
@@ -250,7 +250,7 @@
                                         <tr>
                                             <th class="col-sm-2">Paket Internet</th>
                                             <td>
-                                                : <?= $id_paket ?> | <?= $paket ?>
+                                                : <?= $id_paket ?>
                                             </td>
                                         </tr>
 
@@ -297,7 +297,7 @@
                                         <?php $stt = $status  ?>
                                         <?php if($stt == 'BL'){ ?>
                                         <span class="">
-                                            <a href=<?= base_url('struk/merchant/'.$id_tagihan) ?> title="Bayar"
+                                            <a href=<?= base_url('api/payment/qris/'.$id_tagihan) ?> title="Bayar"
                                                 class="btn btn-warning" style="font-size:16px;">
                                                 <i class="fa fa-dollar"></i> Bayar Sekarang
                                             </a>

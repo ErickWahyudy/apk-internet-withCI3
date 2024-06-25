@@ -12,6 +12,7 @@ class Pengeluaran extends CI_controller
       // needed ???
       $this->load->database();
       $this->load->library('session');
+      $this->load->library('form_validation');
       
 	 // error_reporting(0);
 	 if($this->session->userdata('admin') != TRUE){
@@ -25,10 +26,21 @@ class Pengeluaran extends CI_controller
   //pengeluaran
   public function index($value='')
 {
-  $view = array('judul'  =>'Data Pengeluaran',
-            'data'        =>$this->m_pengeluaran->view(),
-            'pengeluaran'    => $this->db->select_sum('biaya_pengeluaran')->get_where('tb_pengeluaran',array('keterangan'=>'LUNAS','YEAR(tanggal)'=>date('Y')))->num_rows() > 0 ? $this->db->select_sum('biaya_pengeluaran')->get_where('tb_pengeluaran',array('keterangan'=>'LUNAS','YEAR(tanggal)'=>date('Y')))->row()->biaya_pengeluaran : 0,);
+  if (isset($_POST['cari'])) {
+    //cek data apabila berhasi Di kirim maka postdata akan melakukan cek .... dan sebaliknya
+    $tahun =$this->input->post('tahun');
+     $x=array(
+            'judul'         =>'Data Tagihan Pengeluaran',
+            'data'          =>$this->m_pengeluaran->view($tahun),
+            'pengeluaran'   => $this->db->select_sum('biaya_pengeluaran')->get_where('tb_pengeluaran',array('keterangan'=>'LUNAS','YEAR(tanggal)'=>$tahun))->num_rows() > 0 ? $this->db->select_sum('biaya_pengeluaran')->get_where('tb_pengeluaran',array('keterangan'=>'LUNAS','YEAR(tanggal)'=>$tahun))->row()->biaya_pengeluaran : 0,
+            'tahun'    =>$tahun,
+            'depan'    =>FALSE);
+     $this->load->view('admin/pengeluaran/form',$x);
+   }else{
+    $view = array('judul'  =>'Buka Data Pengeluaran',
+                    'depan'    =>TRUE);
    $this->load->view('admin/pengeluaran/form',$view);
+   }
 }
 
 
@@ -64,78 +76,146 @@ private function acak_id($panjang)
    return $newID;
  }
 
- public function add($value='') {
-
-  if (isset($_POST['kirim'])) {
-            
-$SQLinsert=array(
-'id_pengeluaran'      =>$this->id_pengeluaran_urut(),
-'jenis_pengeluaran'   =>$this->input->post('jenis_pengeluaran'),
-'biaya_pengeluaran'   =>$this->input->post('biaya_pengeluaran'),
-'tanggal'             =>$this->input->post('tanggal'),
-'keterangan'          =>$this->input->post('keterangan')
-);
-
-$cek=$this->m_pengeluaran->add($SQLinsert);
-if($cek){
-   $pesan='<script>
-              swal({
-                  title: "Berhasil Menambahkan Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	$this->session->set_flashdata('pesan',$pesan);
-    redirect(base_url('admin/pengeluaran'));
-    }
-   }
- }
-    
-    public function edit($id='') {
-    if(isset($_POST['kirim'])){
-      $SQLupdate=array(
-      	'jenis_pengeluaran'         =>$this->input->post('jenis_pengeluaran'),
-        'biaya_pengeluaran'         =>$this->input->post('biaya_pengeluaran'),
-        'tanggal'                   =>$this->input->post('tanggal'),
-        'keterangan'                =>$this->input->post('keterangan'),
-      );
-      $cek=$this->m_pengeluaran->update($id,$SQLupdate);
-      if($cek){
-       $pesan='<script>
-              swal({
-                  title: "Berhasil Edit Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	$this->session->set_flashdata('pesan',$pesan);
-	 	redirect(base_url('admin/pengeluaran'));
+ //API add pengeluaran
+  public function api_add($value='')
+  {
+    $rules = array(
+      array(
+        'field' => 'jenis_pengeluaran',
+        'label' => 'jenis_pengeluaran',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'biaya_pengeluaran',
+        'label' => 'biaya_pengeluaran',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'tanggal',
+        'label' => 'tanggal',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'keterangan',
+        'label' => 'keterangan',
+        'rules' => 'required'
+      )
+    );
+    $this->form_validation->set_rules($rules);
+    if ($this->form_validation->run() == FALSE) {
+      $response = [
+        'status' => false,
+        'message' => 'Tidak ada data'
+      ];
+    } else {
+      $SQLinsert = [
+        'id_pengeluaran'      =>$this->id_pengeluaran_urut(),
+        'jenis_pengeluaran'   =>$this->input->post('jenis_pengeluaran'),
+        'biaya_pengeluaran'   =>$this->input->post('biaya_pengeluaran'),
+        'tanggal'             =>$this->input->post('tanggal'),
+        'keterangan'          =>$this->input->post('keterangan')
+      ];
+      if ($this->m_pengeluaran->add($SQLinsert)) {
+        $response = [
+          'status' => true,
+          'message' => 'Berhasil menambahkan data'
+        ];
+      } else {
+        $response = [
+          'status' => false,
+          'message' => 'Gagal menambahkan data'
+        ];
       }
     }
-	}
+  
+    $this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response));
+  }
 
-	
-	public function hapus($id='')
-	{
-    $cek=$this->m_pengeluaran->delete($id);
-	 if ($cek) {
-	 	$pesan='<script>
-              swal({
-                  title: "Berhasil Hapus Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	$this->session->set_flashdata('pesan',$pesan);
-	 	redirect(base_url('admin/pengeluaran'));
-	 }
-	}
+  //API edit pengeluaran
+  public function api_edit($id='')
+  {
+    $rules = array(
+      array(
+        'field' => 'jenis_pengeluaran',
+        'label' => 'jenis_pengeluaran',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'biaya_pengeluaran',
+        'label' => 'biaya_pengeluaran',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'tanggal',
+        'label' => 'tanggal',
+        'rules' => 'required'
+      ),
+      array(
+        'field' => 'keterangan',
+        'label' => 'keterangan',
+        'rules' => 'required'
+      )
+    );
+    $this->form_validation->set_rules($rules);
+    if ($this->form_validation->run() == FALSE) {
+      $response = [
+        'status' => false,
+        'message' => 'Tidak ada data'
+      ];
+    } else {
+      $SQLupdate = [
+        'jenis_pengeluaran' => $this->input->post('jenis_pengeluaran'),
+        'biaya_pengeluaran' => $this->input->post('biaya_pengeluaran'),
+        'tanggal'           => $this->input->post('tanggal'),
+        'keterangan'        => $this->input->post('keterangan')
+      ];
+      if ($this->m_pengeluaran->update($id, $SQLupdate)) {
+        $response = [
+          'status' => true,
+          'message' => 'Berhasil mengubah data'
+        ];
+      } else {
+        $response = [
+          'status' => false,
+          'message' => 'Gagal mengubah data'
+        ];
+      }
+    }
+    $this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response));
+  }
+
+  
+  //API hapus pengeluaran
+  public function api_hapus($id='')
+  {
+    if(empty($id)){
+      $response = [
+        'status' => false,
+        'message' => 'Data kosong'
+      ];
+    }else{
+      if ($this->m_pengeluaran->delete($id)) {
+        $response = [
+          'status' => true,
+          'message' => 'Berhasil menghapus data'
+        ];
+      } else {
+        $response = [
+          'status' => false,
+          'message' => 'Gagal menghapus data'
+        ];
+      }
+    }
+    $this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response));
+  }
 
 	
 }
+
+?>

@@ -37,15 +37,18 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif] -->
   <!-- maps -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" type="text/javascript"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" type="text/javascript"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZe7HOqihPIijMcH43anmVsJTZLcYdg28&callback=initMap" type="text/javascript"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- select2 -->
+  <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/select2/dist/css/select2.min.css">
 
    <!-- sweetalert -->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
+  <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
  
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -132,7 +135,7 @@ if($this->session->userdata('level') =="Administrator"){
                   <a href="<?= base_url('admin/user_admin') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="btn btn-default btn-flat">Sign out</a>
+                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
               <?php }elseif($this->session->userdata('level') == "PLG"){ ?>
@@ -141,7 +144,7 @@ if($this->session->userdata('level') =="Administrator"){
                   <a href="<?= base_url('pelanggan/profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="btn btn-default btn-flat">Sign out</a>
+                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
               <?php } ?>
@@ -232,12 +235,27 @@ if($this->session->userdata('level') =="Administrator"){
         <li><a href="<?= base_url('admin/tagihan_lain'); ?>"><i class="fa fa-calculator"></i> Tagihan Lainnya</a>
 
         <li><a href="<?= base_url('admin/pengeluaran'); ?>"><i class="fa fa-dollar"></i> Data Pengeluaran</a>
+        <li><a href="<?= base_url('admin/laporan'); ?>"><i class="fa  fa-file-archive-o"></i> Laporan Keuangan</a>
+      </li>
 
       <li class="header">OTHER</li>
       <li><a href="<?= base_url('admin/feedback'); ?>"><i class="fa fa-caret-square-o-up"></i> Feedback Pelanggan</a></li>
-      <li><a href="<?= base_url('admin/informasi'); ?>"><i class="fa fa-bullhorn"></i> Layanan Informasi </a></li>
+      <li class="treeview">
+          <a href="#">
+            <i class="fa fa-bullhorn"></i>
+            <span>Layanan Informasi</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?= base_url('admin/informasi'); ?>"><i class="fa fa-bullhorn"></i> Informasi Pelanggan</a></li>
+            <li><a href="<?= base_url('admin/maintenance/'); ?>"><i class="fa fa-wrench"></i> Maintenance Server</a></li>
+          </ul>
+        </li>
       <li><a href="<?= base_url('email/kirimemail_plg'); ?>"><i class="fa fa-envelope"></i> Kirim Email</a></li>
          <li><a href="<?= base_url('admin/user_admin') ?>" class="active"><i class="fa fa-user"></i> Data User</a></li>
+         <li><a href="<?= base_url('admin/backup') ?>" class="active"><i class="fa fa-database"></i> Backup Database</a></li>
         </li>
 
 <?php }elseif($this->session->userdata('level') == "PLG"){ ?>
@@ -263,7 +281,7 @@ if($this->session->userdata('level') =="Administrator"){
   
 <?php } ?>
   <!-- logout -->
-  <li> <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-sign-out"></i>Sign out</a>
+  <li> <a href="javascript:void(0)" onclick="keluar()"><i class="fa fa-sign-out"></i> Sign out</a>
   <li class="header">END MAIN NAVIGATION</li>
       </ul>
     </section>

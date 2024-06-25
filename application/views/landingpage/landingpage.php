@@ -82,8 +82,10 @@
                     <div class="fact-item bg-light rounded text-center h-100 p-5">
                         <i class="fa fa-certificate fa-4x text-primary mb-4"></i>
                         <h5 class="mb-3">Biaya Pemasangan</h5>
-                        <h4 class="mb-3"><del style="color:red">Rp. 1.000.000</del></h4>
-                        <h4 class="mb-3">Rp. 350.000</h4>
+                        <h4 class="mb-3"><del style="color:red">Rp. 500.000</del></h4>
+                        <?php foreach($biaya_asli as $asli): ?>
+                            <h4 class="mb-3"><?= rupiah($asli['biaya_asli']); ?></h4>
+                        <?php endforeach; ?>
                         <h6 class="text-muted"><small>S&k berlaku</small></h6>
                     </div>
                 </div>
@@ -91,7 +93,7 @@
                     <div class="fact-item bg-light rounded text-center h-100 p-5">
                         <i class="fa fa-check fa-4x text-primary mb-4"></i>
                         <h5 class="mb-3">Iuran Bulanan</h5>
-                        <h4 class="mb-3">Rp. 80.000 s/d <br> Rp. 300.000</h4>
+                        <h4 class="mb-3">Rp. 100.000 s/d <br> Rp. 300.000</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -422,6 +424,12 @@
 
 
 <?php
+//format rupiah
+function rupiah($angka){
+  $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+  return $hasil_rupiah;
+}
+
 //format tanggal indonesia
 function tgl_indo($tanggal){
     $bulan = array (

@@ -6,11 +6,57 @@
     </section>
     <!-- /.content -->
   </div> 
-  
+  <script>
+    //ajax keluar dari halaman admin
+    function keluar() {
+        swal({
+            title: "Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?> ?",
+            text: "Anda Akan Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?> ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3CB371",
+            confirmButtonText: "Ya, Keluar!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result.value) { // Only delete the data if the user clicked on the confirm button
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('keluar') ?>",
+                    dataType: "json",
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Anda Telah Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?>",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Anda Gagal Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?>",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal Keluar", "Anda Batal Keluar Dari Halaman <?php echo $this->session->userdata('level'); ?>, <?php echo $this->session->userdata('nama'); ?>", "error");
+            }
+        });
+    }
+    </script>
+
   <footer class="main-footer">
     <strong>Copyright &copy; <?php echo date('Y'); ?>
-					<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved.<br>
-          <i>Access application with <?php echo "". get_client_browser()."";?>. <?php echo "". get_client_ip()."";?></i>
+					<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved. APP Version 2.4.73
+    <br><i>Access application with <?php echo "". get_client_browser()."";?>. <?php echo "". get_client_ip()."";?></i>
   </footer>
 
   <!-- Add the sidebar's background. This div must be placed
@@ -19,8 +65,27 @@
 </div>
 <!-- ./wrapper -->
 
+
+    <script>
+        //preview gambar
+        function previewBAYAR() {
+        document.getElementById("preview_bayar").style.display = "block";
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("bukti_bayar").files[0]);
+                 
+        oFReader.onload = function(oFREvent) {
+        document.getElementById("preview_bayar").src = oFREvent.target.result;
+         };
+                
+       };
+
+        </script>
+    </script>
+
 <!-- jQuery 3 -->
 <script src="<?= base_url('themes/admin') ?>/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- select2 -->
+<script src="<?= base_url('themes/admin') ?>/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= base_url('themes/admin') ?>/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

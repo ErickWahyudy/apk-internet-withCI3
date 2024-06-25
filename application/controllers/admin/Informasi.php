@@ -12,6 +12,7 @@ class Informasi extends CI_controller
       // needed ???
       $this->load->database();
       $this->load->library('session');
+      $this->load->library('form_validation');
       
 	 // error_reporting(0);
 	 if($this->session->userdata('admin') != TRUE){
@@ -21,7 +22,7 @@ class Informasi extends CI_controller
     $this->load->model('m_informasi');
 	}
 
-      //informasi
+  //informasi
   public function index($value='')
   {
     $kode_tahun = date('Y');
@@ -62,61 +63,66 @@ class Informasi extends CI_controller
      return $newID;
    }
 
-    
-   public function add($value='') {    
-      $this->load->library('form_validation');
-  
-      if (isset($_POST['kirim'])) {
-        $this->form_validation->set_rules('informasi', 'Informasi', 'required'); 
-  
-        if ($this->form_validation->run()) {
-          $SQLinsert = [
-            'id_informasi'  => $this->id_informasi_urut(),
-            'informasi'     => $this->input->post('informasi'),
-          ];
-  
-          if ($this->m_informasi->add($SQLinsert)) {
-  
-     $pesan='<script>
-                swal({
-                    title: "Berhasil Menambahkan Data",
-                    text: "",
-                    type: "success",
-                    showConfirmButton: true,
-                    confirmButtonText: "OKEE"
-                    });
-            </script>';
-         $this->session->set_flashdata('pesan',$pesan);
-      redirect(base_url('admin/informasi'));
-     }
-    }
-  }
-}
-      
-      public function edit($id='') {
-      if(isset($_POST['kirim'])){
-        $SQLupdate=array(
-          'informasi'               =>$this->input->post('informasi'),
-        );
-        $cek=$this->m_informasi->update($id,$SQLupdate);
-        if($cek){
-         $pesan='<script>
-                swal({
-                    title: "Berhasil Edit Data",
-                    text: "",
-                    type: "success",
-                    showConfirmButton: true,
-                    confirmButtonText: "OKEE"
-                    });
-            </script>';
-         $this->session->set_flashdata('pesan',$pesan);
-       redirect(base_url('admin/informasi'));
-        }
-      }
-    }
 
-    private function berkas($value='')
+//API Add Informasi
+public function api_add($value='')
+{
+  $this->form_validation->set_rules('informasi', 'Informasi', 'required');
+  if ($this->form_validation->run() == FALSE) {
+    $SQLinsert = [
+      'id_informasi'  => $this->id_informasi_urut(),
+      'informasi'     => $this->input->post('informasi'),
+    ];
+    if ($this->m_informasi->add($SQLinsert)) {
+      $data = [
+        'status'  => 'success',
+        'message' => 'Berhasil Menambahkan Data',
+      ];
+      
+    }
+    //mengirim email ke pelanggan dengan phpmailer
+    
+  } else {
+    $data = [
+      'status'  => 'error',
+      'message' => 'Gagal Menambahkan Data',
+    ];
+  }
+
+  echo json_encode($data);
+}
+
+    //API Edit Informasi
+    public function api_edit($id='')
     {
+      $this->form_validation->set_rules('informasi', 'Informasi', 'required');
+      if ($this->form_validation->run() == FALSE) {
+        $SQLupdate = [
+          'informasi'     => $this->input->post('informasi'),
+        ];
+        if ($this->m_informasi->update($id,$SQLupdate)) {
+          $data = [
+            'status'  => 'success',
+            'message' => 'Berhasil Mengedit Data',
+          ];
+         
+      }
+      //mengirim email ke pelanggan dengan phpmailer
+      
+      } else {
+        $data = [
+          'status'  => 'error',
+          'message' => 'Gagal Mengedit Data',
+        ];
+      }
+     
+      echo json_encode($data);
+    }
+    
+    
+    private function berkas($id='')
+    {
+      if ($_FILES['berkas']['name'] != '') {
       $config['upload_path']          = './themes/file_informasi/';
       $config['allowed_types']        = 'pdf|doc|docx|xls|xlsx|ppt|pptx|jpg|png|jpeg|txt';
       $config['max_size']             = 10000;
@@ -137,56 +143,100 @@ class Informasi extends CI_controller
         $this->session->set_flashdata('pesan',$pesan);
         redirect(base_url('admin/informasi'));
       }else{
-        $data = array('upload_data' => $this->upload->data());
-        return $data['upload_data']['file_name'];
+        $data = $this->upload->data();
+        return $data['file_name'];
       }
+    }
+    }
+ 
+    //API Upload File Informasi ke Database dan Folder
+    public function api_file($id='')
+    {
+      if (empty($_FILES['berkas']['name'])) {
+        $data = [
+          'status'  => 'error',
+          'message' => 'Tidak Ada File Yang Diupload',
+        ];
+      } else {
+        $SQLupdate = [
+          'berkas'     => $this->berkas(),
+        ];
+        if ($this->m_informasi->update($id,$SQLupdate)) {
+          $data = [
+            'status'  => 'success',
+            'message' => 'Berhasil Upload File',
+          ];
+         
+        }
+      }     
+     
+      echo json_encode($data);
     }
 
-    public function file($id='') {	
-      if(isset($_POST['kirim'])){
-        $SQLupdate=array(
-          'berkas'               =>$this->berkas(),
-        );
-        $cek=$this->m_informasi->update($id,$SQLupdate);
-        if($cek){
-         $pesan='<script>
-                swal({
-                    title: "Berhasil Upload file informasi",
-                    text: "",
-                    type: "success",
-                    showConfirmButton: true,
-                    confirmButtonText: "OKEE"
-                    });
-            </script>';
-         $this->session->set_flashdata('pesan',$pesan);
-       redirect(base_url('admin/informasi'));
+    //API hapus data dari database dan folder
+  public function api_hapusfile($id='')
+  {
+    if (empty($id)) {
+      $response = [
+        'status' => false,
+        'message' => 'Tidak ada data'
+      ];
+    } else {
+      $data = $this->m_informasi->view_id($id)->row_array();
+      $file = $data['berkas'];
+      unlink('./themes/file_informasi/' . $file);
+
+      //SQL update
+      $SQLupdate = [
+        'berkas'    => ''
+      ];
+      if ($this->m_informasi->update($id, $SQLupdate)) {
+        $response = [
+          'status' => true,
+          'message' => 'Berhasil menghapus data'
+        ];
+      } else {
+        $response = [
+          'status' => false,
+          'message' => 'Gagal menghapus data'
+        ];
+      }
+
+    }
+    $this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response));
+  }
+
+
+    //API hapus data dari database dan folder
+    public function api_hapus($id='')
+    {
+      if (empty($id)) {
+        $response = [
+          'status' => false,
+          'message' => 'Tidak ada data'
+        ];
+      } else {
+        $data = $this->m_informasi->view_id($id)->row_array();
+        if ($this->m_informasi->delete($id)) {
+          unlink('./themes/file_informasi/'.$data['berkas']);
+          $response = [
+            'status' => true,
+            'message' => 'Berhasil menghapus data'
+          ];
+        } else {
+          $response = [
+            'status' => false,
+            'message' => 'Gagal menghapus data'
+          ];
         }
       }
-    }
-  
-    
-    public function hapus($id='')
-    {
-      //hapus file di folder berdasarkan id
-      $data=$this->m_informasi->view_id($id)->row_array();
-      $file=$data['berkas'];
-      unlink('./themes/file_informasi/'.$file);
-      //hapus data di database
-      $cek=$this->m_informasi->delete($id);
-     if ($cek) {
-       $pesan='<script>
-                swal({
-                    title: "Berhasil Hapus Data",
-                    text: "",
-                    type: "success",
-                    showConfirmButton: true,
-                    confirmButtonText: "OKEE"
-                    });
-            </script>';
-         $this->session->set_flashdata('pesan',$pesan);
-       redirect(base_url('admin/informasi'));
-     }
+      $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response));
     }
  
 	
 }
+?>

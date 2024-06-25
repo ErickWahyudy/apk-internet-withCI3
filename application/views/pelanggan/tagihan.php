@@ -122,7 +122,7 @@ elseif($aksi == "bayar_tagihan"):
             <tr>
                 <th class="col-sm-2">Paket Internet</th>
                 <td>
-                    : <?= $id_paket ?> | <?= $paket ?>
+                    : <?= $id_paket ?>
                 </td>
             </tr>
 
@@ -169,9 +169,9 @@ elseif($aksi == "bayar_tagihan"):
             <?php $stt = $status  ?>
             <?php if($stt == 'BL'){ ?>
             <span class="">
-				<a href="<?= base_url('pelanggan/tagihan/merchant/'.$id_tagihan) ?>" title="Bayar" class="btn btn-warning"
+				<a href="<?= base_url('pelanggan/tagihan/qris/'.$id_tagihan) ?>" title="Bayar" class="btn btn-success"
                     style="font-size:16px;">
-                    <i class="fa fa-dollar"></i> Bayar Sekarang
+                    <i class="fa fa-dollar"></i> QRIS Pembayaran
                 </a>
                 <a href="<?= base_url('pelanggan/tagihan/konfirmasi_bayar/'.$id_tagihan) ?>" title="Konfirmasi Pembayaran"
                     class="btn btn-primary" style="font-size:16px;">
@@ -250,50 +250,62 @@ elseif($aksi == "konfirmasi_byr"):
     <?php } ?>
 
     <?php 
-elseif($aksi == "merchant"):
+elseif($aksi == "qris"):
 ?>
-
-
+ <?php $stt = $status  ?>
+    <?php if($stt == 'BL'){ ?>
+ <!-- general form elements -->
+<div class="box-header with-border">
+    <b style="font-size: 14pt">QRIS Pembayaran <?= $nama ?>. Bulan <?= $bulan ?> / <?= $tahun ?>. <?= rupiah($tagihan) ?></b>
+    <div class="box-tools pull-right">
+    </div>
+</div>
+<!-- /.box-header -->
 
     <center>
-        <a href="<?= base_url('themes') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
-            <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/transferbank.png" alt="" style="height:50px">
-        </a>
-        <a href="https://shopee.co.id" class="btn btn">
-            <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/shopeepay.png" alt="" style="height:35px">
-            <a href="https://linkaja.onelink.me/Mk5Y/app" lass="btn btn">
-                <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/linkaja.png" alt="" style="height:50px">
-                <a href="https://link.dana.id/lBx7Kcflieb" lass="btn btn"> &emsp;
-                    <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/dana.png" alt="" style="height:50px">
-                    <a href="<?= base_url('themes') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
-                        <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/alfamart.png" alt=""
-                            style="height:45px">
-                    </a>
-                    <a href="<?= base_url('themes') ?>/Linkpembayaran.txt" class="btn btn" target="blank">
-                        <img src="<?= base_url('themes/kassandra-wifi') ?>/img/img/indomaret.png" alt=""
-                            style="height:45px">
-                    </a>
+    <!-- download qris -->
+    <a href="<?= base_url('themes/qris/'.$qris) ?>" download="<?= $qris ?>" title="Download QRIS">
+        <button class="btn btn-primary btn-sm"><i class="fa fa-download"></i></button></a>
+    <a href="<?= base_url('themes/qris/'.$qris) ?>" title="Lihat QRIS" target="_blank">
+        <img src="<?= base_url('themes/qris/'.$qris) ?>" class="img-thumbnail img-responsive" width="50%" alt="QRIS">
+    </a><br>
+    <!-- memperbesar gambar -->
+    <a href="<?= base_url('themes/qris/'.$qris) ?>" title="Lihat QRIS" target="_blank">
+        <button class="btn btn-primary btn-sm"><i class="fa fa-search-plus"></i> Perbesar QRIS</button></a>
+        
     </center>
 
     <div class="box-header with-border">
         <ul>
             <li>
-                <p>Nomor pembayaran yang perlu dimasukkan bisa dilihat disini
-                    <a href="<?= base_url('themes') ?>/Linkpembayaran.txt" target="blank">
-                        <u>Nomor Pembayaran</u></a>
-                </p>
+                Masukkan nominal pembayaran anda sesuai dengan nominal tagihan yang tertera di aplikasi KassandraWiFi.
             </li>
             <li>
-                <p>Setelah melakukan pembayaran, silahkan konfirmasi melalui link berikut
+                Setelah berhasil melakukan pembayaran, silahkan upload bukti pembayaran Anda pada link / klik tombol berikut.
+                <!-- <a href="https://wa.me/6281456141227" title="Kirim Bukti Pembayaran">
+                    <button class="btn btn-success btn-sm"><i class="fa fa-whatsapp"></i> WhatsApp</button></a> -->
                     <a href="<?= base_url('pelanggan/tagihan/konfirmasi_bayar/'.$id_tagihan) ?>" title="Konfirmasi">
-                        <button class="btn btn-primary btn-sm">Konfirmasi Pembayaran</button></a>
-                </p>
+                    <button class="btn btn-success btn-sm"><i class="fa fa-upload"></i> Upload bukti pembayaran</button></a>
+            </li>
+            <li>
+                Untuk struk pembayaran, dapat anda download dengan klik tombol dibawah ini.
+                <a href="<?= base_url('pelanggan/tagihan/bayar/'.$id_tagihan) ?>" title="Struk Pembayaran">
+                    <button class="btn btn-primary btn-sm"><i class="fa fa-print"></i> Struk Pembayaran</button></a>
             </li>
         </ul>
     </div>
 
     <!-- /.box-body -->
 </div>
+<?php }elseif($stt == 'LS'){ ?>
+    <center>
+        <h3>
+            Anda Sudah Melakukan Pembayaran Tagihan Bulan <?= $bulan ?> / <?= $tahun ?>, pada tgl <?= tgl_indo($tgl_bayar) ?>.
+        </h3>
+    </center>
+<?php } ?>
+
+
 <?php endif; ?>
 
 <?php $this->load->view('template/footer'); ?>

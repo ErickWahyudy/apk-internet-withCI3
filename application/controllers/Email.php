@@ -33,7 +33,7 @@ class Email extends CI_controller
     {
         $view = array('judul'       =>'Kirim Email Pelanggan',
                     'aksi'          =>'kirimemail_plg',      
-                    'pelanggan'     => $this->db->get_where('tb_pelanggan',array('status_plg'=>'Aktif'))->result_array(),
+                    'pelanggan'     => $this->db->order_by('nama', 'ASC')->get_where('tb_pelanggan', ['status_plg' => 'Aktif'])->result_array(),
         );
         $this->load->view('admin/mailbox/compose',$view);
 
@@ -46,7 +46,7 @@ class Email extends CI_controller
         // $mail->Host = 'smtp.gmail.com';
         // $mail->SMTPAuth = true;
         // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-        // $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
+        // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
         // $mail->SMTPSecure = 'tls';
         // $mail->Port = 587;
         $mail->setFrom($this->input->post('email_pengirim'), $this->input->post('nama_pengirim')); // Email pengirim
@@ -147,57 +147,68 @@ class Email extends CI_controller
 
     public function sendmail_semua()
     {
-        //mengambil data email dari database
-        $result = $this->M_email->sendmail_semua();
-        $result = $result->result_array();
-        foreach ($result as $data) {
-            
+        $data = $this->M_email->view_id('E001')->row_array();
+
+        // Query untuk mengambil semua pelanggan yang aktif
+        $active_customers = $this->db->get_where('tb_pelanggan', array('status_plg' => 'Aktif'))->result_array();
+
+        // Inisialisasi objek PHPMailer dan pengaturan SMTP di sini
         $mail = new PHPMailer();
         // $mail->isSMTP();
         // $mail->Host = 'smtp.gmail.com';
         // $mail->SMTPAuth = true;
-        // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-        // $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
+        // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail Anda
+        // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail Anda
         // $mail->SMTPSecure = 'tls';
         // $mail->Port = 587;
-        $mail->setFrom($this->input->post('email_pengirim'), $this->input->post('nama_pengirim')); // Email pengirim
-        $mail->addAddress($data['email'], $data['nama']); // Email penerima
+
+        $mail->setFrom($data['email_pengirim'], $data['nama_pengirim']); // Email pengirim
         $mail->Subject = $data['subject'];
         $mail->isHTML(true);
-        $content = '</p><table><thead><tr><td style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;border-width:1px;border-style:dashed;border-color:rgb(37,63,89);background:lavender;color:rgb(0,0,0);font-size:16px;padding-left:1em;padding-right:1em>'.
-                        $data['isi_pesan'].
-                        '<br></td></tr></thead></table> 
-                        <p style=font-size:16px;padding-left:1em;padding-right:1em>
-                            <i>Pesan ini dikirim otomatis oleh system aplikasi '.$data['nama_pengirim'].'</i>
-                            <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
-                            <br><b>~ ' .$data['tanda_tangan']. ' ~</b>';
-                            
-        $mail->Body = $content;
-        if ($mail->send()) {
-            $this->session->set_flashdata('pesan', '<script>
-            swal({
-                title: "Berhasil",
-                text: "Selamat Anda berhasil mengirim email",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonText: "OKEE"
-            });
-        </script>');
-        redirect(base_url('email/kirimemail_semua/E001'));
-        } else {
-            $this->session->set_flashdata('pesan', '<script>
-            swal({
-                title: "Gagal",
-                text: "Anda gagal mengirim email",
-                type: "error",
-                showConfirmButton: true,
-                confirmButtonText: "OKEE"
-            });
-        </script>');
-        redirect(base_url('email/kirimemail_semua/E001'));
+        $content = '</p><table><thead><tr><td style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;border-width:1px;border-style:dashed;border-color:rgb(37,63,89);background:lavender;color:rgb(0,0,0);font-size:16px;padding-left:1em;padding-right:1em>' .
+            $data['isi_pesan'] .
+            '<br></td></tr></thead></table> 
+                            <p style=font-size:16px;padding-left:1em;padding-right:1em>
+                                <i>Pesan ini dikirim otomatis oleh sistem aplikasi ' . $data['nama_pengirim'] . '</i>
+                                <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
+                                <br><b>~ ' . $data['tanda_tangan'] . ' ~</b>';
+
+        // Iterasi melalui pelanggan yang aktif dan kirim email ke masing-masing
+        foreach ($active_customers as $customer) {
+            // Set penerima email dan konten email di dalam loop
+            $mail->addAddress($customer['email'], $customer['nama']);
+            $mail->Body = $content;
+
+            if ($mail->send()) {
+                $this->session->set_flashdata('pesan', '<script>
+                    swal({
+                        title: "Berhasil",
+                        text: "Selamat Anda berhasil mengirim email",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    });
+                </script>');
+            } else {
+                $this->session->set_flashdata('pesan', '<script>
+                    swal({
+                        title: "Gagal",
+                        text: "Anda gagal mengirim email",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    });
+                </script>');
+            }
+
+            // Hapus alamat email penerima untuk pelanggan berikutnya
+            $mail->ClearAddresses();
         }
+
+        // Redirect setelah loop selesai
+        redirect(base_url('email/kirimemail_semua/E001'));
     }
-}
+
 
 public function kirimemail_umum()
     {
@@ -215,7 +226,7 @@ public function kirimemail_umum()
         // $mail->Host = 'smtp.gmail.com';
         // $mail->SMTPAuth = true;
         // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-        // $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
+        // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
         // $mail->SMTPSecure = 'tls';
         // $mail->Port = 587;
         $mail->setFrom($this->input->post('email_pengirim'), $this->input->post('nama_pengirim')); // Email pengirim
@@ -265,14 +276,14 @@ public function sendmail_bulanan()
         $result = $result->result_array();
                     
             $mail = new PHPMailer();
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-            $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-            $mail->setFrom('kassandramikrotik@gmail.com' , 'Kassandra WiFi'); // Email dan nama pengirim
+            // $mail->isSMTP();
+            // $mail->Host = 'smtp.gmail.com';
+            // $mail->SMTPAuth = true;
+            // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
+            // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
+            // $mail->SMTPSecure = 'tls';
+            // $mail->Port = 587;
+            $mail->setFrom('wifi@kassandra.my.id' , 'Kassandra WiFi'); // Email dan nama pengirim
 
             foreach ($result as $data) {
             $mail->addAddress($data['email'], $data['nama']); // Email dan nama penerima
@@ -283,15 +294,15 @@ public function sendmail_bulanan()
                         '<p style=font-size:18px>Pelanggan Yth. Sdr/i '.$data['nama']. ' Ada tagihan hotspot
                         KassandraWiFi untuk Bulan '.$data['bulan'] . ' / Tahun ' .$data['tahun']. ' yang belum dibayar.</p>'.
                         'Dengan rincian Biaya Tagihan : <br><b>Rp. '.number_format($data['tagihan'], 0, ',', '.') . '</b>'.
-                        '<br>Pembayaran dapat dilakukan secara Tunai maupun transfer Bank, ShopeePay, LinkAja, Dana, Alfamart atau platform digital lainnya.
+                        '<br>Bayar lebih mudah dngn QRIS sekarang!
                         <br><br>Anda dapat melunasi pembayaran sebelum batas akhir pada tanggal 10 - '.$data['bulan'] . ' - ' .$data['tahun'] . 
                         '. Mari lunasi tagihan ini segera, demi kenyamanan internet bersama!
                         <p align=center colspan=2 style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif>
-                        <a href="https://wifi.kassandra.my.id/struk/bayar_tagihan/' .$data['id_tagihan']. '" style=color:rgb(255,255,255);background-color:#589bf2;border-width:initial;border-style:none;border-radius:15px;padding:10px 20px target=_blank >' .
-                        ' Bayar Sekarang</a></p><br><br>Abaikan pesan jika sudah melakukan pembayaran. Terima kasih.' .
+                        <a href="https://wifi.kassandra.my.id/api/payment/qris/' .$data['id_tagihan']. '" style=color:rgb(255,255,255);background-color:#589bf2;border-width:initial;border-style:none;border-radius:15px;padding:10px 20px target=_blank >' .
+                        ' QRIS Pembayaran</a></p><br><br>Abaikan pesan jika sudah melakukan pembayaran. Terima kasih.' .
                         '<br><br></td></tr></thead></table> 
                             <p style=font-size:18px;padding-left:1em;padding-right:1em>
-                                Bayar lebih mudah melalui merchant KassandraWifi berikut ini :
+                                Support by :
                                 </p>
                                 <table><thead>
                             <tr>
@@ -340,7 +351,6 @@ public function sendmail_bulanan()
                 confirmButtonText: "OKEE"
             });
         </script>');
-        redirect(base_url('admin/tagihan'));
         } else {
             $this->session->set_flashdata('pesan', '<script>
             swal({
@@ -351,10 +361,11 @@ public function sendmail_bulanan()
                 confirmButtonText: "OKEE"
             });
         </script>');
-        redirect(base_url('admin/tagihan'));
         }
- }
-}
+        $mail->ClearAddresses();
+        }
+        redirect(base_url('admin/tagihan'));
+    }
 
 public function sendmail_bl_lain()
  {
@@ -368,14 +379,14 @@ public function sendmail_bl_lain()
         foreach ($result as $data) {
 
             $mail = new PHPMailer();
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-            $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-            $mail->setFrom('kassandramikrotik@gmail.com' , 'Kassandra WiFi'); // Email dan nama pengirim
+            // $mail->isSMTP();
+            // $mail->Host = 'smtp.gmail.com';
+            // $mail->SMTPAuth = true;
+            // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
+            // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
+            // $mail->SMTPSecure = 'tls';
+            // $mail->Port = 587;
+            $mail->setFrom('wifi@kassandra.my.id' , 'Kassandra WiFi'); // Email dan nama pengirim
             $mail->addAddress($data['email'], $data['nama']); // Email dan nama penerima
             $mail->Subject = 'Yth. '.$data['nama'].' Ada Tagihan Baru KassandraWiFi Yang Belum Dibayar'; // Subject email
             $mail->isHTML(true);
@@ -392,7 +403,7 @@ public function sendmail_bl_lain()
                         ' Bayar Sekarang</a></p><br><br>Abaikan pesan jika sudah melakukan pembayaran. Terima kasih.' .
                         '<br><br></td></tr></thead></table> 
                             <p style=font-size:18px;padding-left:1em;padding-right:1em>
-                                Bayar lebih mudah melalui merchant KassandraWifi berikut ini :
+                               Support by :
                                 </p>
                                 <table><thead>
                             <tr>
@@ -464,14 +475,14 @@ public function sendmail_bl_lain()
         $data = $data->row_array();
 
             $mail = new PHPMailer();
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
-            $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-            $mail->setFrom('kassandramikrotik@gmail.com' , 'Kassandra WiFi'); // Email dan nama pengirim
+            // $mail->isSMTP();
+            // $mail->Host = 'smtp.gmail.com';
+            // $mail->SMTPAuth = true;
+            // $mail->Username = 'kassandramikrotik@gmail.com'; // Email gmail anda
+            // $mail->Password = 'boiyueqqtkdwtgyg'; // Password gmail anda
+            // $mail->SMTPSecure = 'tls';
+            // $mail->Port = 587;
+            $mail->setFrom('wifi@kassandra.my.id' , 'Kassandra WiFi'); // Email dan nama pengirim
             $mail->addAddress($data['email'], $data['nama']); // Email dan nama penerima
             $mail->Subject = 'Yth. '.$data['nama'].' Ada Tagihan Baru KassandraWiFi bulan '.$data['bulan']. ' / ' .$data['tahun']. ' Yang Belum Dibayar'; // Subject email
             $mail->isHTML(true);
@@ -480,15 +491,15 @@ public function sendmail_bl_lain()
                         '<p style=font-size:18px>Pelanggan Yth. Sdr/i '.$data['nama']. ' Ada tagihan hotspot
                         KassandraWiFi untuk Bulan '.$data['bulan'] . ' / Tahun ' .$data['tahun']. ' yang belum dibayar.</p>'.
                         'Dengan rincian Biaya Tagihan : <br><b>Rp. '.number_format($data['tagihan'], 0, ',', '.') . '</b>'.
-                        '<br>Pembayaran dapat dilakukan secara Tunai maupun transfer Bank, ShopeePay, LinkAja, Dana, Alfamart atau platform digital lainnya.
+                        '<br>Bayar lebih mudah dngn QRIS sekarang!
                         <br><br>Anda dapat melunasi pembayaran sebelum batas akhir pada tanggal 10 - '.$data['bulan'] . ' - ' .$data['tahun'] . 
                         '. Mari lunasi tagihan ini segera, demi kenyamanan internet bersama!
                         <p align=center colspan=2 style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif>
-                        <a href="https://wifi.kassandra.my.id/struk/bayar_tagihan/' .$data['id_tagihan']. '" style=color:rgb(255,255,255);background-color:#589bf2;border-width:initial;border-style:none;border-radius:15px;padding:10px 20px target=_blank >' .
-                        ' Bayar Sekarang</a></p><br><br>Abaikan pesan jika sudah melakukan pembayaran. Terima kasih.' .
+                        <a href="https://wifi.kassandra.my.id/api/payment/qris/' .$data['id_tagihan']. '" style=color:rgb(255,255,255);background-color:#589bf2;border-width:initial;border-style:none;border-radius:15px;padding:10px 20px target=_blank >' .
+                        ' QRIS Pembayaran</a></p><br><br>Abaikan pesan jika sudah melakukan pembayaran. Terima kasih.' .
                         '<br><br></td></tr></thead></table> 
                             <p style=font-size:18px;padding-left:1em;padding-right:1em>
-                                Bayar lebih mudah melalui merchant KassandraWifi berikut ini :
+                               Support by :
                                 </p>
                                 <table><thead>
                             <tr>

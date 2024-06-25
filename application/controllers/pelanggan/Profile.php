@@ -69,6 +69,34 @@ $this->m_pelanggan->update($id,$SQLupdate);
                   confirmButtonText: "OKEE"
                   });
           </script>';
+
+        // Kirim pesan ke Telegram
+        date_default_timezone_set('Asia/Jakarta');
+				$date = date('d F Y');
+				$time = date('H:i:s');
+          
+        $telegramBotToken = '1306451202:AAFL84nqcQjbAsEpRqVCziQ0VGty4qIAxt4'; // Ganti dengan token bot Telegram Anda
+        $telegramChatID = '-1001769208109'; // Ganti dengan chat ID tujuan admin
+
+        $isi_chat = "Ada Pelanggan yang mengupdate data diri:\n";
+        $isi_chat .= "Tgl / Waktu: " . $date . " / " . $time . "\n\n";
+        $isi_chat .= "ID Pelanggan: " . $id . "\n";
+        $isi_chat .= "Nama: " . $this->input->post('nama') . "\n";
+        $isi_chat .= "Alamat: " . $this->input->post('alamat') . "\n";
+        $isi_chat .= "No HP: " . $this->input->post('no_hp') . "\n";
+        $isi_chat .= "Email: " . $this->input->post('email') . "\n";
+
+        // Kirim pesan ke Telegram
+        $url = "https://api.telegram.org/bot" . $telegramBotToken . "/sendMessage?chat_id=" . $telegramChatID . "&text=" . urlencode($isi_chat);
+
+        // Pengiriman pesan ke Telegram
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_exec($ch);
+        curl_close($ch);
+
+
           //mengirim email ke pelanggan dengan phpmailer
           require_once(APPPATH.'libraries/phpmailer/Exception.php');
           require_once(APPPATH.'libraries/phpmailer/PHPMailer.php');
@@ -131,6 +159,7 @@ $this->m_pelanggan->update($id,$SQLupdate);
           $mail->Body = $content;
           if ($mail->send())
           ;
+        
   	 	$this->session->set_flashdata('pesan',$pesan);
        redirect(base_url('pelanggan/profile'));
    }else{
@@ -174,6 +203,27 @@ $SQLupdate=array(
 
   public function edit_map($id='')
   {
+
+    //validasi id_pelanggan apakah yang login sama dengan id_pelanggan yang di edit
+    $id_pelanggan=$this->session->userdata('id_pelanggan');
+    if ($id_pelanggan!=$id) {
+      $pesan='<script>
+                swal({
+                    title: "Gagal Edit Data",
+                    text: "ID Pelanggan Tidak Ditemukan",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: false
+                },
+                function(){
+                    window.location.href="'.base_url('pelanggan/profile').'";
+                });
+              </script>';
+      $this->session->set_flashdata('pesan',$pesan);
+      redirect(base_url('pelanggan/profile'));
+    }
   	$data=$this->m_pelanggan->view_id_maps($id)->row_array();
     if (empty($data['id_pelanggan'])) {
       $pesan='<script>
@@ -191,6 +241,7 @@ $SQLupdate=array(
                 });
               </script>';
       $this->session->set_flashdata('pesan',$pesan);
+   
       redirect(base_url('pelanggan/profile'));
     }
 
@@ -222,6 +273,40 @@ $SQLupdate=array(
                         confirmButtonText: "OKEE"
                         });
                 </script>';
+
+                  // Kirim pesan ke Telegram                
+                  // Mendapatkan latitude dan longitude dari input
+                  $latitude = $this->input->post('latitude');
+                  $longitude = $this->input->post('longitude');
+                  $nama = $data['nama'];
+                  $alamat = $data['alamat'];
+
+                  // Menghasilkan URL gambar peta dari Google Maps Static API
+                  $googleMapsApiKey = 'AIzaSyDZe7HOqihPIijMcH43anmVsJTZLcYdg28&callback=initMap';
+                  $mapsImageUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" . $latitude . "," . $longitude . "&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7Clabel:L%7C" . $latitude . "," . $longitude . "&key=" . $googleMapsApiKey;
+
+                  // Mendapatkan gambar peta dari URL yang dihasilkan
+                  $mapImage = file_get_contents($mapsImageUrl);
+
+                  $isi_chat = "Ada Pelanggan yang mengupdate lokasi:\n";
+                  $isi_chat .= "Nama: " . $nama . "\n";
+                  $isi_chat .= "Alamat: " . $alamat . "\n";
+
+                  // Konfigurasi pengiriman gambar ke Telegram
+                  $telegramBotToken = '1306451202:AAFL84nqcQjbAsEpRqVCziQ0VGty4qIAxt4';
+                  $telegramChatID = '-1001769208109';
+
+                  // Mengirimkan gambar ke Telegram
+                  $url = "https://api.telegram.org/bot" . $telegramBotToken . "/sendPhoto?chat_id=" . $telegramChatID . "&caption=" . urlencode($isi_chat) . "&parse_mode=Markdown&photo=" . urlencode($mapsImageUrl);
+
+                  // Pengiriman pesan ke Telegram
+                  $ch = curl_init();
+                  curl_setopt($ch, CURLOPT_URL, $url);
+                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                  curl_exec($ch);
+                  curl_close($ch);
+
+
              $this->session->set_flashdata('pesan',$pesan);
              redirect(base_url('pelanggan/profile/'));
         }else{

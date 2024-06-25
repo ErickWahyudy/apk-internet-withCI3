@@ -15,15 +15,21 @@ if($aksi == "edit"):
 <tr>
 	<th>Biaya Pemasangan</th>
 	<td>
-		<input type="text" name="biaya_promo" value="<?= $biaya_promo ?>" class="form-control" required="">
+		<input type="text" name="biaya_asli" value="<?= $biaya_asli ?>" class="form-control" required="" autocomplete="off">
+	</td>
+</tr>
+<tr>
+	<th>Biaya Promo</th>
+	<td>
+		<input type="text" name="biaya_promo" value="<?= $biaya_promo ?>" class="form-control" required="" autocomplete="off">
 	</td>
 </tr>
 <tr>
 	<th>Status</th>
 	<td>
-		<input type="text" name="status" value="<?= $status ?>" class="form-control" readonly>
-		<input type="radio" name="status" value="promo"> Promo
-		<input type="radio" name="status" value="tidak ada promo"> Tidak Ada Promo
+		<input type="radio" name="status" value="promo" <?php if($status == 'promo'){ echo 'checked'; } ?>> Promo
+        <input type="radio" name="status" value="tidak ada promo" <?php if($status == 'tidak ada promo'){ echo 'checked'; } ?>> Tidak ada promo
+                
 	</td>
 </tr>
 

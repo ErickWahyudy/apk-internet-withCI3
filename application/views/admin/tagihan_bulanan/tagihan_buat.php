@@ -2,6 +2,7 @@
 
 <?php 
       $kode_tahun = date("Y");
+      $kode_bulan = date("m");
 ?>
 
 <center>
@@ -11,16 +12,16 @@
 <?= $this->session->flashdata('pesan') ?>
 
 <table class="table">
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form id="add" method="post">
    <tr>
     <th class="col-sm-2 control-label">Bulan</th>
     <td class="col-sm-10">
       <select name="bulan" class="form-control" required="">
  	        <option value="">--Pilih Bulan--</option>
  	        <?php foreach($bulan as $bln): ?>
-          <option value="<?= $bln['id_bulan'] ?>">
-				  <?= ucfirst($bln['bulan']) ?>
-			    </option>
+          <option value="<?= $bln['id_bulan'] ?>" <?= $bln['id_bulan'] == $kode_bulan ? 'selected' : '' ?>>
+                <?= ucfirst($bln['bulan']) ?>
+          </option>
  	        <?php endforeach; ?>	
  	    </select>
     </td>
@@ -28,7 +29,12 @@
   <tr>
     <th>Tahun</th>
     <td>
-      <input type="number" name="tahun" class="form-control" value="<?= $kode_tahun ?>" placeholder="tahun" required="">
+        <select name="tahun" class="form-control" required="">
+          <option value="">--Pilih Tahun--</option>
+            <?php for($i = date('Y'); $i >= date('Y'); $i--){ ?>
+            <option value="<?= $i ?>" <?= $i == $kode_tahun ? 'selected' : '' ?>><?= $i ?></option>
+           <?php } ?>
+        </select>
     </td>
   </tr>
   <tr>
@@ -68,5 +74,34 @@
                </table>
 </form>
 </div>
-
+<script>
+        //add tagihan
+        $(document).ready(function () {
+        $('#add').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('admin/tagihan/api_add') ?>",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                async: false,
+                success: function (data) {
+                    $('#buat_tagihan');
+                    $('#add')[0].reset();
+                    swal({
+                        title: "Berhasil",
+                        text: "Data berhasil ditambahkan",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE",
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+</script>
 <?php $this->load->view('template/footer'); ?>

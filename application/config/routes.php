@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Landingpage';
 $route['404_override'] = 'notfound/index';
 $route['maintenance'] = 'notfound/dalam_pengembangan';
+$route['maintenance-server'] = 'notfound/perbaikan_server';
 
 //landingpage
 $route['about']       = 'Landingpage/about';
@@ -65,8 +66,9 @@ $route['testimonial'] = 'Landingpage/testimonial';
 $route['feedback']    = 'feedback/feedback_add';
 $route['lapor']       = 'Landingpage/lapor';
 
-$route['register']    = 'Register/add';
-$route['promo']       = 'Register/promo';
+$route['register']          = 'Register/add';
+$route['register_add']      = 'Register/api_add';
+$route['promo']             = 'Register/promo';
 
 $route['reset_password']            = 'reset_password/kirim_email';
 $route['password_baru/(:any)']      = 'reset_password/reset/$1';
@@ -76,5 +78,7 @@ $route['api/v1/pelanggan_view']     = 'API/pelanggan/view';
 $route['api/v1/promo_view']         = 'API/pelanggan/promo_view';
 $route['api/v1/email_view']         = 'API/email/view_email';
 $route['api/v1/email_send']         = 'API/email/send_mail_all';
+
+$route['api/payment/qris/(:any)']  = 'Struk/qris/$1';
 
 $route['translate_uri_dashes'] = FALSE;

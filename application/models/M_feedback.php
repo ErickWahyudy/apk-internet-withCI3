@@ -8,12 +8,12 @@ class M_feedback extends CI_model
 
 private $table = 'tb_feedback';
 
-//FEEDBACK PELANGGAN
+//feedback INTERNET
 public function view($value='')
 {
-  $this->db->select('*');
-  $this->db->from($this->table);
-  $this->db->order_by('id_feedback','DESC');
+  $this->db->select ('*');
+  $this->db->from ($this->table);
+  $this->db->order_by('tanggal', 'DESC');
   return $this->db->get();
 }
 

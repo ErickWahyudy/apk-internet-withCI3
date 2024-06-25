@@ -13,8 +13,7 @@
     <link rel="manifest" href="<?= base_url('static/manifest.json') ?>">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
-    <link href="<?= base_url('themes') ?>favicon.ico" rel="icon">
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +35,9 @@
     <!--Stylesheet -->
     <link href="<?= base_url('themes/kassandra-wifi') ?>/css/style.css" rel="stylesheet">
 
-    <!-- sweetalert -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+   <!-- sweetalert -->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 </head>
@@ -152,12 +153,7 @@
                     </div>
                 </div>
                 <a href="contact" class="nav-item nav-link <?php if($this->uri->segment(1)=="contact"){echo "active";}?>">Contact Us</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Login Aplikasi</a>
-                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-                        <a href="login" target="" class="dropdown-item">Login</a>
-                    </div>
-                </div>
+                <a href="login" class="nav-item nav-link <?php if($this->uri->segment(1)=="login"){echo "active";}?>">Login App</a>
             </div>
             <a href="register" target="" class="btn btn-sm btn-light rounded-pill py-2 px-4">Daftar sekarang ?</a>
         </div>

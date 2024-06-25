@@ -9,7 +9,7 @@ if($aksi == "kirimemail_plg"):
     <section class="content">
         <div class="row">
             <div class="col-md-3">
-                <a href="<?= base_url('admin') ?>" class="btn btn-primary btn-block margin-bottom">Back to Home</a>
+                <a href="<?= base_url('admin/home') ?>" class="btn btn-primary btn-block margin-bottom">Back to Home</a>
 
                 <div class="box box-solid">
                     <div class="box-header with-border">
@@ -54,11 +54,11 @@ if($aksi == "kirimemail_plg"):
                                 <input type="text" class="form-control" id="nama_pengirim" name="nama_pengirim" value="KASSANDRA WIFI" autocomplete="off" required>
                             </div>
                             <div class="form-group">
-                                <select name="email_penerima" id="email_penerima" class="form-control" required="">
+                                <select name="email_penerima" id="email_penerima" class="form-control select2" style="width: 100%;" required>
                                     <option value="">--Pilih Pelanggan--</option>
-                                    <?php $no=1; foreach($pelanggan as $plg): ?>
+                                    <?php foreach($pelanggan as $plg): ?>
                                     <option value="<?= $plg['email'] ?>">
-                                       <?= $no++ ?> | <?= ucfirst($plg['nama']) ?> | <?= ucfirst($plg['email']) ?>
+                                      <?= ucfirst($plg['nama']) ?> | <?= ucfirst($plg['email']) ?>
                                     </option>
                                     <?php endforeach; ?>
                                 </select>
@@ -100,7 +100,7 @@ if($aksi == "kirimemail_plg"):
     <section class="content">
         <div class="row">
             <div class="col-md-3">
-                <a href="<?= base_url('admin') ?>" class="btn btn-primary btn-block margin-bottom">Back to home</a>
+                <a href="<?= base_url('admin/home') ?>" class="btn btn-primary btn-block margin-bottom">Back to Home</a>
 
                 <div class="box box-solid">
                     <div class="box-header with-border">
@@ -184,7 +184,7 @@ if($aksi == "kirimemail_plg"):
  <section class="content">
         <div class="row">
             <div class="col-md-3">
-                <a href="<?= base_url('admin') ?>" class="btn btn-primary btn-block margin-bottom">Back to Home</a>
+                <a href="<?= base_url('admin/home') ?>" class="btn btn-primary btn-block margin-bottom">Back to Home</a>
 
                 <div class="box box-solid">
                     <div class="box-header with-border">
@@ -263,5 +263,11 @@ if($aksi == "kirimemail_plg"):
 
 <?php endif; ?>
     <script type="text/javascript" src="<?php echo base_url('themes/kassandra-wifi/ckeditor/ckeditor.js')?>"></script>
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+        })
+    </script>
 
 <?php $this->load->view('template/footer'); ?>
