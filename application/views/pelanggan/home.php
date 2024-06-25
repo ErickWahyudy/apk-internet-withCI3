@@ -157,7 +157,7 @@
                                     <td><?= $no ?></td>
                                     <td><?= $informasi['informasi'] ?></td>
                                     <td>
-                                        <a href="<?= base_url('template/file_informasi/'.$informasi['berkas']) ?>"
+                                        <a href="<?= base_url('themes/file_informasi/'.$informasi['berkas']) ?>"
                                             target="_blank"><?= $informasi['berkas'] ?></a> <br>
                                     </td>
                                 </tr>
